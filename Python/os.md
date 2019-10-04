@@ -8,7 +8,7 @@
 import os
 
 path = "C:/Users/user/Documents/Study/TIL/Python"
-filelist = os.path.listdir()
+filelist = os.listdir()
 filelist_py = [file for file in filelist if file.endswith(".py")]
 for file in filelist:
     print(file)

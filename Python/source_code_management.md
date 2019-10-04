@@ -1,5 +1,6 @@
-#git
+# git
 
+## 버전관리
 `git init`
 현재 디렉토리에서 git 버전 관리를 시작
 
@@ -26,15 +27,21 @@
 > git commit --help
 > git commit -m 'Commit message'
 > git commit -am 'add + commit'
-> git commit
 ```
-* With `-am` option, a version to be commited is needed to be tracked. It means it has to be 'added' at the very first time(`-am` 옵션은 `git add`와 `git commit`을 한꺼번에 해준다. 하지만 해당 파일이나 디렉토리가 tracked, 즉 최초 한 번은 add되어 git이 추적가능한 상태여야 한다.)
-* Just type only `git commit`, you can type multi line for commit message. In this case you need set text editor with `git config --global core.editor "TEXT_EDITOR"` TEXT_EDITOR can be vim, nano, etc. (`git commit`만 칠 경우 여러 줄로 commit message를 작성할 수 있다. `git config`에서 내가 익숙한 텍스트 에디터를 기본 설정으로 변경할 수 있다.)
+* `-am` 옵션은 `git add`와 `git commit`을 한꺼번에 해준다. 하지만 해당 파일이나 디렉토리가 tracked, 즉 최초 한 번은 add되어 git이 추적가능한 상태여야 한다.(With `-am` option, a version to be commited is needed to be tracked. It means it has to be 'added' at the very first time)
+
+* `git commit`만 칠 경우 여러 줄로 commit message를 작성할 수 있다. `git config`에서 내가 익숙한 텍스트 에디터를 기본 설정으로 변경할 수 있다.(Just type `git commit`, you can type multi line for commit message. In this case you need set text editor with `git config --global core.editor "TEXT_EDITOR"` TEXT_EDITOR can be vim, nano, etc.)
+
+* 최근 commit message를 수정
+```
+> git commit --amend
+```
 
 
 
 `git log`
 버전 기록을 보여준다.
+
 ```
 > git log --help
 > git log
@@ -51,12 +58,10 @@ insertions, deletions 표시
 Show changes between commits, commit and working tree, etc
 
 
-`git checkout`
-`git log`를 통해 branch ID를 확인할 수 있다. `git checkout branch_ID`를 하면 해당 버전으로 변경할 수 있다.
-
 
 `git reset`
 버전을 삭제하는 명령어
+
 ```
 > git reset --help
 > git reset --hard
@@ -66,3 +71,73 @@ Show changes between commits, commit and working tree, etc
 
 `git revert`
 버전을 되돌리는 명령어. 스택 구조(FIFO) 방식으로 버전 역행이 가능하다. 현재 버전 4까지 있고 버전 2로 가고 싶은 경우: `git revert 4` -> `git revert 3`
+
+
+## Branch & Conflict
+`git branch`
+
+```
+> git branch
+* master
+브랜치 목록 보기. 기본 브랜치는 master
+> git branch apple
+기존에 apple이라는 브랜치가 없었다면, apple 이라는 새로운 브랜치 생성
+> git branch
+  apple
+* master
+```
+
+
+
+`git checkout`
+HEAD를 변경해 현재 저장소 위치를 바꾸는 명령어
+
+* `git log`를 통해 branch ID를 확인할 수 있다. `git checkout branch_ID`를 하면 해당 버전으로 변경할 수 있다.
+```
+> git branch
+  apple
+* master
+> git checkout apple
+apple 브랜치로 이동
+```
+
+* HEAD는 브랜치가 아닌 버전을 가리킬 수도 있다. 이런 상태를 `detached`라고 한다.
+
+
+
+`git merge`
+서로 다른 브랜치를 병합
+
+* master 브랜치와 custom 브랜치(예시: apple)를 병합
+* master 브랜치에서 병합할 브랜치 이름을 `git merge` 명령어 뒤에 붙인다.(merge apple into master)
+
+```
+> git branch
+  apple
+* master
+> git merge apple
+```
+
+* 3-way merge
+```
+base	here	there	2way_m	3way_m
+----------------------------------------------------
+A	A	A	A	A
+H	B	B	?	H
+C	C	T	?	T
+H           D	T	?	?
+```
+
+
+
+## 원격저장소
+
+### 혼자 작업하기
+
+```
+> git remote add origin git@github.com:~
+> git push -u origin master
+```
+
+* 새로운 원격저장소를 만들고, 지역저장소와 연결하려면 git cli에서 `git remote add` 명령어를 쓴다. 뒤에 원격저장소 HTTP 주소가 필요하다.
+* 원격저장소를 추가한 뒤 `git push` 명령어를 통해 지역저장소 버전을 원격저장소에 업로드할 수 있다. 이 때, 맨처음 push할 때 `-u` 옵션을 줘야 원격저장소의 master 브랜치와 지역저장소의 master 브랜치를 연결할 수 있다.
