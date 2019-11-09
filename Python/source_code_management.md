@@ -128,6 +128,7 @@ C	C	T	?	T
 H           D	T	?	?
 ```
 
+* `git mergetool` 을 사용해서 merge 관리(예: p4merge)
 
 
 ## 원격저장소
@@ -145,3 +146,7 @@ H           D	T	?	?
 
 
 ### 같이 작업하기(너 내 동료가 돼라!)
+
+* github의 원격저장소 -> Setting -> Collaborator에 함께 작업할 동료 아이디 또는 이메일 추가
+* 원격저장소의 내용을 `git pull`을 통해서 다른 사람이 작업한 내용을 가져오고 정리해 타임라인을 만든 다음 작업을 시작
+* CONFLICT가 발생하면 merge 등을 통해 해결해야하며 commit할때 message를 쓰지않고 
