@@ -32,6 +32,28 @@ arguments = sys.argv[1:]
 count = len(arguments)
 ```
 
+다른 예시
+```
+# test.py
+
+import sys
+
+print("sys.argv => {0} {1}".format(type(sys.argv), sys.argv))
+
+for i, val in enumerate(sys.argv):
+    print("sys.argv[{0}] => {1}".format(i, val))
+
+```
+
+터미널창에서 인자를 space로 구분하여 전달
+```
+$ python test.py 1 2 3
+sys.argv => <class 'list'> ['test.py', '1', '2', '3']
+sys.argv[0] => 200115.py
+sys.argv[1] => 1
+sys.argv[2] => 2
+sys.argv[3] => 3
+```
 
 ## property
 property 데코레이터는 클래스 메소드가 클래스 변수에 접근할 수 있도록 도와준다.
