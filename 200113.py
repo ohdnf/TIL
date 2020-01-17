@@ -60,7 +60,7 @@ ret_val = calc(lambda x, y: x + y, 10, 5)
 print(ret_val)
 
 ret_val = calc(lambda x, y: x - y, 10, 5)
-pretin(ret_val)
+print(ret_val)
 
 
 # 클로저
