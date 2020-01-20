@@ -49,7 +49,7 @@ for i, val in enumerate(sys.argv):
 ```
 $ python test.py 1 2 3
 sys.argv => <class 'list'> ['test.py', '1', '2', '3']
-sys.argv[0] => 200115.py
+sys.argv[0] => test.py
 sys.argv[1] => 1
 sys.argv[2] => 2
 sys.argv[3] => 3
