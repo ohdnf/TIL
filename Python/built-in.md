@@ -55,6 +55,7 @@ sys.argv[2] => 2
 sys.argv[3] => 3
 ```
 
+
 ## property
 property 데코레이터는 클래스 메소드가 클래스 변수에 접근할 수 있도록 도와준다.
 
