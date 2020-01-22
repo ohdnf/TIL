@@ -42,38 +42,61 @@
 # print(words.join(","))
 
 
-class Student:
-    def __init__(self):
-        self.__name = ''
+# class Student:
+#     def __init__(self):
+#         self.__name = ''
 
-    @property
-    def name(self):
-        return self.__name
+#     @property
+#     def name(self):
+#         return self.__name
 
-    @name.setter
-    def name(self, name):
-        self.__name = name
+#     @name.setter
+#     def name(self, name):
+#         self.__name = name
 
-class GraduateStudent(Student):
-    def __init__(self):
-        super().__init__()
-        self.__major = ''
+# class GraduateStudent(Student):
+#     def __init__(self):
+#         super().__init__()
+#         self.__major = ''
 
-    @property
-    def major(self):
-        return self.__major
+#     @property
+#     def major(self):
+#         return self.__major
     
-    @major.setter
-    def major(self, major):
-        self.__major = major
+#     @major.setter
+#     def major(self, major):
+#         self.__major = major
 
 
-if __name__ == '__main__':
-    student = Student()
-    student.name = '홍길동'
-    graduateStudent = GraduateStudent()
-    graduateStudent.name = '이순신'
-    graduateStudent.major = '컴퓨터'
-    print(student.name)
-    print(graduateStudent.name)
-    print(graduateStudent.major)
+# if __name__ == '__main__':
+#     student = Student()
+#     student.name = '홍길동'
+#     graduateStudent = GraduateStudent()
+#     graduateStudent.name = '이순신'
+#     graduateStudent.major = '컴퓨터'
+#     print(student.name)
+#     print(graduateStudent.name)
+#     print(graduateStudent.major)
+
+# T = int(input())
+# # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
+# for test_case in range(1, T + 1):
+#     N, M = map(int, input().split())
+#     area = []
+#     for _ in range(N):
+#         area.append(list(map(int, input().split())))
+#     max_kill = 0
+#     for row in range(N-M-1):
+#         for col in range(N-M-1):
+#             kill = sum([sum(area[r][col:col+M]) for r in range(row, row+M)])
+#             if kill > max_kill:
+#                 max_kill = kill
+#     print('#{0} {1}'.format(test_case, max_kill))
+
+# def ssafy(name, location='서울'):
+#     print(f'{name}의 지역은 {location}입니다.')
+
+# if __name__ == '__main__':
+#     # ssafy(location='대전', name='철수')
+#     # ssafy('길동', location='광주')
+#     ssafy(name='허준', '구미')
