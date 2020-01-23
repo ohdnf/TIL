@@ -100,3 +100,11 @@
 #     # ssafy(location='대전', name='철수')
 #     # ssafy('길동', location='광주')
 #     ssafy(name='허준', '구미')
+
+# test = [1, 2, 3, 4, 5]
+
+# for i in reversed(test):
+#     print(i)
+
+# print(test.reverse())
+# print(test)
