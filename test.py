@@ -100,3 +100,53 @@
 #     # ssafy(location='대전', name='철수')
 #     # ssafy('길동', location='광주')
 #     ssafy(name='허준', '구미')
+
+# grade = ['A+', 'A0', 'A-', 'B+', 'B0', 'B-', 'C+', 'C0', 'C-', 'D0']
+# T = 1
+# for test_case in range(1, T + 1):
+#     # N, K = map(int, input().split())
+#     N, K = 10, 2
+#     data = [
+#         [87, 59, 88],
+#         [99, 94, 78],
+#         [94, 86, 86],
+#         [99, 100, 99],
+#         [69, 76, 70],
+#         [76, 89, 96],
+#         [98, 95, 96],
+#         [74, 69, 60],
+#         [98, 84, 67],
+#         [85, 84, 91],
+#         ]
+#     result = []
+#     for student_num in range(1, N + 1):
+#         # midterm, final, assignment = map(int, input().split())
+#         midterm, final, assignment = data[student_num-1]
+#         score = midterm * 35 + final * 45 + assignment * 20
+#         result.append([student_num, score])
+#     sorted_result = sorted(result, key=lambda student: student[1], reverse=True)
+#     print(sorted_result)
+#     grade_of_k = ''
+#     for idx, student in enumerate(sorted_result):
+#         if student[0] == K:
+#             grade_of_k = grade[int((idx + 1) / N * 10)]
+#             break
+#     print('#{0} {1}'.format(test_case, grade_of_k))
+
+# A = [[1, 2, 3],[4, 5, 6],[7, 8, 9]]
+# print(zip(*A))
+
+T = int(input())
+# 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
+for test_case in range(1, T + 1):
+    N, K = map(int, input().split())
+    puzzle_horizon = []
+    for _ in range(N):
+        puzzle_horizon.append(input().replace(' ', ''))
+    puzzle_vertical = [''.join(v) for v in list(zip(*puzzle_horizon))]
+    print(puzzle_horizon)
+    print(puzzle_vertical)
+    cnt = 0
+    for i in range(N):
+        cnt += puzzle_horizon[i].split('0').count('1'*K) + puzzle_vertical[i].split('0').count('1'*K)
+    print('#{0} {1}'.format(test_case, cnt))
