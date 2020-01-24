@@ -101,6 +101,7 @@
 #     # ssafy('길동', location='광주')
 #     ssafy(name='허준', '구미')
 
+<<<<<<< HEAD
 # grade = ['A+', 'A0', 'A-', 'B+', 'B0', 'B-', 'C+', 'C0', 'C-', 'D0']
 # T = 1
 # for test_case in range(1, T + 1):
@@ -150,3 +151,12 @@ for test_case in range(1, T + 1):
     for i in range(N):
         cnt += puzzle_horizon[i].split('0').count('1'*K) + puzzle_vertical[i].split('0').count('1'*K)
     print('#{0} {1}'.format(test_case, cnt))
+=======
+# test = [1, 2, 3, 4, 5]
+
+# for i in reversed(test):
+#     print(i)
+
+# print(test.reverse())
+# print(test)
+>>>>>>> 76c174f3d3e7aac133f5c39b234a4ae7e6f27d64
