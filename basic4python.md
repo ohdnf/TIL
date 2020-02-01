@@ -1,10 +1,8 @@
 # Basic for Python
 
-SW Expert Academy 파이썬 프로그래밍 기초
+파이썬 프로그래밍 문법 정리
 
 
-
-## 파이썬의 기본 구조와 기초 문법
 
 ### 예외처리
 
@@ -34,4 +32,26 @@ SW Expert Academy 파이썬 프로그래밍 기초
   	# 예외 발생과 상관없이 실행
   ```
 
-  
+
+
+### 리스트 & strings
+
+Concatenate items in list to string
+
+`'[dilimiter]'.join([list])`
+
+1. type(item) == str
+
+    ```python
+    data = ['h', 'e', 'l', 'l', 'o']
+    print('-'.join(data))
+    # 'h-e-l-l-o'
+    ```
+
+2. type(item) == int
+
+    ```python
+    data = [1, 2, 3, 4, 5]
+    print('-'.join(map(str, data))))
+    # '1-2-3-4-5'
+    ```

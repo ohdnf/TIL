@@ -1,5 +1,31 @@
 # git
 
+
+## git이란?
+
+`SCM(Source Code Management)`, `VCS(Version Control System)`
+
+* Versioning을 통해 Source Code를 Management하는 Tool
+
+* "Folder-based" management
+* `Version` == `Snapshot`
+
+
+
+## git을 쓰는 이유
+
+* 버전 관리
+* 원격 저장
+* 협업
+
+
+
+## Remote Repository(원격 저장소)
+
+* github, gitlab, bitbucket 등...
+
+
+
 ## 버전관리
 `git init`
 현재 디렉토리에서 git 버전 관리를 시작
@@ -111,7 +137,7 @@ apple 브랜치로 이동
 * master 브랜치와 custom 브랜치(예시: apple)를 병합
 * master 브랜치에서 병합할 브랜치 이름을 `git merge` 명령어 뒤에 붙인다.(merge apple into master)
 
-```
+```shell
 > git branch
   apple
 * master
