@@ -63,3 +63,17 @@
     - 식(Expression)으로 구성
     - 콜론(:) 포함
     - 변수 할당 or 바인딩 불가
+
+
+
+## Algorithms
+
+Program that solves a problem
+
+==> Machine way of thinking
+
+### 1. Abstraction
+
+~~추상화~~, 요약
+
+### 2. Reduction
