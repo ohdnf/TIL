@@ -1,15 +1,3 @@
-# sys 모듈
-# 명령행 매개변수로부터 인자 값을 읽어오기
-import sys
-
-print("sys.argv => {0} {1}".format(type(sys.argv), sys.argv))
-
-for i, val in enumerate(sys.argv):
-    print("sys.argv[{0}] => {1}".format(i, val))
-
-print("/n")
-
-
 # random 모듈
 
 from random import random, uniform, randrange, choice, sample, shuffle
@@ -69,20 +57,5 @@ print(now.strftime(fmt).format(*"년월일시분초"))
 # now_paris = now_pacific.astimezone(tz_paris)
 # print(now_paris.strftime(fmt))
 
-
-# 리스트
-# 항목 추가
-data = list(range(10))
-
-data.extend([10, 11, 12])   # iterable 객체를 받아 리스트 확장
-data.append([13, 14, 15])   # data에 항목 추가
-
-# 항목 제거
-data.pop(4)
-data.remove(15)     # 15를 가진 첫 번째 항목 제거
-data.clear()        # 모든 항목을 제거해 빈 리스트 객체 생성
-
-# 항목 확인
-data.count(10)      # 10이라는 항목의 개수 확인
 
 

@@ -1,36 +1,4 @@
-Unix 홈 디렉토리는 `~`로 표시
-
-
-
-Bash Shell에서 `code` 명령어로 vscode가 실행되지 않는 경우
-
-사용자 변수의 `Path`에서
-
-`C:\Users\multicampus\AppData\Local\Programs\Microsoft VS Code\bin`를 복사해
-
-시스템 변수의 `Path`에 붙여넣기
-
-
-
-`Linter pylint` : 파이썬 스타일
-
-
-
-`scraping` vs. `crawling`
-
-![image-20200116102927337](C:\Users\multicampus\Documents\jupyo\TIL\image-20200116102927337.png)![image-20200116103000627](C:\Users\multicampus\Documents\jupyo\TIL\image-20200116103000627.png)
-
-
-
-`beautifulsoup` 
-
-`lxml`
-
-
-
-
-
-## Hypertext Markup Language
+# HyperText Markup Language
 
 ```html
 <!doctype html> <!--현재 문서가 html 형식이라는 것을 알려줌-->

@@ -1,23 +1,40 @@
-### linux cmd 단축키 만들기
+# CS50 by Kang
 
-```shell
-$ vi .bashrc
+**강동주** 선생님
+
+5개월 동안 함께할 Mento (- -)(_ _)
+
+
+
+## Computer Programming Language
+
+### 1. 각 단어 분석
+
+* Computer: 계산/저장하는 기계
+* Programming: 명령, 순서
+* Language
+
+=> 컴퓨터에게 뭔가를 시킬 때 쓰는 말
+
+
+
+### 2. 컴퓨터 프로그래밍 언어의 변천 과정
+
+0, 1 => 어셈블리어 => C언어 => __Python__
+
+
+
+### 3. 3형식
+
+```html
+저장(=)
+조건(if)
+반복(while)
 ```
 
-```vi
-alias jn="jupyter notebook"
-```
-
-`Esc` 눌러서 일반 모드로 나오고 `:wq` 누르고 `Enter` 눌러서 저장 후 종료
-
-이 상태에선 설정이 저장되지 않으므로 터미널 새로고침이 필요
-
-```shell
-$ source ~/.bashrc
-```
 
 
-### 저장
+## 저장
 - 어떻게(=)
     - 할당 연산자
 - 무엇을(데이터 타입 == 자료형)
@@ -36,7 +53,8 @@ $ source ~/.bashrc
         - {dict:}
 
 
-### 식(Expression) & 문(Statement)
+
+## 식(Expression) & 문(Statement)
 - 조건식(Expression)
     - 값(Value) & 연산자(Operator)
     - 연산자를 통한 값의 평가(Evaluate)가 가능
