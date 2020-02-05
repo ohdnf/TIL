@@ -77,3 +77,13 @@ Program that solves a problem
 ~~추상화~~, 요약
 
 ### 2. Reduction
+
+
+
+## 절대법칙
+
+1. Web Browser는 Chrome이다.
+
+2. 교과서는 공식 문서(Documentation)다.
+
+3. User는 또라이다.
