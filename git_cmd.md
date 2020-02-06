@@ -31,6 +31,18 @@ bash 창에서 `git [명령어] -h`로 해당 명령의 도움말 확인 가능
 
 
 
+## golden_bell(공동 작업)
+
+1. `master`에 **commit X**
+
+2. 항상 작업 시작 전에 본인의 `branch`(내 경우 `ohdnf`) 확인
+
+3. `merge`된 `master`를 `pull` 이후에는 본인 `branch` 삭제 후 재생성
+
+4. 1-3 반복
+
+
+
 ## branch
 
 branch는 **일회용**이다.
