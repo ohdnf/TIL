@@ -66,20 +66,6 @@
 
 
 
-## Algorithms
-
-Program that solves a problem
-
-==> Machine way of thinking
-
-### 1. Abstraction
-
-~~추상화~~, 요약
-
-### 2. Reduction
-
-
-
 ## 절대법칙
 
 1. Web Browser는 Chrome이다.
@@ -87,3 +73,39 @@ Program that solves a problem
 2. 교과서는 공식 문서(Documentation)다.
 
 3. User는 또라이다.
+
+
+
+## Algorithms
+
+Program that solves a problem
+
+==> Machine way of thinking
+
+### ~~추상화~~, 요약
+
+    1. Abstraction
+    2. Reduction
+
+### 패러다임(접근방식)
+
+- brute force
+
+- dynamic programming
+
+- greedy (knapsack)
+
+
+
+## 자료구조
+
+### 선형
+
+### 비선형
+
+
+
+## OOP(Object-oriented Programming)
+
+프로그래밍을 할 때 인간이 이해하기 쉽게 주어(S)와 서술부(V, predicate)로 추상화, 논리구조를 만드는 것.
+
