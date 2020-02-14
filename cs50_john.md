@@ -6,6 +6,37 @@
 
 
 
+## Samsung SW 역량 Test A형 유형 조지기: 네 가지만 떠올려라
+
+(IM은 소위 Index Manipulation...!)
+
+삼성 시험의 경우 `import`를 하면 연산 메모리 안에 모듈을 다 넣어놓기 때문에 채점 시 불리할 수 있다. 기본으로 푸는 연습할 것(`from collections import deque` 같은 경우도 그냥 `list`로 구현하기)
+
+1. Simulation(단순 구현)
+
+2. Brute Force(완전 탐색): Exhaustive Enumeration 포함
+
+
+
+> 1, 2번까지는 구현해서 test case까지 돌려보고 나서 3, 4번으로 생각
+
+
+
+3. BFS
+
+4. **DP** + Greedy
+
+    무식하게 많이 풀어보는 수 밖에 없다
+
+    재귀 + 메모(Memorization)
+
+
+
+## 다른 코테는...?
+
+**자료구조** 및 CS 기본지식 필요!
+
+
 ## Computer Programming Language
 
 ### 1. 각 단어 분석
