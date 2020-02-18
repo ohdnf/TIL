@@ -140,3 +140,25 @@ Program that solves a problem
 
 프로그래밍을 할 때 인간이 이해하기 쉽게 주어(S)와 서술부(V, predicate)로 추상화, 논리구조를 만드는 것.
 
+
+
+## Error
+
+### Error handling
+
+1. Syntactic Error
+
+    `Syntax`: 구문, 문법, 규칙을 나타내는 기본 단위
+    확실한 오류 ==> 실행종료
+
+### (Semantic) Debugging
+
+의미상 다른 부분을 고쳐나가는 것
+
+2. Static Semantic Error
+
+    구문적으로 오류가 없으며 (Syntatically valid) 의미를 내포하려 하지만 의미상 오류가 존재
+
+3. Semantic Error
+
+    Syntatically valid하고 Static Semantic Error도 없는 상태이지만 의미가 의도한 의미와 다를 가능성이 존재
