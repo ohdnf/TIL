@@ -13,7 +13,6 @@
 | `mv [file_path] [destination]`      | 파일/폴더를 해당 위치로 이동(이름 변경 가능) |
 | `cp [file_path] [destination]`      | 복사 대상 경로 파일을 복사 위치로 복사(이름 변경 가능) |
 | `cat (-n) [file_path]`              | (옵션: `n`행만큼) 파일 내용 출력 |
-| `cat [file_path] > [content]`       | 입력한 내용을 저장한 파일을 새로 생성 |
 | `cat [file_path] > [destination]`   | 기존 파일 내용을 다른 파일로 복사 |
 | `echo '[contents]' > [file_path]`   | 해당 파일 내용을 `[contents]`로 덮어쓰기 |
 | `echo '[contents]' >> [file_path]`  | 해당 파일 맨 뒤에 `[contents]` 이어쓰기 |
