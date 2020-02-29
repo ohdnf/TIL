@@ -114,8 +114,9 @@
 
 
 
-- `git checkout`
-HEAD를 변경해 현재 저장소 위치를 바꾸는 명령어
+- `git checkout`: HEAD를 변경해 현재 저장소 위치를 바꾸는 명령어
+
+
 
 - `git log`를 통해 branch ID를 확인할 수 있다. `git checkout branch_ID`를 하면 해당 버전으로 변경할 수 있다.
 
@@ -146,12 +147,12 @@ HEAD를 변경해 현재 저장소 위치를 바꾸는 명령어
 - 3-way merge
 
     ```
-    base	here	there	2way_m	3way_m
+    base    here	there	2way_m  3way_m
     ----------------------------------------------------
-    A	A	A	A	A
-    H	B	B	?	H
-    C	C	T	?	T
-    H           D	T	?	?
+    A	    A	    A	    A	    A
+    H	    B   	B   	?   	H
+    C	    C	    T	    ?	    T
+    H       D   	T   	?   	?
     ```
 
     * `git mergetool` 을 사용해서 merge 관리(예: p4merge)

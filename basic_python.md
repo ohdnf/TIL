@@ -64,31 +64,66 @@ hell0 = hello.replace(" ", "")  # 공백 제거
 
 ### Concatenate items in list to string
 
-#### `'[dilimiter]'.join([list])`
+- `'[dilimiter]'.join([list])`
 
-1. type(item) == str
+    1. type(item) == str
+
+        ```python
+        data = ['h', 'e', 'l', 'l', 'o']
+        print('-'.join(data))
+        # 'h-e-l-l-o'
+        ```
+
+    2. type(item) == int
+
+        ```python
+        data = [1, 2, 3, 4, 5]
+        print('-'.join(map(str, data))))
+        # '1-2-3-4-5'
+        ```
+
+    - Using `*`(unpack)
+
+        ```python
+        # 1부터 100까지 원소 사이에 ', '(쉼표 공백) 넣어서 출력하기
+        l = [num for num in range(1, 100) if num % 2 == 1]
+        print(*l, sep=', ')
+        ```
+
+
+
+### 복사
+
+- 얕은 복사
 
     ```python
-    data = ['h', 'e', 'l', 'l', 'o']
-    print('-'.join(data))
-    # 'h-e-l-l-o'
+    # 주소의 복사
+    new_list = old_list
     ```
 
-2. type(item) == int
+- 깊은 복사
 
     ```python
-    data = [1, 2, 3, 4, 5]
-    print('-'.join(map(str, data))))
-    # '1-2-3-4-5'
-    ```
+    # 슬라이싱, 가장 빠름
+    new_list = old_list[:]
 
-#### Using `*`(unpack)
+    # 리스트를 추가
+    new_list = list()
+    new_list.extend(old_list)
 
-- 1부터 100까지 원소 사이에 ', '(쉼표 공백) 넣어서 출력하기
+    # 새로운 리스트로 복제
+    new_list = list(old_list)
 
-    ```python
-    l = [num for num in range(1, 100) if num % 2 == 1]
-    print(*l, sep=', ')
+    # copy 활용
+    import copy
+    new_list = copy.copy(old_list)
+
+    # 리스트 함축
+    new_list = [e for e in old_list]
+
+    # 리스트 원소까지도 깊은 복사, 가장 느림
+    import copy
+    new_list = copy.deepcopy(old_list)
     ```
 
 
@@ -351,3 +386,31 @@ hell0 = hello.replace(" ", "")  # 공백 제거
     ```
 
 
+
+## `@decorator` 함수
+
+- 어떠한 함수를 다른 함수가 실행되기 전에 자동으로 먼저 실행될 수 있도록 해주는 문법
+
+- 파이썬에서는 `functools` 모듈의 `wraps decorator` 함수를 사용해 만들 수 있다.
+
+    ```python
+    from functools import wraps
+    
+    def test_decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            print('Decorated Function')
+            return f(*args, **kwargs)
+        
+        return decorated_function
+
+    @test_decorator
+    def func():
+        print('Calling func function')
+    ```
+
+    ```shell
+    >>> func()
+    Decorated Function
+    Calling func function
+    ```
