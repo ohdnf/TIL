@@ -39,6 +39,10 @@
 ```
 
 
+## `id` vs. `class`
 
+- `id`
+
+- `class`
 
 
