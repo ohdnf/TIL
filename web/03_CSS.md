@@ -370,6 +370,21 @@
         }
         ```
 
+### display
+- `display: block` 요소
+    - 줄 바꿈이 일어나는 요소
+    - 화면 크기 전체의 가로폭을 차지한다.
+    - 블록 레벨 요소 안에 인라인 레벨 요소가 들어갈 수 있다.
+- `display: inline` 요소
+    - 줄 바꿈이 일어나지 않는 행의 일부 요소
+    - `content` 너비만큼 가로폭을 차지한다.
+    - `width`, `height`, `margin-top`, `margin-bottom`을 지정할 수 없다. (지정해도 적용이 안 됨)
+    - 상하여백은 `line-height`로 지정한다.
+- `display: inline-block` 요소
+    - `block`과 `inline` 레벨 요소의 특징을 모두 갖는다.
+    - `inline`처럼 한 줄에 표시 가능
+    - `block`처럼 `width`, `height`, `margin` 속성을 모두 지정할 수 있다.
+
 ### 요소의 크기 설정(`width`, `height` 속성)
 - `width`, `height` 속성: 블록 레벨 요소의 크기 설정 -> **인라인 레벨 요소에는 적용되지 않음**
 - `width` 속성: 요소의 너비 설정
@@ -380,13 +395,50 @@
 ### Position
 - `position` 속성: 특정 요소가 다른 요소들과 어떠한 관계 속에서 위치를 결정하는지 설정
 - 속성값
-    - `position: relative;`: 상대 위치
-    - `position: absolute;`: 절대 위치
-    - `position: fixed;`: 고정 위치
+    - `static`: 디폴트 값(기준 위치)
+        - 기본적인 요소의 배치 순서에 따름(좌측상단)
+        - 부모 요소 내에서 배치될 때는 부모 요소의 위치를 기준으로 배치된다.
+    - `position: relative;`: 상대 위치 / `static` 위치를 기준으로 이동
+    - `position: absolute;`: 절대 위치 / `static`이 아닌 가장 가까이 있는 부모/조상요소를 기준으로 이동
+    - `position: fixed;`: 고정 위치 / 부모 요소와 관계 없이 브라우저를 기준으로 이동
+        - 스크롤 시에도 항상 같은 곳에 위치
     - `z-index` 속성
         - 어떤 요소가 다른 요소 위에 나타나는지 설정
         - 속성 값(정수)이 높을 수록 앞에 배치
         - 미 설정시 HTML 문서에서 요소가 나타난 순서대로 위에 제시
+
+### float
+- `float`는 요소를 일반적인 흐름(normal flow: 박스 모델, 좌상단으로 모두 붙어서 배치)에서 벗어나도록 하는 속성 중 하나
+    - 반드시 `clear` 속성을 통해 초기화가 필요하며, 예상치 못한 상황이 발생할 수 있음
+- 신문처럼 중간에 사진이 삽입되는 배치에서 일반적으로 많이 쓰임
+- `float`를 사용하는 경우 `block` 사용을 뜻하며, `display`값이 `inline`인 경우 `block`으로 계산
+- 문제
+    - 자식 요소의 `float` 속성으로 인해 부모 영역의 높이가 사라짐
+    - `clear`한 요소의 `margin`이 제대로 표현되지 않음
+- 해결방안
+    - 의사(가상) 요소 선택자를 활용
+        ```css
+        .clear {
+            clear: both;
+        }
+        .parent {
+            background-color: gray;
+        }
+        .clearfix::after {
+            content: "hello world";
+            display: block;
+            clear: both;
+        }
+        ```
+        ```html
+        <html>
+            <body>
+                <section class="parent clearfix">
+                    <div class="float-left"></div>
+                </section>
+            </body>
+        </html>
+        ```
 
 ## 7. 레이아웃 정렬
 
