@@ -400,7 +400,7 @@
         - 기본적인 요소의 배치 순서에 따름(좌측상단)
         - 부모 요소 내에서 배치될 때는 부모 요소의 위치를 기준으로 배치된다.
     - `position: relative;`: 상대 위치 / `static` 위치를 기준으로 이동
-    - `position: absolute;`: 절대 위치 / `static`이 아닌 가장 가까이 있는 부모/조상요소를 기준으로 이동
+    - `position: absolute;`: 절대 위치 / `static`이 아닌 가장 가까이 있는 부모/조상요소를 기준으로 이동(부모요소에 `position: relative;` 설정 필요)
     - `position: fixed;`: 고정 위치 / 부모 요소와 관계 없이 브라우저를 기준으로 이동
         - 스크롤 시에도 항상 같은 곳에 위치
     - `z-index` 속성

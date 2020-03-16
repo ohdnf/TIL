@@ -32,11 +32,15 @@
     1. 객체(object): 다양한 값의 집합
     2. 객체의 값: property(어떠한 값도 가능)
     3. 객체 리터럴: JavaScript의 새로운 객체 만들 때 사용
+        ```javascript
+        var a = new Object;   // 새로운 비어있는 객체 생성
+        a.width = 300;          // property 접근
+        ```
     4. 배열(array): 값의 집합
     5. 배열 생성: 생성자(`new`) 이용, 배열 리터럴 이용
-        ```javascript
-        var a = new Object;
-        var a = [10];
+        ```js
+        var a = new Array();                // 비어있는 배열 생성
+        var a = {10, true, 3.5, "orange"};  // 배열 생성 및 리터럴 사용해 초기화
         ```
     6. 함수: JavaScript 프로그래밍의 기본 단위. 데이터 타입으로 변수에 할당이 가능한 값
     7. 함수 생성: 키워드(`function`) 이용
