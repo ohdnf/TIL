@@ -3,11 +3,11 @@
 - 일반적인 feature(보안 등)이 잘 되어있다.
 - `flask`와 다르게 대규모의 application을 만들 때 유용하다.
 - Model-View-Controller Model Pattern을 따른다.
-    | 소프트웨어 디자인 패턴 | `django` |
-    | -------------------- | -------- |
-    | 데이터 관리 | **M**odel |
-    | 인터페이스(화면) | **T**emplate |
-    | 중간 관리(상호 동작) | **V**iew |
+    | SW 디자인 패턴 | MVC | Django |
+    | ------------- | --- | ------ |
+    | 데이터 관리 | Model | **M**odel |
+    | 인터페이스(화면) | View | **T**emplate |
+    | 중간 관리(상호 동작) | Controller | **V**iew |
 
 ## 패키지 설치
 
