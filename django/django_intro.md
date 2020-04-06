@@ -125,3 +125,25 @@
     $ ls
     db.sqlite3  django_intro/  manage.py*  pages/
     ```
+
+
+## 0406 수업 흐름
+- 개발 단계
+    1. MVC
+    - Model driven design
+    - Data Modeling
+
+    2. (urls  ->) View
+
+    3. Controller
+
+- 텔넷
+`sudo apt-get install telnetd`
+
+- http 요청-응답 프로세스 추적하는 프로그램
+traceroute
+tracert
+
+- 오늘 했던 내용
+app_name
+{% url 'index' %}
