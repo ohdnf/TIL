@@ -20,7 +20,7 @@
 
 - `project` == `git`의 `repository` 개념
     ```bash
-    $ django-admin startproject [project_name]
+    $ django-admin startproject 프로젝트명
     ```
 
 - `project_name` 폴더 안에 동일한 이름의 `project_name` 폴더가 있는 이유
@@ -119,7 +119,7 @@
 
 ## 앱 만들기
 
-- ㅇㅇ
+- `pages`라는 앱을 만드는 명령어
     ```bash
     $ python manage.py startapp pages
     $ ls
