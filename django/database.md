@@ -38,7 +38,7 @@ class Article(models.Model):
 
 ### DB 초기화하기
 > 주의: 모든 데이터가 사라짐!
-1. `migrations/` 내 `__init__.py` 파일 제외(삭제하면 안 됨!)하고 이력(`0001_initial.py` 등) 삭제
+1. `migrations/` 내 `__init__.py` 파일 제외(삭제하면 패키지로 인식하지 못 함)하고 이력(`0001_initial.py` 등) 삭제
 2. `db.sqlite3` 삭제
 3. `$ python manage.py makemigrations`
 4. `$ python manage.py migrate [app_label] [migration_name]`

@@ -1,5 +1,9 @@
 # django: The web framework for perfectionist with deadlines
 
+- Python Web Framework
+
+![Django MTV Model](assets/basic-django.png)
+
 - 일반적인 feature(보안 등)이 잘 되어있다.
 - `flask`와 다르게 대규모의 application을 만들 때 유용하다.
 - Model-View-Controller Model Pattern을 따른다.
@@ -18,7 +22,8 @@
 
 ## 프로젝트 생성
 
-- `project` == `git`의 `repository` 개념
+- `django`는 여러 개의 Application을 가진 하나의 Project로 구성
+- Project는 git의 Repository 개념
     ```bash
     $ django-admin startproject 프로젝트명
     ```
@@ -56,7 +61,7 @@
     from pages import views
 
     urlpatterns = [
-        # 경로 뒤에 항상 `/`로 닫아준다.
+        # path의 url은 항상 `/`로 닫아준다.
         # 여기서는 index/라는 경로를 만든다.
         path('index/', views.index),
         ...
@@ -112,20 +117,10 @@
     LANGUAGE_CODE = 'ko-kr'
     ```
 
-- 서버 실행
+- 서버 실행: `manage.py`가 있는 경로 확인!
     ```bash
     $ python manage.py runserver 8080
     ```
-
-## 앱 만들기
-
-- `pages`라는 앱을 만드는 명령어
-    ```bash
-    $ python manage.py startapp pages
-    $ ls
-    db.sqlite3  django_intro/  manage.py*  pages/
-    ```
-
 
 ## 0406 수업 흐름
 - 개발 단계
