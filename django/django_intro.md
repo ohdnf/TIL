@@ -32,6 +32,26 @@
     - 다양한 application을 넣기 위해
     - 앞으로 해당 폴더는 project 폴더라고 지칭
 
+## 초기 설정
+
+- `project_name/settings.py` 설정
+    ```py
+    # settings.py
+
+    ALLOWED_HOSTS = ['*']   # 추후 white-listing 필요
+
+    LANGUAGE_CODE = 'ko-kr'
+
+    TIME_ZONE = 'Asia/Seoul'
+    ```
+
+- `.gitignore` 파일 추가
+    ```shell
+    $ vi .gitignore
+    ```
+    - 내용은 [gitignore.io](https://www.gitignore.io/api/django) 참고
+
+
 ## 앱(Application) 생성
 
 - `pages`라는 앱 생성해보기
