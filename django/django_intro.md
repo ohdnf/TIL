@@ -1,6 +1,6 @@
 # django: The web framework for perfectionist with deadlines
 
-- Python Web Framework
+Python Web Framework
 
 ![Django MTV Model](assets/basic-django.png)
 
@@ -38,7 +38,10 @@
     ```py
     # settings.py
 
-    ALLOWED_HOSTS = ['*']   # 추후 white-listing 필요
+    # 로컬호스트 제외 접속 가능한 URL 지정
+    # '*': 모든 host/domain 허용
+    # 추후 white-listing 필요
+    ALLOWED_HOSTS = ['*']
 
     LANGUAGE_CODE = 'ko-kr'
 
@@ -51,6 +54,9 @@
     ```
     - 내용은 [gitignore.io](https://www.gitignore.io/api/django) 참고
 
+## 전체 흐름
+
+URL 설정 => Views => Templates
 
 ## 앱(Application) 생성
 
@@ -59,7 +65,7 @@
     $ python manage.py startapp pages
     ```
 
-- 생성한 앱은 `settings.py` > `INSTALLED_APPS` 리스트에 추가를 해주어야 한다.
+- 앱 등록: 생성한 앱은 `settings.py` > `INSTALLED_APPS` 리스트에 추가를 해주어야 한다.
     ```python
     #django_intro/settings.py
 
@@ -123,18 +129,6 @@
 - 반드시 서버 실행 시 실행되는 디렉토리를 확인할 것
     ```bash
     $ cd django_intro
-    ```
-
-- 서버 실행을 위한 `settings.py` 환경 설정
-    ```python
-    #django_intro/settings.py
-    ...
-    
-    ALLOWED_HOSTS = ['*']
-
-    ...
-
-    LANGUAGE_CODE = 'ko-kr'
     ```
 
 - 서버 실행: `manage.py`가 있는 경로 확인!

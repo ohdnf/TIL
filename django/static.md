@@ -37,28 +37,28 @@ django_pjt/
     manage.py
     README.md
 ```
-- 프로젝트 폴더와 같은 위치에 `static` 폴더 만들기
-    - `settings.py` 설정
-        ```py
-        # settings.py
+## 프로젝트 폴더와 같은 위치에 `static` 폴더 만들기
+- `settings.py` 설정
+    ```py
+    # settings.py
 
-        ...
-        # Static files (CSS, JavaScript, Images)
-        # https://docs.djangoproject.com/en/2.1/howto/static-files/
+    ...
+    # Static files (CSS, JavaScript, Images)
+    # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-        # STATIC_URL은 외부에서 접속 가능하도록 설정
-        # domain_url/STATIC_URL/serving_되는_static_파일_경로
-        # 와 같은 형태로 html source에 표현
-        STATIC_URL = '/static/'
+    # STATIC_URL은 외부에서 접속 가능하도록 설정
+    # domain_url/STATIC_URL/serving_되는_static_파일_경로
+    # 와 같은 형태로 html source에 표현
+    STATIC_URL = '/static/'
 
-        # app 디렉토리가 아닌 static 폴더 지정
-        STATICFILES_DIRS = [
-            os.path.join(BASE_DIR, 'static'),
-        ]
-        ```
+    # app 디렉토리가 아닌 static 폴더 지정
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+    ]
+    ```
 
-- 앱 폴더 안에 `static` 폴더 만들기
-    - 향후 다른 앱에서도 `static` 폴더를 만들기 위해서는 각 앱의 `static` 폴더 안에 앱 이름의 폴더를 만들어주는 것이 바람직하다(`templates`처럼).
+## 앱 폴더 안에 `static` 폴더 만들기
+- 향후 다른 앱에서도 `static` 폴더를 만들기 위해서는 각 앱의 `static` 폴더 안에 앱 이름의 폴더를 만들어주는 것이 바람직하다(`templates`처럼).
 
 - `templates/base.html`
     ```html
