@@ -8,6 +8,312 @@
 $ python manage.py startapp accounts
 ```
 
+## 회원가입: `signup`
+
+```py
+# accounts/urls.py
+from django.urls import path
+from . import views
+
+app_name = 'accounts'
+
+urlpatterns = [
+    path('signup/', views.signup, name='signup'),
+]
+```
+
+```py
+# accounts/views.py
+from django.shortcuts import render
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
+from django.contrib.auth.forms import UserCreationForm
+
+def signup(request):
+    if request.user.is_authenticated:
+        return redirect('posts:index')
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # 회원가입 성공 시 자동으로 로그인
+            user = authenticate(
+                username=form.cleaned_data.get('username'),
+                password=form.cleaned_data.get('password1')
+                )
+            auth_login(request, user)
+            # 로그인이 되면 그 전 페이지 또는 메인 페이지로 이동
+            return redirect(request.GET.get('next') or 'posts:index')
+    else:
+        form = UserCreationForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'accounts/signup.html', context)
+```
+
+```html
+<!-- accounts/templates/accounts/signup.html -->
+{% extends 'base.html' %}
+
+{% block body %}
+<form action="" method="POST">
+  {% csrf_token %}
+  {% form %}
+  <button class="btn btn-primary">Join!</button>
+  <a href="{% url 'accounts:login' %}">Log in</a>
+</form>
+{% endblock %}
+```
+
+## 로그인: `login`
+
+```py
+# accounts/urls.py
+urlpatterns = [
+    ...
+    path('login', views.login, name='login'),
+]
+```
+
+```py
+# accounts/views.py
+...
+from django.contrib.auth import login as auth_login
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+...
+
+def login(request):
+    if request.user.is_authenticated:
+        return redirect('posts:index')
+    if request.method == 'POST':
+        form = Authentication(request, request.POST)
+        if form.is_valid():
+            form.save()
+            auth_login(request, form.get_user())
+            # 로그인이 되면 그 전 페이지 또는 메인 페이지로 이동
+            return redirect(request.GET.get('next') or 'posts:index')
+    else:
+        form = AuthenticationForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'accounts/login.html', context)
+```
+
+```html
+<!-- accounts/templates/accounts/login.html -->
+{% extends 'base.html' %}
+
+{% block body %}
+<form action="" method="POST">
+  {% csrf_token %}
+  {% form %}
+  <button class="btn btn-primary">Log in</button>
+  <a href="{% url 'accounts:signup' %}">Sign up</a>
+</form>
+{% endblock %}
+```
+
+## 마이페이지: `detail`
+
+```py
+# accounts/urls.py
+...
+urlpatterns = [
+    path('<int:pk>/detail/', views.detail, name='detail'),
+]
+```
+
+```py
+# accounts/views.py
+...
+def detail(request, pk):
+    user = User.objects.get(pk=pk)
+    context = {
+        'user': user,
+    }
+    return render(request, 'accounts/detail.html', context)
+```
+
+```html
+<!-- accounts/templates/accounts/detail.html -->
+{% extends 'base.html' %}
+
+{% block body %}
+{{ user.username }}'s Info
+
+{% if request.user == user %}
+<!-- GET -->
+<a href="{% url 'accounts:delete' %}">Delete Account</a>
+<!-- POST -->
+<form action="{% url 'accounts:delete' %}" method="POST">
+  {% csrf_token %}
+  <button class="btn btn-danger">Delete my Account</button>
+</form>
+{% endif %}
+{% endblock %}
+```
+
+## 회원정보 수정: `update`
+
+```py
+# accounts/urls.py
+...
+urlpatterns = [
+    ...
+    path('update/', views.update, name='update'),
+]
+```
+
+```py
+# accounts/forms.py
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserChangeForm
+
+class CustomUserChangeForm(UserChangeForm):
+    class Meta:
+        model = get_user_model()
+        fields = ['username', 'first_name', 'last_name', 'email']
+```
+
+```py
+# accounts/views.py
+...
+from .forms import CustomUserChangeForm
+
+def update(request):
+    if request.method == 'POST':
+        form = CustomUserChangeForm(request, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:update')
+    else:
+        form = CustomUserChangeForm(instance=request.user)
+    context = {
+        'form': form,
+    }
+    return render(request, 'accounts/update.html', context)
+```
+
+```html
+<!-- accounts/templates/accounts/detail.html -->
+{% extends 'base.html' %}
+
+{% block body %}
+{{ user.username }}'s Info
+
+{% if request.user == user %}
+<!-- GET -->
+<a href="{% url 'accounts:update' %}">Update info</a>
+<!-- POST -->
+<form action="{% url 'accounts:delete' %}" method="POST">
+  {% csrf_token %}
+  <button class="btn btn-danger">Delete account</button>
+</form>
+{% endif %}
+{% endblock %}
+```
+
+## 로그아웃: `logout`
+
+```py
+# accounts/urls.py
+...
+
+urlpatterns = [
+    path('logout/', views.logout, name='logout'),
+]
+```
+
+```py
+# accounts/views.py
+...
+from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def logout(request):
+    auth_logout(request)
+    return redirect('posts:index')
+```
+
+```html
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workshop</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'posts:index' %}">Navbar</a>
+    <div class="navbar-nav">
+    {% if request.user.is_authenticated %}
+    <!-- {% if user.is_authenticated %} -->
+    <!-- user는 context에서 넘겨준 값, request.user는 현재 장고 서버에서 보내준 응답 -->
+      <a class="nav-item nav-link" href="#">{{ request.user.username }}</a>
+      <a class="nav-item nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+    {% else %}
+      <a class="nav-item nav-link" href="{% url 'accounts:login' %}">Login</a>
+      <a class="nav-item nav-link" href="{% url 'accounts:signup' %}">Sign up</a>
+    {% endif %}
+    </div>
+  </nav>
+  {% block body %}
+  {% endblock %}
+</body>
+</html>
+```
+
+## 회원탈퇴: `delete`
+
+```py
+# accounts/urls.py
+...
+urlpatterns = [
+    ...
+    path('delete/', views.delete, name='delete'),
+]
+```
+
+```py
+# accounts/views.py
+...
+from django.contrib.auth.decorators import login_required
+from django.views.decorators import require_POST
+
+@require_POST
+@login_required
+def delete(request):
+    request.user.delete()
+    return redirect('posts:index')
+```
+
+## Sign UP vs Sign IN
+
+| 구분 | Sign Up | Sign In |
+| ---- | ------- | ------- |
+| forms | UserCreationForm | AuthenticationForm |
+| 로직 | User Object 생성 | Django Session 저장 및 변경 + 사용자에게 쿠키 전달 |
+
+## login_required
+
+```py
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def func(request):
+    ...
+    return
+```
+
+- 로그인되어있지 않을 경우 로그인 페이지로 이동
+    - 로그인 URL Default는 `LOGIN_URL='/accounts/login/'`이며 `settings.py`에서 변경이 가능하다.
+- `next` 파라미터를 활용 가능
+
 ## 상속관계
 
 > [Django GitHub](https://github.com/django/django/blob/master/django/contrib/auth/models.py) 참고

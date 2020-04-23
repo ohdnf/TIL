@@ -1,5 +1,23 @@
 # Django Form
 
+## 기본 로직
+
+1. Form 제공: `GET {URL}`
+
+    1. `context`에 `form` 넘겨준다.
+
+2. 양식에 맞춰 데이터 회수 => 처리: `POST {URL}`
+
+    1. 양식_데이터(`request.POST`)를 ModelForm에 넘긴다
+        ```py
+        form = ArticleForm(request.POST)
+        ```
+    2. 검증
+        ```py
+        if form.is_valid():
+            form.save()
+        ```
+
 ## User의 input 값을 받아 처리하기
 
 > 두 페이지가 필요하다!
@@ -60,6 +78,9 @@ class PostForm(forms.ModelForm):
 
 > 비밀번호를 암호화해야 하기 때문에 일반 ModelForm은 쓸 수 없다.
 > Django 내부 로직을 통해 이를 해결할 수 있다.
+
+- `UserCreationForm`
+- `AuthenticationForm`
 
 ### Signup: User Create
 
