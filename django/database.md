@@ -115,6 +115,8 @@ $ python manage.py shell_plus --print-sql
 
 ### 1:N
 
+[Django Documentation](https://docs.djangoproject.com/en/3.0/topics/db/queries/#one-to-many-relationships)
+
 > 1 has many N
 > N belongs to 1
 
@@ -131,6 +133,25 @@ class Article(models.Model):
     reporter = models.ForeignKey(Reporter, on_delete=models.CASCADE)
 ```
 
-`reporter.article_set.all()` ==> 자동으로 설정
+## Naming Convention
 
-`article.reporter` ==> 우리가 설정
+```py
+reporter.article_set.all() # 자동으로 설정
+
+# models.py
+class Reporter(models.Model):
+    ...
+    article = models.ForeignKey(
+        Article, on_delete=models.CASCADE, 
+        related_name='reporter')
+article.reporter # related_name 옵션으로 직접 설정
+```
+
+### 1:N
+
+- 정의: 모델 단수형(`.user`)
+- 역참조: 모델_set(`.article_set`)
+
+### M:N
+
+- 정의 및 역참조: 모델 복수형(`.like_users`, `like_articles`)
