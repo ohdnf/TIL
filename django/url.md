@@ -8,7 +8,7 @@ from . import views
 # app_name은 app마다 namespace를 지정하기 위해 정의한다.
 # app_name과 name으로 지정한 urlpattern들은
 # `articles:index`와 같은 형식으로 사용 가능하다.
-app_name = 'articles/'
+app_name = 'articles'
 
 urlpatterns = [
     path('', views.index, name='index'),
