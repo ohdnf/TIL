@@ -58,15 +58,33 @@ Templates의 html 파일은 Django Template Language로 구성
 
 ## Filters
 
-### default
+### `default`
 
 `value`가 `False`이거나 `empty`일 경우 `default`로 지정된 값을 반환
 
 `{{ value|default:"nothing" }}`
 
-### length
+### `length`
 
 ```html
 {{ value|length }}
 ```
 
+## `with`
+
+[Django Documentation](https://docs.djangoproject.com/ko/3.0/ref/templates/builtins/#with)
+
+```html
+{% with article_like_users=article.like_users.all %}
+  {% if request.user in article_like_users %}
+  <a href="{% url 'articles:like' article.pk %}">
+    <i class="fas fa-heart fa-lg" style="color: red;"></i>
+  </a>
+  {% else %}
+  <a href="{% url 'articles:like' article.pk %}">
+    <i class="fas fa-heart fa-lg" style="color: black;"></i>
+  </a>
+  {% endif %}
+  <p>{{ article_like_users|length }}명이 좋아합니다.</p>
+{% endwith %}
+```
