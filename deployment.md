@@ -122,7 +122,7 @@ While alive:
     - `Procfile` 파일 생성 후 다음 내용 추가
 
         ```procfile
-        web: gunicorn instagram.wsgi --log-file -
+        
         ```
 
     - `web: gunicorn <프로젝트명>.wsgi --log-file -`
