@@ -1,4 +1,4 @@
-# DRF
+# Django REST Framework
 
 ## DRF로 CRUD하는 이유
 0. Money
