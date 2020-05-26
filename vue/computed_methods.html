@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <button v-on:click="visible = !visible">Refresh</button>
+    <ul v-if="visible">
+      <li><span>Methods: </span>{{ getDate() }}</li>
+      <li><span>Computed: </span>{{ computedGetDate }}</li>
+    </ul>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        visible: true,
+      },
+      methods: {
+        getDate() {
+          return new Date()
+        }
+      },
+      // render되는 data가 변경될 때만 갱신
+      computed: {
+        computedGetDate() {
+          return new Date()
+        }
+      },
+      watch: {
+        someNumber() {
+          console.log('형 someNumber 변했어')
+        }
+      }
+    })
+  </script>
+</body>
+</html>

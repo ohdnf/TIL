@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 둘은 완전 동일 -->
+    <!-- v- ==> directive -->
+    <p v-text="message"></p>
+    <p>{{ message }}</p>
+    
+    <!-- 조건문 -->
+    <p v-if="bool1">
+      show
+    </p>
+    <p v-if="bool2">
+      does not show
+    </p>
+
+    <p v-if="username === 'master'">
+      Hello master
+    </p>
+    <p v-else>
+      Hello User
+    </p>
+
+    <p v-for="teacher in teachers">{{ teacher }}</p>
+
+    <a v-bind:href="URL">Naver Search</a>
+    <img v-bind:src="randomImage" v-bind:alt="altText">
+
+    <button v-on:click="reverseMessage">메시지 뒤집기</button>
+
+    <!-- v-모델 디렉티브 -->
+    <h1>v-모델 디렉티브</h1>
+    <input v-model="userInput">
+    <p>[[ userInput ]]</p>
+
+    <!-- JS 버전 -->
+    <h1>JS 버전</h1>
+    <input id="jsInput" type="text">
+    <p id="jsP"></p>
+    
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      delimiter: ["[[", "]]"],
+      data: {
+        message: 'Hello Vue',
+        bool1: true,
+        bool2: false,
+        str1: 'Yes',  // true
+        str2: '',     // false
+        num1: 1,      // true
+        num2: 0,      // false
+        username: 'master',
+        teachers: [
+          { name: 'tak' },
+          { name: 'john' },
+        ],
+        URL: 'https://www.naver.com/',
+        randomImage: 'https://picsum.photos/200',
+        altText: 'random-image',
+      },
+      methods: {
+        reverseMessage: function() {
+          this.message = this.message.split('').reverse().join('')
+          console.log(this.log)
+        }
+      }
+    })
+    // 1. 이벤트가 발생하는 DOM 요소를 잡는다.
+    const jsInput = document.querySelector('#jsInput')
+    // 2. 해당 DOM 요소에 eventListener를 붙인다(callback 함수로 무엇을 할지 정의한다)
+    jsInput.addEventListener('input', function(event) {
+      const inputValue = event.target.value
+      document.querySelector('#jsP').innerText = inputValue
+    })
+  </script>
+</body>
+</html>
