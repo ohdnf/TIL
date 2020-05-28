@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="myButton">Dab</button>
+  <script>
+    const myButton = document.querySelector('#myButton')
+    // function confirmMessage(event) {
+    //   confirm('Dab?!')
+    // }
+    // myButton.addEventListener('click', confirmMessage)
+
+    myButton.addEventListener('click', function(event) {
+      confirm('Dab?!')
+    })
+  </script>
+</body>
+</html>

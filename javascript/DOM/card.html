@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <title>Hello, world!</title>
+</head>
+
+<body>
+  <div class="form-group">
+    <label for="cardTitleInput">Card Title</label>
+    <input type="text" id="cardTitleInput" class="form-control">
+    <label for="cardTextInput">Card Text</label>
+    <input type="text" id="cardTextInput" calss="form-control">
+  </div>
+  <button id="createCardButton" class="btn btn-primary">Create Card</button>
+  <div class="container">
+    <div id="cardArea" class="row">
+      <!-- JavaScript로 카드를 만들어보자 -->
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+
+  <script>
+    function createCard(title, content) {
+      const card = document.createElement('div')
+      card.classList.add('card', 'col-4')
+      const cardImage = document.createElement('img')
+      cardImage.src = 'https://picsum.photos/200'
+      cardImage.classList.add('card-img-top')
+      cardImage.alt = 'random-image'
+
+      const cardBody = document.createElement('div')
+      cardBody.classList.add('card-body')
+      
+      const cardTitle = document.createElement('h5')
+      cardTitle.classList.add('card-title')
+      cardTitle.innerText = title
+
+      const cardText = document.createElement('p')
+      cardText.classList.add('card-text')
+      cardText.innerHTML = content
+
+      const cardButton = document.createElement('a')
+      cardButton.classList.add('btn', 'btn-primary')
+      cardButton.href = '#'
+      cardButton.innerText = 'Go somewhere'
+
+      // appendChild: Node 한 개만 추가 가능
+      // append: Node 여러 개 가능 + Text도 가능
+      cardBody.append(cardTitle, cardText, cardButton)
+      card.append(cardImage, cardBody)
+
+      // div#cardArea
+      const cardArea = document.querySelector('#cardArea')
+      cardArea.appendChild(card) 
+    }
+    
+    const createCardButton = document.querySelector('#createCardButton')
+    // createCardButton.addEventListener('click', createCard)
+    // addEventListener의 두번째 인자는 콜백함수이므로 인자를 받을 수 없다.
+    // 익명함수 안에 함수와 인자를 넣어 처리한다.
+    createCardButton.addEventListener('click', function() {
+      const cardTitleInput = document.querySelector('#cardTitleInput')
+      const cardTextInput = document.querySelector('#cardTextInput')
+      // input 태그의 내부값은 .value로 확인
+      createCard(cardTitleInput.value, cardTextInput.value)
+
+      cardTitleInput.value = null
+      cardTextInput.value = null
+    })
+  </script>
+</body>
+
+</html>
