@@ -11,7 +11,27 @@
 
 ==> javascript & frameworks 분리
 
-## Serialize
+## Web APIs for Django
+
+- [django-rest-framework](https://www.django-rest-framework.org/)
+- [GitHub](https://github.com/encode/django-rest-framework)
+
+### Install
+
+```shell
+$ pip install djangorestframework
+```
+
+```py
+# settings.py
+
+INSTALLED_APP = [
+    ...
+    'rest_framework',
+]
+```
+
+## Serializer
 
 > 직렬화, `Object(언어, 데이터베이스) => String(JSON)`하는 것
 
@@ -20,57 +40,51 @@
 dict => JSON (stringify)    # 직렬화
 JSON => dict (parse)        # 역직렬화
 
-## RESTful API
+### `serializers.py`
 
-> URL을 깔끔하게 정리하는 방식(Convention)
-> [참고 링크](https://meetup.toast.com/posts/92)
+```py
+# serializers.py
 
-- C: new, create, write, make, render...
-- R: index(전체), detail(상세), '', read, show...
-- U: ... 
-- D: ...
+from rest_framework import serializers
+from .models import Article
 
-### 1. 동사를 URL에 넣지말자!
+class ArticleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Article
+        fields = '__all__'
 
-- C: POST
-- R: GET
-- U: PUT
-- D: DELETE
+class ArticleIndexSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Article
+        fields = ('id', 'title', 'created_at')
 
-> HTTP Method(verb) 활용!
-
-### 2. 목적어(Resource)만 URL에 넣자!
-
-Resource == Data
-
-- C: (POST)     /articles
-- R: (GET)
-    - index =>  /articles
-    - detail => /articles/<id>
-- U: (PUT)      /articles/<id>
-- D: (DELETE)   /articles/<id>
-
-### API 관련 URL
-1. subdomain
-```
-lab.ssafy.com
-api.github.com
+class ArticleDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Article
+        fields = ('id', 'title', 'content', 'created_at', 'updated_at')
 ```
 
-2. 분리 URL /api/
-```
-ssafy.com/api/lectures/
-github.com/api/repos/
-```
+### `views.py`
 
-3. Versioning
+```py
+# views.py
+
+from rest_framework.response import Response    # rest_framework의 serializer를 리턴하기 위한 클래스
+from rest_framework.decorators import api_view  # django rest framework로 동작하는 view 함수에 반드시 필요한 데코레이터
+
+from .models import Article
+from .serializers import ArticleSerializer, ArticleIndexSerializer, ArticleDetailSerializer
+
+@api_view(['GET'])
+def index(request):
+    articles = Article.objects.all()
+    serializer = ArticleIndexSerializer(articles, many=True)     # many=True 옵션은 쿼리셋일 때 설정
+    return Response(serializer.data)
+
+ @api_view(['GET'])
+ def detail(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    serializer = ArticleDetailSerializer(article)
+    return Response(serializer.data)
+
 ```
-ssafy.com/api/v1/lectures/
-```
-
-POST /api/v1/articles/1/like/
-POST /api/v2/aritcles/1/comments/like/
-
-
-/api/v1/articles/
-/api/v1/articles/<id>/
