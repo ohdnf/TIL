@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const xhr = new XMLHttpRequest()
+    xhr.open('GET', 'https://koreanjson.com/posts/1')
+
+    xhr.send()  // python과 다르게 non-blocking: send()의 응답이 올 때까지 기다리는게 아니라 다음 라인으로 넘어가버림
+
+    const res = xhr.response  // 따라서 res엔 초기에 정의할 때처럼 빈 문자열
+    console.log('RES: ', res)
+  </script>
+</body>
+</html>

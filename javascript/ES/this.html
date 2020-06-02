@@ -8,9 +8,47 @@
 <body>
   <script>
   /*
-    콜백 함수(A)는 다른 함수(B)의 인자로 넘겨지는 함수로,
-    다른 함수(B)의 내부에서 실행되는 함수(A)를 말한다.
+    method ==> 객체 안에 정의된 함수 (Object.methodName() 으로 실행하는 함수)
+    function ==> method가 아닌 모든 함수
+
+    this는 기본적으로 window
+
+    단, 아래의 두 가지 경우는 예외
+    1. method 정의 블록 안의 this ==> 해당 method가 정의된 객체(object)
+        (method 정의할 때는 arrow function을 쓰지 않는다!)
+    2. 생성자 함수 안의 this
   */
+
+  const obj = {
+    name: 'obj',
+    method1: function () {
+      console.log(this)   // obj
+    },
+    objInObj: {
+      name: 'object in object',
+      oioMethod () {
+        console.log(this) // objInObj
+      }
+    },
+    arr: [0, 1, 2],
+    newArr: [],
+    method2 () {
+      this.arr.forEach(
+        /*
+        아래 function은 메소드가 아니다. 그러므로 this는 window
+
+        function(number) {
+          this.newArr.push(number * 100)
+        }.bind(this)
+        
+        */
+
+        (number) => {
+          this.newArr.push(number * 100)
+        }
+      ) // obj
+    }
+  }
   </script>
 </body>
 </html>

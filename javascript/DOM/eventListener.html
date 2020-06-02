@@ -15,6 +15,14 @@
     // myButton.addEventListener('click', confirmMessage)
 
     myButton.addEventListener('click', function(event) {
+      /*
+      this보다 event.target을 사용하는 것이 바람직
+      1. function(event) {}가 (event) => {}와 같이 화살표함수가 되었을 때 this는 작동 안 할 수 있음
+      2. event.target은 무조건 myButton을 가르킨다.
+      */
+      // this.classList.add('btn', 'btn-primary')
+      event.target.classList.add('btn', 'btn-primary')
+
       confirm('Dab?!')
     })
   </script>
