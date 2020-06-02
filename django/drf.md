@@ -40,28 +40,43 @@ INSTALLED_APP = [
 dict => JSON (stringify)    # 직렬화
 JSON => dict (parse)        # 역직렬화
 
+> 다음 `serializers.py`와 `views.py`는 음악가/곡/평론 모델을 갖고있는 API 요청들을 간단히 구현
+
 ### `serializers.py`
 
 ```py
-# serializers.py
-
 from rest_framework import serializers
-from .models import Article
+from .models import Artist, Music, Comment
 
-class ArticleSerializer(serializers.ModelSerializer):
+class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Article
-        fields = '__all__'
+        model = Artist
+        fields = ('id', 'name',)
 
-class ArticleIndexSerializer(serializers.ModelSerializer):
+class MusicSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Article
-        fields = ('id', 'title', 'created_at')
+        model = Music
+        fields = ('id', 'title')
 
-class ArticleDetailSerializer(serializers.ModelSerializer):
+class CommentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Article
-        fields = ('id', 'title', 'content', 'created_at', 'updated_at')
+        model = Comment
+        fields = ('id', 'content')
+
+class ArtistDetailSerializer(ArtistSerializer):
+    # column명 ==> serializer에서 어떻게 보일지
+    musics = MusicSerializer(many=True)
+    # source ==> Model의 property
+    music_count = serializers.IntegerField(source='musics.count', read_only=True)
+
+    class Meta(ArtistSerializer.Meta):
+        fields = ArtistSerializer.Meta.fields + ('musics', 'music_count',)
+
+class MusicDetailSerializer(MusicSerializer):
+    comments = CommentSerializer(many=True)
+
+    class Meta(MusicSerializer.Meta):
+        fields = MusicSerializer.Meta.fields + ('comments',)
 ```
 
 ### `views.py`
@@ -69,22 +84,61 @@ class ArticleDetailSerializer(serializers.ModelSerializer):
 ```py
 # views.py
 
-from rest_framework.response import Response    # rest_framework의 serializer를 리턴하기 위한 클래스
-from rest_framework.decorators import api_view  # django rest framework로 동작하는 view 함수에 반드시 필요한 데코레이터
+from django.shortcuts import render, get_object_or_404
 
-from .models import Article
-from .serializers import ArticleSerializer, ArticleIndexSerializer, ArticleDetailSerializer
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
+from .models import Artist, Music, Comment
+from .serializers import ArtistSerializer, MusicSerializer, CommentSerializer, ArtistDetailSerializer, MusicDetailSerializer
+# Create your views here.
 
 @api_view(['GET'])
-def index(request):
-    articles = Article.objects.all()
-    serializer = ArticleIndexSerializer(articles, many=True)     # many=True 옵션은 쿼리셋일 때 설정
+def artists_list(request):
+    artists = Artist.objects.all()
+    serializer = ArtistSerializer(artists, many=True)
     return Response(serializer.data)
 
- @api_view(['GET'])
- def detail(request, pk):
-    article = get_object_or_404(Article, pk=pk)
-    serializer = ArticleDetailSerializer(article)
+@api_view(['GET'])
+def artists_detail(request, artist_pk):
+    artist = get_object_or_404(Artist, pk=artist_pk)
+    serializer = ArtistDetailSerializer(artist)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def music_list(request):
+    musics = Music.objects.all()
+    serializer = MusicSerializer(musics, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def music_detail(request, music_pk):
+    music = get_object_or_404(Music, pk=music_pk)
+    serializer = MusicDetailSerializer(music)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def comment_create(request, music_pk):
+    # music = get_object_or_404(Music, pk=music_pk)
+    serializer = CommentSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(music_id=music_pk)
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PUT', 'DELETE'])
+def comment_update_delete(request, comment_pk):
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    if request.method == 'PUT':
+        serializer = CommentSerializer(comment, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            # return Response(serializer.data)
+            return Response({'message': '성공적으로 수정되었습니다.'})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        comment.delete()
+        # return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({'message': '성공적으로 삭제되었습니다.'})
 
 ```
