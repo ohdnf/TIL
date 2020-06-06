@@ -6,6 +6,27 @@
   <title>Lucky Six</title>
 </head>
 <body>
-  <script></script>
+  <div id="app">
+    
+  </div>
+
+  <!-- Vue.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        allNumbers: _.range(1, 46),
+        myNumbers: []
+      },
+      methods: {
+        makeSixNumbers () {
+          this.myNumbers = _.sampleSize(this.allNumbers, 6)
+          this.myNumbers.sort((a, b) => a - b)
+        }
+      }
+    })
+  </script>
 </body>
 </html>

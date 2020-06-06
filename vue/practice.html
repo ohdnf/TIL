@@ -10,6 +10,7 @@
     <!-- 둘은 완전 동일 -->
     <!-- v- ==> directive -->
     <p v-text="message"></p>
+    <!-- {{ interpolation }} -->
     <p>{{ message }}</p>
     
     <!-- 조건문 -->
@@ -20,22 +21,35 @@
       does not show
     </p>
 
-    <p v-if="username === 'master'">
-      Hello master
-    </p>
-    <p v-else>
-      Hello User
-    </p>
+    <p v-if="username === 'master'">Hello master</p>
+    <p v-else>Hello User</p>
+
+    <!-- v-if는 (초기) 로딩 렌더링 코스트가 적다 ==> t/f가 자주 바뀌지 않을 때 유리 -->
+    <p v-if="bool1">v-if with true</p>
+    <p v-if="bool2">v-if with false</p>
+    <!-- v-show는 토글 렌더링 코스트가 적다 ==> t/f가 자주 바뀔 때 유리 -->
+    <p v-show="bool1">v-if with true</p>
+    <p v-show="bool2">v-if with false</p>
 
     <p v-for="teacher in teachers">{{ teacher }}</p>
 
+    <!-- :src === v-bind:src -->
     <a v-bind:href="URL">Naver Search</a>
-    <img v-bind:src="randomImage" v-bind:alt="altText">
+    <img :src="randomImage" v-bind:alt="altText">
 
+    <!-- @click === v-on:click -->
     <button v-on:click="reverseMessage">메시지 뒤집기</button>
-
-    <!-- v-모델 디렉티브 -->
-    <h1>v-모델 디렉티브</h1>
+    <button @click="alertWarning">CAUTION!</button>
+    
+    <!-- 단방향 바인딩 vs. 양방향 바인딩 -->
+    <p>one way</p>
+    <input @keyup="onInputChange" type="text">
+    <p>two way</p>
+    <input @keyup="onInputChange" type="text" :value="message">
+    
+    <!-- v-model directive -->
+    <!-- input, select, textarea에 양방향 바인딩 -->
+    <h1>v-model directive:two way binding</h1>
     <input v-model="userInput">
     <p>[[ userInput ]]</p>
 
@@ -45,6 +59,7 @@
     <p id="jsP"></p>
     
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
     const app = new Vue({
@@ -66,11 +81,20 @@
         URL: 'https://www.naver.com/',
         randomImage: 'https://picsum.photos/200',
         altText: 'random-image',
+        userInput: null
       },
       methods: {
+        alertWarning() {
+          alert('WARNING')
+        },
         reverseMessage: function() {
+          // this.data.message가 아니라 this.message로 접근
           this.message = this.message.split('').reverse().join('')
           console.log(this.log)
+        },
+        onInputChange(event) {
+          // console.log(event)
+          this.message = event.target.value
         }
       }
     })
