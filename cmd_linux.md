@@ -17,8 +17,8 @@
 | `start` | `start .`: 현재 디렉토리에서 파일 탐색기 실행 |
 | `code` | `code .` : 현재 디렉토리에서 vscode 실행 |
 | `python` | Python으로 파일 실행(ex. `python hello.py`) |
-| `pip`  | Python Package Installer |
-
+| `pip` | Python Package Installer |
+| `grep` | 출력된 데이터 중 일치하는 텍스트가 있는 줄들을 보여줌(ex. `pip list | grep django`) |
 
 
 ## linux cmd 단축키 만들기
