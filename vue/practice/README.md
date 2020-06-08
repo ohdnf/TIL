@@ -1,4 +1,4 @@
-# exercise
+# practice
 
 ## Project setup
 ```

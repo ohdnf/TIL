@@ -1,22 +1,20 @@
 <template>
   <div id="app">
-    <button>Index</button>
-    <button>Lotto</button>
-    <button>Lunch</button>
-    <Index/>
-    <Lotto/>
+    <img alt="Vue logo" src="./assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <MyComponent/>
   </div>
 </template>
 
 <script>
-import Index from './components/Index'
-import Lotto from './components/Lotto'
+import HelloWorld from './components/HelloWorld.vue'
+import MyComponent from './components/MyComponent.vue'
 
 export default {
   name: 'App',
   components: {
-    Index,
-    Lotto,
+    HelloWorld,
+    MyComponent
   }
 }
 </script>
