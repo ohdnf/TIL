@@ -1,10 +1,13 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <!-- <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/contact">Contact</router-link> |
-      <router-link to="/ping">Ping</router-link>
+      <router-link to="/ping">Ping</router-link> | -->
+      <!-- v-bind를 통해 vue-router 호출 -->
+      <!-- <router-link :to="{ name: 'Parent' }">Parent</router-link> -->
+      <router-link :to="{name: 'TodoView'}">TodoView</router-link>
     </div>
     <router-view/>
   </div>

@@ -1,17 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+// import Home from '../views/Home.vue'
 import Contact from '../views/Contact.vue'
 import Ping from '../views/Ping.vue'
 import Pong from '../views/Pong.vue'
+import Parent from '../views/Parent.vue'
+import TodoView from '../views/TodoView.vue'
 
 Vue.use(VueRouter)
 
   const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'TodoView',
+    component: TodoView
   },
   {
     path: '/about',
@@ -35,6 +37,11 @@ Vue.use(VueRouter)
     path: '/pong',
     name: 'Pong',
     component: Pong
+  },
+  {
+    path: '/parent',
+    name: 'Parent',
+    component: Parent
   }
 ]
 
