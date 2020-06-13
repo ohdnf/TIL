@@ -1,10 +1,10 @@
 <template>
-  <div class="todolist">
+  <div class="todo-list">
     <h1>TodoList</h1>
     <ul>
-      <li v-for="todo in todos" :key="todo.createdAt">
-        <input type="checkbox" name="isCompleted" id="isCompleted" @change="check($event)">
-        <span :class="{done: isCompleted}">{{todo.title}}</span>
+      <li v-for="todo in todos" :key="todo.id" :class="{ done: todo.isCompleted }">
+        <input type="checkbox" :checked="todo.isCompleted" @change="$emit('checked', todo)">
+        {{ todo.goal }}
       </li>
     </ul>
     <p>{{ newTodo }}</p>
@@ -15,33 +15,21 @@
 export default {
   name: 'TodoList',
   props: {
-    newTodo: String,
-  },
-  data() {
-    return {
-      todos: [],
-    }
-  },
-  methods: {
-    check() {
-      
-    }
-  },
-  computed: {
-    createdTodo() {
-      let goal = {
-        title: this.newTodo,
-        isCompleted: false,
-        createdAt: Date.now()
-      }
-      this.todos.push(goal)
+    todos: {
+      type: Array,
+      required: true
     }
   }
 }
 </script>
 
 <style>
+  ul {
+    list-style-type: none;
+  }
+  
   .done {
     text-decoration: line-through;
   }
+
 </style>

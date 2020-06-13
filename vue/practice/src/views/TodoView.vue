@@ -1,7 +1,7 @@
 <template>
-  <div class="todoview">
-    <TodoInput @submit-todo="createTodo"/>
-    <TodoList :newTodo="whatTodo"/>
+  <div class="todo-view">
+    <TodoInput @create="createTodo"/>
+    <TodoList :todos="todos" @checked="updateTodo"/>
   </div>
 </template>
 
@@ -17,12 +17,20 @@ export default {
   },
   data() {
     return {
-      whatTodo: ''
+      todos: [
+        // Dummies
+        {id: 1, goal: 'Django 복습', isCompleted: true},
+        {id: 2, goal: 'JavaScript 복습', isCompleted: false},
+        {id: 3, goal: 'Vue 복습', isCompleted: false},
+      ]
     }
   },
   methods: {
-    createTodo(data) {
-      this.whatTodo = data
+    createTodo(todo) {
+      this.todos.push(todo)
+    },
+    updateTodo(todo) {
+      todo.isCompleted = !todo.isCompleted
     }
   }
 }

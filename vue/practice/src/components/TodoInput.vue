@@ -1,7 +1,7 @@
 <template>
-  <div class="todoview">
-    <input v-model="newTodo" type="text">
-    <button @click="newTodoSignal">할 일 등록</button>
+  <div class="todo-view">
+    <input v-model="newTodo" type="text" @keypress.enter="writeTodo">
+    <button @click="writeTodo">할 일 등록</button>
   </div>
 </template>
 
@@ -10,14 +10,19 @@ export default {
   name: 'TodoInput',
   data() {
     return {
-      newTodo: ''
+      newTodo: null
     }
   },
   methods: {
-    newTodoSignal() {
-      if (this.newTodo) {
-        this.$emit('submit-todo', this.newTodo)
+    writeTodo() {
+      if (this.newTodo.trim()) {
+        this.$emit('create', {
+          id: Date.now(),
+          goal: this.newTodo,
+          isCompleted: false
+        })
       }
+      this.newTodo = null
     }
   }
 }
