@@ -401,5 +401,23 @@ def signup(request):
 
 > [Naver D2의 '안전한 패스워드 저장'](https://d2.naver.com/helloworld/318732) 참조
 
-## 로그인
 
+## Custom User
+
+```py
+# accounts/models.py
+
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+class User(AbstractUser):
+    pass
+```
+
+```py
+# settings.py
+
+...
+
+AUTH_USER_MODEL = 'accounts.User'
+```
