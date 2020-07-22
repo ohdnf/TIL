@@ -1,7 +1,7 @@
 # Vue.js
 
 
-## Declarative (선언형) vs. Iㅡperative
+## Declarative (선언형) vs. Imperative
 
 ### Declarative
 - 유산슬을 만들어줘 (대신해서 절차를 수행 ==> 프레임워크)
