@@ -21,10 +21,16 @@
 
 ## alias
 
-```bash
-# .bashrc
-alias va="source venv/bin/activate"
-```
+- Linux OS
+    ```bash
+    # .bashrc
+    alias va="source venv/bin/activate"
+    ```
+- Windows OS
+    ```bash
+    # .bashrc
+    alias activate="source venv/Scripts/activate"
+    ```
 
 ```shell
 $ source ./bashrc
