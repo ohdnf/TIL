@@ -23,22 +23,31 @@
 
 ## linux cmd 단축키 만들기
 
-root 디렉토리에 `.bashrc` 파일을 만들어준다.
+1. root 디렉토리에 `.bashrc` 파일을 만들어준다.
 
 ```shell
 $ vi ~/.bashrc
 ```
 
-```vi
+```bashrc
 alias jn="jupyter notebook"
 alias inout="mv ~/Downloads/input.txt ~/Downloads/output.txt ."
+
+# Double command: &&
+# cmd1 && cmd2 ==> cmd1 실행 후 cmd2 실행
+alias sample="mv ~/Downloads/sample_input.txt ./input.txt && mv ~/Downloads/sample_output.txt ./output.txt"
 ```
 
 > 띄어쓰기 조심!
 
+- 커스텀 명령어 하나에 두 개 이상의 명령어를 실행하고 싶다면 `;`, `&&`, `&`를 사용한다.
+    - `alias custom="cmd1; cmd2"`: 명령어 `cmd1`의 성공여부 상관없이 다음 명령어 `cmd2` 실행
+    - `alias custom="cmd1&& cmd2"`: 명령어 `cmd1`가 성공하면 다음 명령어 `cmd2` 실행
+    - `alias custom="cmd1& cmd2"`: 명령어 `cmd1`를 백그라운드에서 실행하고 다음 명령어 `cmd2` 실행
+
 `Esc` 눌러서 일반 모드로 나오고 `:wq` 누르고 `Enter` 눌러서 저장 후 종료
 
-이 상태에선 설정이 저장되지 않으므로 **터미널 새로고침**이 필요
+2. 이 상태에선 설정이 저장되지 않으므로 **터미널 새로고침**이 필요
 
 ```shell
 $ source ~/.bashrc
