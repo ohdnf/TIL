@@ -1,5 +1,57 @@
 # Java
 
+## 환경변수 설정
+
+- javac.exe: 컴파일러
+- java.exe: JVM 구동 명령
+
+### `JAVA_HOME` 환경변수 추가
+
+`javac.exe`, `java.exe`를 다른 디렉토리에서도 실행할 수 있도록 하기 위해 환경변수(Path)에 JDK의 `bin` 경로를 등록한다.
+
+### Path 환경변수 확인
+
+```shell
+$ java -version
+```
+
+## Java 컴파일러와 JVM
+
+### Java 소스 작성부터 프로그램 실행까지의 순서
+
+1. `Test.java` 소스 작성
+    ```java
+    public class Test {
+        public static void main(String[] args) {
+            System.out.println("Hello World");
+        }
+    }
+    ```
+2. `javac.exe`가 컴파일
+    ```shell
+    $ javac.exe Test.java
+    ```
+3. `xxx.class`라는 바이트 코드 파일 생성
+    ```shell
+    $ ls
+    Test.class Test.java
+    ```
+4. `java.exe`로 JVM 구동
+5. LINK(메모리 로딩/실행 준비/실행 결정/초기화): 기계어 > 실행
+    ```shell
+    $ java xxx
+    Hello World
+    ```
+
+## Garbage Collector
+
+프로그램 실행에 필요한 메모리를 Garbage Collector가 자동으로 관리한다.
+
+| C계열 프로그램 | Java 프로그램 |
+| ------------- | ------------ |
+| 개발자가 직접 메모리 관리 | 개발자가 메모리에 접근할 수 없음 |
+| 메모리 누수 발생 시 타 프로그램 동작 멈춤 | Garbage Collector가 불필요한 메모리 회수해서 최적화 |
+
 ## MainClass.java
 
 ```java
