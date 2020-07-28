@@ -311,3 +311,6 @@ SELECT emp_name
 FROM EMP03;
 ```
 
+## 데이터 집계
+
+### `GROUP BY`
