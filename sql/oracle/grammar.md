@@ -314,3 +314,82 @@ FROM EMP03;
 ## 데이터 집계
 
 ### `GROUP BY`
+
+```sql
+SELECT station_name
+    ,COUNT(*) cnt
+    ,MIN(passenger_number) min_value
+    ,MAX(passenger_number) max_value
+    ,SUM(passenger_number) sum_value
+    ,AVG(passenger_number) avg_value
+FROM subway_statistics
+WHERE gubun = '승차'
+GROUP BY station_name
+ORDER BY station_name;
+```
+
+> `GROUP BY` 절에 `station_name`을 기술했으니 지하철역별로 집계를 한다는 것이고, `station_name`은 `SELECT` 절에도 반드시 기술해야함
+
+```sql
+-- 구의역 시간별 승하차 인원 조회
+select station_name,
+    boarding_time,
+    gubun,
+    count(*) cnt,
+    min(passenger_number) min_value,
+    max(passenger_number) max_value,
+    sum(passenger_number) sum_value,
+    avg(passenger_number) avg_value
+from subway_statistics
+where station_name like '구의%'
+group by station_name, boarding_time, gubun
+order by station_name, boarding_time, gubun;
+```
+
+> `SELECT` 절에는 `GROUP BY` 절에 명시한 컬럼이나 표현식 외 다른 것은 모두 **집계 함수 형태**만 사용할 수 있다
+
+### `HAVING`
+
+`GROUP BY` 절과 함께 사용하며 집계 함수 결과 값으로 조건을 걸 때 사용
+
+```sql
+SELECT station_name
+    ,boarding_time
+    ,gubun
+    ,MIN(passenger_number) min_value
+    ,MAX(passenger_number) max_value
+    ,SUM(passenger_number) sum_value
+FROM subway_statistics
+GROUP BY station_name, boarding_time, gubun
+HAVING SUM(passenger_number) BETWEEN 15000 AND 16000
+ORDER BY 6 DESC;
+```
+
+### `DISTINCT`
+
+`SELECT` 절에 `DISTINCT 컬럼명` 형태로 사용하면 해당 컬럼에 들어 있는 값에서 중복 값을 제외한 유일(고유한) 값들만 조회
+
+```sql
+SELECT DISTINCT station_name
+FROM subway_statistics
+WHERE gubun = '승차'
+ORDER BY 1;
+```
+
+## 집합 쿼리
+
+
+
+### `UNION ALL`
+
+
+
+### `UNION`
+
+
+
+### `INTERSECT`
+
+
+
+### `MINUS`
