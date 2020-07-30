@@ -378,18 +378,65 @@ ORDER BY 1;
 
 ## 집합 쿼리
 
-
-
 ### `UNION ALL`
 
+두 집합의 모든 원소를 가져오는 합집합 개념
 
+```sql
+SELECT col1a, col2a, ...
+FROM ...
+WHERE ...
+UNION ALL
+SELECT col1b, col2b, ...
+FROM ...
+WHERE ...
+ORDER BY col1a DESC;
+```
+
+- 최종 조회 결과는 첫 번째 `SELECT` 문의 컬럼명 기준
+- 두 `SELECT` 절에서 사용하는 컬럼의 데이터형과 수는 일치해야 함
+- `ORDER BY` 절은 문장 맨 끝에, 첫 번째 문장의 컬럼명을 사용
 
 ### `UNION`
 
+`UNION ALL`과 동일하지만 **중복 데이터가 존재할 경우 해당 데이터를 1건만 조회**
 
+```sql
+SELECT emp_name, gender, age
+FROM emp03
+UNION
+SELECT emp_name2, gender, age
+FROM emp08
+ORDER BY 1;
+```
+
+- `emp_name`에 중복된 값이 있더라도 `SELECT` 문에 `gender`와 `age`에 다른 값이 있다면 중복 데이터로 인지하지 않는다.
 
 ### `INTERSECT`
 
+두 집합의 공통 원소(중복 데이터)만 추출하는 교집합 역할
 
+```sql
+SELECT emp_name
+FROM emp03
+INTERSECT
+SELECT emp_name2
+FROM emp08
+ORDER BY 1;
+```
 
 ### `MINUS`
+
+한 집합(첫 번째 `SELECT` 문)을 기준으로 다른 집합에 없는 요소만 추출하는 차집합 역할
+
+```sql
+SELECT emp_name
+FROM emp03
+MINUS
+SELECT emp_name2
+FROM emp08
+ORDER BY 1;
+```
+
+## JOIN: 테이블 간 관계 맺기
+
