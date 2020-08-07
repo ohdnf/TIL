@@ -83,6 +83,8 @@ html#boot-features-spring-mvc-welcome-page) 참고
 
 ### thymeleaf 템플릿 엔진
 
+> 템플릿 엔진? HTML 코드에 Loop를 넣거나 변수를 활용할 수 있게 해줌
+
 ```java
 // java/hello.hellospring/controller/HelloController.java
 
@@ -92,9 +94,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+// 컨트롤러는 annotation을 적어줘야 함
 @Controller
 public class HelloController {
 
+    // HTTP Method annotation
     @GetMapping("hello")
     public String hello(Model model) {
         model.addAttribute("data", "hello!");
@@ -129,3 +133,12 @@ public class HelloController {
 
 > 참고: `spring-boot-devtools` 라이브러리를 추가하면 `html` 파일을 컴파일만 해주고 서버 재시작 없이 View 파일 변경이 가능하다.
 > IntelliJ 컴파일 방법: build -> Recompile
+
+
+## Build하고 실행하기
+
+1. 빌드 명령어 실행
+    - Mac OS: `./gradlew build`
+    - Windows OS: IntelliJ 터미널(프로젝트 실행 경로)에서 `gradle build` 입력한 상태에서 `Ctrl + Enter`
+2. `cd build/libs`
+3. `java -jar hello-spring-0.0.1-SNAPSHOT.jar` 명령어로 실행
