@@ -1,3 +1,7 @@
 venv/
 pycache/
 .vscode
+*.pdf
+*.exe
+*.sqlite3
+*.pptx
