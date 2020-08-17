@@ -77,8 +77,70 @@ computed: {
 }
 ```
 
-## 상위 모듈에 있는 `dispatch`나 `commit`을 실행하기
+## 상위 모듈에 있는 `getters`나 `mutations`, `actions`를 `dispatch`나 `commit`을 사용해 실행하기
 
 ### `rootState` 사용
 
 `dispatch("path1/actionA", payload, { root: true });`
+
+## 같은 모듈에 있는 `getters`를 다른 `getters`에서 사용하기
+
+```js
+// store.stepper.js
+export const stepper = {
+  namespaced: true,
+  state: {
+      ...
+  },
+  getters: {
+    // Stepper 세부사항 불러오기
+    getSelectedVideoType(state) {
+      ...
+    },
+    getSelectedVideoStyle(state) {
+      ...
+    },
+    
+    ...
+
+    isChecked(state, getters) {
+        // stepNum으로 넘겨준 인자를 step 화살표 함수로 사용
+        return step => {
+            switch (step) {
+                case 0:
+                    if (!getters.getSelectedVideoType) {
+                        return true
+                    }
+                        ...
+                case 1:
+                    if (!getters.getSelectedVideoStyle) {
+                        ...
+                    }
+            },
+        }
+    },
+```
+
+```vue
+// Stepper.vue
+<template>
+...
+</template>
+
+<script>
+export default {
+    ...
+        
+    methods: {
+        changeStep(stepNum) {
+            // getters 뒤에 (parameter) 형태로 넘겨줄 수 있다.
+            if (this.$store.getters['stepper/isChecked'](stepNum)) {
+                this.currentStep = stepNum
+            }
+        }
+    },
+}
+</script>
+
+...
+```
