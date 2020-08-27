@@ -124,3 +124,23 @@ for weight, value in stuff.items():
 
 print(dp[MAX_WEIGHT])
 ```
+
+
+
+## 동전 거슬러 주기
+
+```python
+# n: 동전 종류 수
+# m: 거슬러 줄 금액
+
+n, m = map(int, input().split())
+coin = list(map(int, input().split()))
+# 1~m원을 거슬러 줄 최소 동전의 개수를 dp 배열로 생성
+dp = [float('inf')] * (m+1) # 동전을 거슬러 줄 방법을 모두 무한대로 초기화
+dp[0] = 0   # 0원을 거슬러 줄 방법은 0으로 초기화
+
+for c in coin:
+    for money in range(c, m+1):
+        dp[money] = min(dp[money-c]+1, dp[money])
+
+print(dp[m])    # m원을 거슬러 줄 최소 동전의 개수
