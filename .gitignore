@@ -5,3 +5,4 @@ pycache/
 *.exe
 *.sqlite3
 *.pptx
+node_modules/
