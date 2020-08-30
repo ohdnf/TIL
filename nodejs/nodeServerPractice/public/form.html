@@ -6,7 +6,7 @@
   <title>email form</title>
 </head>
 <body>
-  <form action="/email_post" method="post">
+  <form action="/email/form" method="post">
     <label for="email">Email: </label>
     <input type="text" name="email">
     <input type="submit" value="Submit">
@@ -18,23 +18,26 @@
 
   <script>
     document.querySelector('.ajax-req').addEventListener('click', function() {
-      var inputData = document.forms[0].elements[0].value
-      sendAjax('http://127.0.0.1:3000/ajax_email', inputData)
+      const inputData = document.forms[0].elements[0].value
+      sendAjax('http://127.0.0.1:3000/email/ajax', inputData)
     })
 
     function sendAjax(url, data) {
-      var data = JSON.stringify({'email': data})
-      var xhr = new XMLHttpRequest()
+      const jsonData = JSON.stringify({'email': data})
+      const xhr = new XMLHttpRequest()
       xhr.open('POST', url)
       xhr.setRequestHeader('Content-Type', "application/json")
-      xhr.send(data)
+      xhr.send(jsonData)
 
-      // 
       xhr.addEventListener('load', function() {
         // console.log(xhr.responseText)
-        var response = JSON.parse(xhr.responseText)
-        if (response.result !== "OK") return;
-        document.querySelector('.result').innerHTML = response.email
+        const response = JSON.parse(xhr.responseText)
+        const resultDiv = document.querySelector('.result')
+        if (response.result === 200) {
+          resultDiv.innerHTML = response.name
+        } else {
+          resultDiv.innerHTML = "Not Found"
+        }
       })
     }
   </script>

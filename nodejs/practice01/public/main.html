@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Welcome page</h1>
+  <form action="/search" method="POST">
+    <!-- <label for="query">검색</label> -->
+    <input type="text" name="query" placeholder="검색어를 입력하세요">
+    <!-- <input type="submit" value="검색"> -->
+    <button class="btn">검색</button>
+  </form>
+
+  <p class="result"></p>
+
+  <script>
+    document.querySelector('.btn').addEventListener('click', function() {
+      let inputData = document.forms[0].elements[0].value
+      sendAjax('http://127.0.0.1:3000/search', inputData)
+    })
+
+    function sendAjax(url, data) {
+      let jsonData = JSON.stringify({'query': data})
+      let xhr = new XMLHttpRequest()
+      xhr.open('POST', url)
+      xhr.setRequestHeader('Content-Type', 'application/json')
+      xhr.send(jsonData)
+
+      xhr.addEventListener('load', function() {
+        let response = JSON.parse(xhr.responseText)
+        if (response.result !== 200) return;
+        document.querySelector('.result').innerHTML = response.query
+      })
+    }
+  </script>
+</body>
+</html>
