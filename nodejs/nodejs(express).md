@@ -72,7 +72,7 @@ npm install nodemon -g
 
 
 
-이제 `nodemon` 명령어로 서버를 시작하면 된다.
+이제 `node` 대신 `nodemon` 명령어로 서버를 시작하면 된다.
 
 ```shell
 nodemon app.js
@@ -752,4 +752,157 @@ OkPacket {
 
 
 ## VI. 패스포트 기반 인증 로직 구현(회원가입, 로그인, 로그아웃)
+
+### `passport`와 관련 모듈 설치
+
+```shell
+npm install passport passport-local express-session connect-flash
+```
+
+- `passport` Node.js용 인증 미들웨어
+
+- `passport-local` 소셜 로그인이 아닌 일반 로그인의 Local DB 처리를 도와주는 passport 전략
+- `express-session` Express.js를 위한 세션 미들웨어
+- `connect-flash` Error 메시지를 redirect하는 과정에서 쉽게 전달해주는 모듈
+
+
+
+### 미들웨어 설정
+
+`app.js`
+
+```js
+// app.js
+
+...
+
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+const session = require('express-session')
+const flash = require('connect-flash')
+
+...
+
+// router에서 passport를 사용할 수 있기 때문에 app.use(router) 이전에 설정
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(flash())
+
+// Router 모듈화
+app.use(router)
+```
+
+
+
+`join.js`: 회원 가입 로직 처리
+
+```js
+// join.js
+
+const express = require('express')
+const app = express()
+const router = express.Router()
+const path = require('path')
+
+const LocalStrategy = require('passport-local').Strategy
+
+// DB Setting
+const mysql = require("mysql")
+const passport = require('passport')
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  port: 3306,
+  user: 'root',
+  password: 'q1w2e3r4',
+  database: 'jsman'
+})
+
+connection.connect()
+
+router.get('/', function(req, res) {
+  console.log('GET /join URL')
+  const errMsg = req.flash('error')
+  if (errMsg) {
+    const msg = errMsg
+  }
+  // res.sendFile(path.join(__dirname, '../public/join.html'))
+  res.render('join.ejs', {'message': msg})
+})
+
+passport.serializeUser((user, done) => {
+  console.log('passport session save: ', user.id)
+  done(null, user.id)
+})
+
+passport.deserializeUser((id, done) => {
+  console.log('passport session get id: ', id)
+
+  done(null, id)
+})
+
+// passport strategy 설정
+passport.use('local-join', new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password',
+  passReqToCallback: true
+}, function(req, email, password, done) {   // 콜백함수
+  const query = connection.query('select * from user where email=?', [email], function(err, rows) {
+    if (err) return done(err)
+    if (rows.length) {
+      console.log('existed user')
+      return done(null, false, {message: 'Your email is already used'})
+    } else {
+      const sql = {email: email, password: password}
+      const query = connection.query('insert into user set ?', sql, function(err, rows) {
+        if (err) throw err
+        return done(null, {email: email, id: rows.insertId})
+      })
+    }
+  })
+}))
+
+router.post('/', passport.authenticate('local-join', {
+    successRedirect: '/main',   // 회원가입 성공
+    failureRedirect: '/join',   // 중복회원 체크 등 가입 실패
+    failureFlash: true 
+  })
+)
+
+module.exports = router;  // 다른 파일에서 main.js를 사용할 수 있게 exports 처리
+
+```
+
+
+
+`join.ejs`
+
+```ejs
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up</title>
+</head>
+<body>
+  <h1>Join my website!</h1>
+  <form action="/join" method="post">
+    <label for="nickname">Nickname:</label><br>
+    <input type="text" name="nickname"><br>
+    <label for="email">Email:</label><br>
+    <input type="email" name="email"><br>
+    <label for="password">Password:</label><br>
+    <input type="password" name="password" id="password"><br>
+    <input type="submit" value="Join!">
+  </form>
+</body>
+</html>
+```
 
