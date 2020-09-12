@@ -2,9 +2,28 @@
 
 
 
+## 목차
+
+1. Node.js + Express.js 웹 서버 설정
+   1. npm 프로젝트 시작하기
+   2. Express.js 기반 웹 서버 구동
+2. Request, Response 처리 기본
+   1. POST 요청처리
+   2. View engine(ejs)을 활용한 응답처리
+   3. JSON을 활용한 AJAX 처리
+3. Database 연동 기본
+   1. MySQL 연동 설정
+   2. MySQL 연동 구현
+4. Router 개선: 모듈화
+   1. Routing 모듈화
+   2. Routing 리팩토링
+   3. 
+
+
+
 ## I. Node.js + Express.js 웹 서버 설정
 
-### 1. NPM Proect 시작하기
+### 1. NPM Project 시작하기
 
 ```shell
 npm init
@@ -169,10 +188,8 @@ console.log("main.js is loaded")
 Node.js에서 POST 요청처리를 위해선 `body-parser` 모듈이 필요하다.
 
 > [body-parser를 소개합니다. 하지만, body-parser를 쓰지 마세요.](https://medium.com/@chullino/1%EB%B6%84-%ED%8C%A8%ED%82%A4%EC%A7%80-%EC%86%8C%EA%B0%9C-body-parser%EB%A5%BC-%EC%86%8C%EA%B0%9C%ED%95%A9%EB%8B%88%EB%8B%A4-%ED%95%98%EC%A7%80%EB%A7%8C-body-parser%EB%A5%BC-%EC%93%B0%EC%A7%80-%EB%A7%88%EC%84%B8%EC%9A%94-bc3cbe0b2fd)
-
+>
 > [express 미들웨어 body-parser 모듈](https://velog.io/@yejinh/express-%EB%AF%B8%EB%93%A4%EC%9B%A8%EC%96%B4-bodyParser-%EB%AA%A8%EB%93%88)
-
-
 
 ```js
 // app.js
@@ -767,7 +784,7 @@ npm install passport passport-local express-session connect-flash
 
 
 
-### 미들웨어 설정
+### Middleware 설정
 
 `app.js`
 
@@ -800,7 +817,9 @@ app.use(router)
 
 
 
-`join.js`: 회원 가입 로직 처리
+### Strategy 설정
+
+`join.js`: 회원 가입 로직 처리를 위한 local-strategy
 
 ```js
 // join.js
@@ -827,24 +846,9 @@ const connection = mysql.createConnection({
 connection.connect()
 
 router.get('/', function(req, res) {
-  console.log('GET /join URL')
-  const errMsg = req.flash('error')
-  if (errMsg) {
-    const msg = errMsg
-  }
-  // res.sendFile(path.join(__dirname, '../public/join.html'))
+  ...
+    
   res.render('join.ejs', {'message': msg})
-})
-
-passport.serializeUser((user, done) => {
-  console.log('passport session save: ', user.id)
-  done(null, user.id)
-})
-
-passport.deserializeUser((id, done) => {
-  console.log('passport session get id: ', id)
-
-  done(null, id)
 })
 
 // passport strategy 설정
@@ -856,9 +860,11 @@ passport.use('local-join', new LocalStrategy({
   const query = connection.query('select * from user where email=?', [email], function(err, rows) {
     if (err) return done(err)
     if (rows.length) {
+      // 중복 회원 존재
       console.log('existed user')
       return done(null, false, {message: 'Your email is already used'})
     } else {
+      // 신규 회원 생성
       const sql = {email: email, password: password}
       const query = connection.query('insert into user set ?', sql, function(err, rows) {
         if (err) throw err
@@ -904,5 +910,34 @@ module.exports = router;  // 다른 파일에서 main.js를 사용할 수 있게
   </form>
 </body>
 </html>
+```
+
+
+
+### passport 기반 session 처리
+
+```js
+// session 관리
+
+// strategy에서 query 요청이 성공하였을 경우, 아래 코드의 객체
+// return done(null, {email: email, id: rows.insertId})
+// {email: ~ } 부분을 user로 받아 session에 직렬화하여 저장
+passport.serializeUser((user, done) => {
+  console.log('passport session save: ', user.id)
+  done(null, user.id)
+})
+
+// 역직렬화를 통해 session에 저장된 유저를 확인할 수 있다.
+passport.deserializeUser((id, done) => {
+  console.log('passport session get id: ', id)
+
+  done(null, id)
+})
+
+
+
+// passport strategy 설정
+passport.use('local-join', new LocalStrategy({
+    ...
 ```
 

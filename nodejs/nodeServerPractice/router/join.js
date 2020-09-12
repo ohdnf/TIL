@@ -20,23 +20,29 @@ const connection = mysql.createConnection({
 connection.connect()
 
 router.get('/', function(req, res) {
-  console.log('GET /join URL')
+  // console.log('GET /join URL')
   const errMsg = req.flash('error')
   if (errMsg) {
     const msg = errMsg
   }
   // res.sendFile(path.join(__dirname, '../public/join.html'))
-  res.render('join.ejs', {'message': msg})
+  res.render('join.ejs', {'message': res})
 })
 
+
+// session 관리
+
+// strategy에서 query 요청이 성공하였을 경우, 아래 코드의 객체
+// return done(null, {email: email, id: rows.insertId})
+// {email: ~ } 부분을 user로 받아 session에 직렬화하여 저장
 passport.serializeUser((user, done) => {
   console.log('passport session save: ', user.id)
   done(null, user.id)
 })
 
+// 역직렬화를 통해 session에 저장된 유저를 확인할 수 있다.
 passport.deserializeUser((id, done) => {
   console.log('passport session get id: ', id)
-
   done(null, id)
 })
 
@@ -52,7 +58,7 @@ passport.use('local-join', new LocalStrategy({
       console.log('existed user')
       return done(null, false, {message: 'Your email is already used'})
     } else {
-      const sql = {email: email, password: password}
+      const sql = {email: email, password: password, name: req.body.nickname}
       const query = connection.query('insert into user set ?', sql, function(err, rows) {
         if (err) throw err
         return done(null, {email: email, id: rows.insertId})

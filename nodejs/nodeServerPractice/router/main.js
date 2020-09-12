@@ -3,6 +3,9 @@ const app = express()
 const router = express.Router()
 
 router.get('/', function(req, res) {
+  // session에 저장된 user 접근: req.user
+  const id = req.user;
+  if (!id) res.render('login.ejs')
   console.log('main js loaded', req.user)
   // res.sendFile(__dirname + '/public/main.html')
   res.render('main.ejs', {id: id})
