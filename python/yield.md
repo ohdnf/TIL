@@ -34,7 +34,7 @@
 
 ## Generators
 
-Generator는 **단 한 번만 iterate`할 수 있는 iterator다. Generator는 모든 값을 메모리에 저장하는 대신, 순차적으로 값들을 그때 그때 계산하고 저장하지 않는다.
+Generator는 **단 한 번만 iterate**할 수 있는 iterator다. Generator는 모든 값을 메모리에 저장하는 대신, 순차적으로 값들을 그때 그때 계산하고 저장하지 않는다.
 
 ```python
 >>> mygenerator = (x*x for x in range(3))
