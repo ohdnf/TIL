@@ -31,7 +31,7 @@
 - 정점 i에서 정점 j로 가는 최단 경로는 직접 가는 경로와 다른 정점(k)들을 경유하는 경로 중 짧은 거리
 - 경유 가능한 점들을 하나씩 추가해 나가면서 최단 경로 구하기(k = 1...n)
 
-![formula](C:\Users\multicampus\Workspace\TIL\algorithm\assets\floyd-warshall.png)
+![formula](assets\floyd-warshall.png)
 
 ```python
 # D[i][j]: i에서 j로 가는 최단 경로 가중치 합
