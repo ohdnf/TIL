@@ -15,10 +15,10 @@
 | `echo 'contents' > file_path` | 해당 파일 내용을 `contents`로 덮어쓰기 |
 | `echo 'contents' >> file_path` | 해당 파일 맨 뒤에 `contents` 이어쓰기 |
 | `start` | `start .`: 현재 디렉토리에서 파일 탐색기 실행 |
-| `code` | `code .` : 현재 디렉토리에서 vscode 실행 |
-| `python` | Python으로 파일 실행(ex. `python hello.py`) |
-| `pip` | Python Package Installer |
 | `grep` | 출력된 데이터 중 일치하는 텍스트가 있는 줄들을 보여줌(ex. `pip list | grep django`) |
+| `apt-get install <패키지 이름>` | 패키지 설치 |
+| `apt-get update` | 패키지 업그레이드 가능 여부 체크 |
+| `apt-get upgragde` | 업그레이드 가능한 패키지 업그레이드 |
 
 
 ## linux cmd 단축키 만들기
