@@ -26,6 +26,10 @@
 ### 1. NPM Project 시작하기
 
 ```shell
+# node.js가 설치되어 있는지 확인
+node -v
+v12.18.2
+
 npm init
 ```
 
@@ -185,18 +189,20 @@ console.log("main.js is loaded")
 
 ### POST 요청처리
 
-Node.js에서 POST 요청처리를 위해선 `body-parser` 모듈이 필요하다.
+Node.js에서 POST 요청처리를 위해선 `body-parser` 모듈이 필요하다. 하지만...
 
 > [body-parser를 소개합니다. 하지만, body-parser를 쓰지 마세요.](https://medium.com/@chullino/1%EB%B6%84-%ED%8C%A8%ED%82%A4%EC%A7%80-%EC%86%8C%EA%B0%9C-body-parser%EB%A5%BC-%EC%86%8C%EA%B0%9C%ED%95%A9%EB%8B%88%EB%8B%A4-%ED%95%98%EC%A7%80%EB%A7%8C-body-parser%EB%A5%BC-%EC%93%B0%EC%A7%80-%EB%A7%88%EC%84%B8%EC%9A%94-bc3cbe0b2fd)
 >
 > [express 미들웨어 body-parser 모듈](https://velog.io/@yejinh/express-%EB%AF%B8%EB%93%A4%EC%9B%A8%EC%96%B4-bodyParser-%EB%AA%A8%EB%93%88)
 
+Express.js 안에 이미 body-parser가 내장되어 있다...!
+
 ```js
 // app.js
 
 // Express.js의 Built-in body-parser 사용
-app.use(express.json())
-app.use(express.urlencoded( {extended : true } ));
+app.use(express.json())	// application/json 타입 데이터
+app.use(express.urlencoded( {extended : true } ));	// application/x-www-form-urlencoded 타입 데이터 가져와서 사용할 수 있게 해준다
 
 ...
 
