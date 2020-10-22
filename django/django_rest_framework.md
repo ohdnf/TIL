@@ -22,7 +22,7 @@
 $ pip install djangorestframework
 ```
 
-```py
+```python
 # settings.py
 
 INSTALLED_APP = [
@@ -44,7 +44,7 @@ JSON => dict (parse)        # 역직렬화
 
 ### `serializers.py`
 
-```py
+```python
 from rest_framework import serializers
 from .models import Artist, Music, Comment
 
@@ -81,7 +81,7 @@ class MusicDetailSerializer(MusicSerializer):
 
 ### `views.py`
 
-```py
+```python
 # views.py
 
 from django.shortcuts import render, get_object_or_404
@@ -142,3 +142,4 @@ def comment_update_delete(request, comment_pk):
         return Response({'message': '성공적으로 삭제되었습니다.'})
 
 ```
+

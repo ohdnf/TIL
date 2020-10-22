@@ -6,19 +6,21 @@
     - STATIC: CSS, JavaScripts, Images
     - MEDIA: User가 Upload한 file
 
+
+
 ## Image Upload
 
 ### Pillow library
 
 - local 환경에서 작업 시 설치 필요
-    
+  
     ```shell
     $ pip install pillow
     ```
 
 - `models.py`
 
-    ```py
+    ```python
     from django.db import models
     class Article(models.Model):
         image = models.ImageField()
@@ -28,7 +30,7 @@
     > 이전에 만들어진 레코드들의 값이 없어 실패하게 된다.
     > 이 경우 NOT NULL 옵션을 NULLABLE하게 바꾸거나 DEFAULT 값을 설정해야 한다.
     
-    ```py
+    ```python
     from django.db import models
     class Article(models.Model):
         image = models.ImageField(blank=True)   # NULLABLE
@@ -36,7 +38,7 @@
 
 - `views.py`
 
-    ```py
+    ```python
     @login_required
     def create(request):
         if request.method == 'POST':
@@ -72,18 +74,17 @@
     {% extends 'base.html' %}
 
     {% block content %}
-    <!-- articles 객체에 있는 이미지의 URL을 가져와도 
-    서버를 돌리면 깨져있는 것을 확인할 수 있다 
-    이미지가 올바르게 나오기 위해선 추가 설정이 필요하다 -->
     <img src="{{ articles.image.url }}" alt="My image">
     {% endblock  %}
     ```
+    
+    > articles 객체에 있는 이미지의 URL을 가져와도 서버를 돌리면 깨져있는 것을 확인할 수 있다. 이미지가 올바르게 나오기 위해선 추가 설정이 필요하다.
 
 ### 추가 설정
 
 - `settings.py`
 
-    ```py
+    ```python
     # 미디어 파일을 저장하기 위한 루트 경로
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
     # 미디어 파일을 불러오기 위한 루트 경로
@@ -92,15 +93,17 @@
 
 - `urls.py`
 
-    ```py
+    ```python
     from django.conf import settings
     from django.conf.urls.static import static
 
     urlpatterns = [
         ...
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    # 서버 안에 있는 STATIC 파일을 특정한  URL로 서빙할 수 있게 접근 가능 설정
+    # 서버 안에 있는 STATIC 파일을 특정한 URL로 서빙할 수 있게 접근 가능 설정
     ```
+
+
 
 ## `django-imagekit`: 이미지를 잘라서 저장
 
@@ -113,7 +116,7 @@ pip install pilkit django-imagekit
 
 ### `models.py`
 
-```py
+```python
 from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill, ResizeToFit, Thumbnail

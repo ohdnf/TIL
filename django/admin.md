@@ -2,7 +2,7 @@
 
 - 등록한 모델을 관리할 admin 만들기(model 예시: `Article`)
 
-    ```py
+    ```python
     # posts/admin.py
     from django.contrib import admin
     # 1. model 불러오기
@@ -35,3 +35,4 @@
     ```bash
     $ python manage.py runserver 8080
     ```
+

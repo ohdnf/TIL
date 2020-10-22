@@ -39,7 +39,7 @@ django_pjt/
 ```
 ## 프로젝트 폴더와 같은 위치에 `static` 폴더 만들기
 - `settings.py` 설정
-    ```py
+    ```python
     # settings.py
 
     ...

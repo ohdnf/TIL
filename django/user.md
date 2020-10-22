@@ -2,15 +2,23 @@
 
 [Django Documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/)
 
+
+
+## `auth.User` vs. `setting.AUTH_USER_MODEL`
+
+
+
 ## `accounts` 앱 생성
 
 ```bash
 $ python manage.py startapp accounts
 ```
 
+
+
 ## 회원가입: `signup`
 
-```py
+```python
 # accounts/urls.py
 from django.urls import path
 from . import views
@@ -22,7 +30,7 @@ urlpatterns = [
 ]
 ```
 
-```py
+```python
 # accounts/views.py
 from django.shortcuts import render
 from django.contrib.auth import authenticate
@@ -46,10 +54,7 @@ def signup(request):
             return redirect(request.GET.get('next') or 'posts:index')
     else:
         form = UserCreationForm()
-    context = {
-        'form': form,
-    }
-    return render(request, 'accounts/signup.html', context)
+    return render(request, 'accounts/signup.html', {'form': form})
 ```
 
 ```html
@@ -66,9 +71,11 @@ def signup(request):
 {% endblock %}
 ```
 
+
+
 ## 로그인: `login`
 
-```py
+```python
 # accounts/urls.py
 urlpatterns = [
     ...
@@ -76,12 +83,12 @@ urlpatterns = [
 ]
 ```
 
-```py
+```python
 # accounts/views.py
-...
+
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-...
+
 
 def login(request):
     if request.user.is_authenticated:
@@ -95,10 +102,7 @@ def login(request):
             return redirect(request.GET.get('next') or 'posts:index')
     else:
         form = AuthenticationForm()
-    context = {
-        'form': form,
-    }
-    return render(request, 'accounts/login.html', context)
+    return render(request, 'accounts/login.html', {'form': form})
 ```
 
 ```html
@@ -115,9 +119,11 @@ def login(request):
 {% endblock %}
 ```
 
+
+
 ## 마이페이지: `detail`
 
-```py
+```python
 # accounts/urls.py
 ...
 urlpatterns = [
@@ -125,15 +131,12 @@ urlpatterns = [
 ]
 ```
 
-```py
+```python
 # accounts/views.py
 ...
 def detail(request, pk):
     user = User.objects.get(pk=pk)
-    context = {
-        'user': user,
-    }
-    return render(request, 'accounts/detail.html', context)
+    return render(request, 'accounts/detail.html', {'user': user})
 ```
 
 ```html
@@ -155,9 +158,11 @@ def detail(request, pk):
 {% endblock %}
 ```
 
+
+
 ## 회원정보 수정: `update`
 
-```py
+```python
 # accounts/urls.py
 ...
 urlpatterns = [
@@ -166,7 +171,7 @@ urlpatterns = [
 ]
 ```
 
-```py
+```python
 # accounts/forms.py
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserChangeForm
@@ -177,9 +182,9 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ['username', 'first_name', 'last_name', 'email']
 ```
 
-```py
+```python
 # accounts/views.py
-...
+
 from .forms import CustomUserChangeForm
 
 def update(request):
@@ -190,10 +195,7 @@ def update(request):
             return redirect('accounts:update')
     else:
         form = CustomUserChangeForm(instance=request.user)
-    context = {
-        'form': form,
-    }
-    return render(request, 'accounts/update.html', context)
+    return render(request, 'accounts/update.html', {'form': form})
 ```
 
 ```html
@@ -215,9 +217,11 @@ def update(request):
 {% endblock %}
 ```
 
+
+
 ## 로그아웃: `logout`
 
-```py
+```python
 # accounts/urls.py
 ...
 
@@ -226,9 +230,8 @@ urlpatterns = [
 ]
 ```
 
-```py
+```python
 # accounts/views.py
-...
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 
@@ -268,9 +271,11 @@ def logout(request):
 </html>
 ```
 
+
+
 ## 회원탈퇴: `delete`
 
-```py
+```python
 # accounts/urls.py
 ...
 urlpatterns = [
@@ -279,9 +284,9 @@ urlpatterns = [
 ]
 ```
 
-```py
+```python
 # accounts/views.py
-...
+
 from django.contrib.auth.decorators import login_required
 from django.views.decorators import require_POST
 
@@ -292,6 +297,8 @@ def delete(request):
     return redirect('posts:index')
 ```
 
+
+
 ## Sign UP vs Sign IN
 
 | 구분 | Sign Up | Sign In |
@@ -299,9 +306,11 @@ def delete(request):
 | forms | UserCreationForm | AuthenticationForm |
 | 로직 | User Object 생성 | Django Session 저장 및 변경 + 사용자에게 쿠키 전달 |
 
+
+
 ## login_required
 
-```py
+```python
 from django.contrib.auth.decorators import login_required
 
 @login_required
@@ -314,6 +323,8 @@ def func(request):
     - 로그인 URL Default는 `LOGIN_URL='/accounts/login/'`이며 `settings.py`에서 변경이 가능하다.
 - `next` 파라미터를 활용 가능
 
+
+
 ## 상속관계
 
 > [Django GitHub](https://github.com/django/django/blob/master/django/contrib/auth/models.py) 참고
@@ -324,7 +335,7 @@ def func(request):
             - `User`
 
 - `django/contrib/auth/base_user.py`
-    ```py
+    ```python
     class AbstractBaseUser(models.Model):
         password = models.CharField(_('password'), max_length=128)
         last_login = models.DateTimeField(_('last login'), blank=True, null=True)
@@ -336,7 +347,7 @@ def func(request):
 
 - `django/contrib/auth/models.py`
 
-    ```py
+    ```python
     class AbstractUser(AbstractBaseUser, PermissionsMixin):
         username_validator = UnicodeUsernameValidator()
 
@@ -357,9 +368,11 @@ def func(request):
             swappable = 'AUTH_USER_MODEL'
     ```
 
+
+
 ## signup: Create
 
-```py
+```python
 # accounts/views.py
 from django.contrib.auth.forms import UserCreationForm
 
@@ -388,6 +401,8 @@ def signup(request):
     - `User.objects.create_user(username, email=None, password=None)`
     - `user.set_password(password)`
 
+
+
 ## 비밀번호
 
 ### 암호화
@@ -402,9 +417,10 @@ def signup(request):
 > [Naver D2의 '안전한 패스워드 저장'](https://d2.naver.com/helloworld/318732) 참조
 
 
+
 ## Custom User
 
-```py
+```python
 # accounts/models.py
 
 from django.db import models
@@ -414,7 +430,7 @@ class User(AbstractUser):
     pass
 ```
 
-```py
+```python
 # settings.py
 
 ...

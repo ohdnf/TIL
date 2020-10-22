@@ -1,4 +1,4 @@
-```py
+```python
 # Class-based Generic View
 from django.views.generic import ListView, DetailView
 

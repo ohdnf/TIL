@@ -10,7 +10,7 @@
 
 - `views.py`
     - 기본 문법
-    ```py
+    ```python
     from django.contrib import messages
     messages.add_message(request, messages.INFO, 'Hello world.')
     ```
@@ -51,7 +51,7 @@
 ## How it works?
 
 - `settings.py`
-    ```py
+    ```python
     TEMPLATES = [
         {
             'BACKEND': 'django.template.backends.django.DjangoTemplates',

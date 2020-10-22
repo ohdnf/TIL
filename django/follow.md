@@ -4,7 +4,7 @@
 
 ### `models.py`
 
-```py
+```python
 # accounts/models.py
 from django.db import models
 from django.conf import settings
@@ -24,7 +24,7 @@ class User(AbstractUser):
 
 ### `settings.py`
 
-```py
+```python
 # settings.py
 
 # AUTH_USER_MODEL = 'auth.User'     # 기존 모델(Default)
@@ -42,7 +42,7 @@ $ python manage.py migrate
 
 > Custom User Model을 만든 이후부터 admin 사이트에 관리하려면 `admin.py`에 추가해야한다.
 
-```py
+```python
 # accounts/admin.py
 from django.contrib import admin
 from .models import User
@@ -58,7 +58,7 @@ admin.site.register(User, UserAdmin)
 > `ModelForm`을 상속받는 `UserCreationForm`, `UserChangeForm`은 `AbstractUser`을 모델로 쓰고 있다.
 > `AuthenticationForm`은 `forms.ModelForm`이 아닌 `forms.Form`을 상속받기 때문에 수정하지 않아도 된다.
 
-```py
+```python
 # accounts/forms.py
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm

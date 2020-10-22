@@ -13,7 +13,7 @@
 
 ### Model 생성
 
-```py
+```python
 # models.py
 from django.db import models
 
@@ -91,12 +91,12 @@ migrate할 때 실제 대응되는 SQL문을 보여준다.
 - `QuerySet` 반환
 
 - AND
-    ```py
+    ```python
     Posts.object.filter(condition_1, condition_2)
     ```
 
 - OR
-    ```py
+    ```python
     Posts.object.filter(Q(condition_1) | Q(condition_2))
     ```
 

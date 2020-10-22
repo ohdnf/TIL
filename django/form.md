@@ -1,5 +1,7 @@
 # Django Form
 
+
+
 ## 기본 로직
 
 1. Form 제공: `GET {URL}`
@@ -9,58 +11,70 @@
 2. 양식에 맞춰 데이터 회수 => 처리: `POST {URL}`
 
     1. 양식_데이터(`request.POST`)를 ModelForm에 넘긴다
-        ```py
+        ```python
         form = ArticleForm(request.POST)
         ```
     2. 검증
-        ```py
+        ```python
         if form.is_valid():
             form.save()
         ```
 
+
+
 ## User의 input 값을 받아 처리하기
 
 > 두 페이지가 필요하다!
+>
+> `ping.html` 사용자 입력하는 페이지
+>
+> `pong.html` 입력을 받아 출력하는 페이지
 
 1. 사용자 정보(`form`)
     - `boards/views.py`
-        ```py
+      
+        ```python
         def ping(request):
-        return render(request, 'boards/ping.html')
+        	return render(request, 'boards/ping.html')
         ```
-
     - `templates/boards/ping.html`
+        
         ```html
         <form action="/boards/ping/">
             <input type="text" name="msg">
             <input type="submit" value="입력">
         </form>
-
+    ```
+    
 2. 정보 처리
     - `boards/views.py`
-        ```py
+        ```python
         def pong(request):
-        msg = request.GET.get('msg')
-        context = {
-            'msg': msg,
-        }
-        return render(request, 'boards/pong.html', context)
+            msg = request.GET.get('msg')
+            return render(request, 'boards/pong.html', {'msg': msg})
         ```
-    
+        
     - `templates/boards/pong.html`
         ```html
         <p>출력: {{ msg }}</p>
         ```
 
+
+
 ## `/`
-`action` 속성에 시작부분에 /기호를 넣지 않으면 현재페이지를 기준으로 요청으로 보내게 되고 /기호를 넣게 되면 서버주소를 기준으로 요청을 보내게 됩니다.
+
+`action` 속성 시작 부분에...
+
+-  `/` 기호를 넣지 않으면 현재 페이지를 기준으로 요청을 보내고,
+-  `/` 기호를 넣게 되면 서버주소를 기준으로 요청을 보내게 됩니다.
+
 
 
 ## ModelForm
 
 Model에서 쓰는 구조를 그대로 활용하기 위해서 사용
 
-```py
+```python
 # posts/forms.py
 from django import forms
 from .models import Post    # 내가 정의한 model
@@ -72,6 +86,7 @@ class PostForm(forms.ModelForm):
         # 어떠한 필드를 담을 지
         fields = '__all__'
 ```
+
 
 
 ## User: 회원 가입 및 로그인 처리
@@ -86,7 +101,7 @@ class PostForm(forms.ModelForm):
 
 - Django Documentation
 
-```py
+```python
 # django/contrib/auth/forms.py
 
 class UserCreationForm(forms.ModelForm):
@@ -157,7 +172,7 @@ class UserCreationForm(forms.ModelForm):
 - `request`가 중요하다.
     `AuthenticationForm(request, request.POST)`
 
-```py
+```python
 # django/contrib/auth/forms.py
 
 class AuthenticationForm(forms.Form):
