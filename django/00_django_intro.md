@@ -1,6 +1,6 @@
 # Django: The web framework for perfectionist with deadlines
 
-Python Web Framework
+Server-side Web Framework using Python
 
 ![Django MTV Model](assets/basic-django.png)
 
@@ -8,11 +8,11 @@ Python Web Framework
 
 ## 특징
 
-- 일반적인 feature(보안 등)이 잘 되어있다.
+- 일반적인 feature(보안, 유지보수 등)이 잘 되어있다.
 
 - `flask`와 다르게 대규모의 application을 만들 때 유용하다.
 
-- Model-View-Controller Model Pattern을 따른다.
+- Model-View-Controller Model Pattern을 따른다: **MTV**
     | SW 디자인 패턴 | MVC | Django |
     | ------------- | --- | ------ |
     | 데이터 관리 | Model | **M**odel |
@@ -24,7 +24,7 @@ Python Web Framework
 ## 패키지 설치
 
 - `django==2.1.15` 버전 사용
-    
+  
     ```bash
     $ pip install django==2.1.15
     ```
@@ -47,26 +47,25 @@ Python Web Framework
 
 
 ## 초기 설정
-
 - `project_name/settings.py` 설정
-    
     ```python
-# settings.py
-    
+    # settings.py
+
     # 로컬호스트 제외 접속 가능한 URL 지정
     # '*': 모든 host/domain 허용
     # 추후 white-listing 필요
-ALLOWED_HOSTS = ['*']
-    
-LANGUAGE_CODE = 'ko-kr'
-    
+    ALLOWED_HOSTS = ['*']
+
+    LANGUAGE_CODE = 'ko-kr'
+
     TIME_ZONE = 'Asia/Seoul'
-```
+    ```
     
 - `.gitignore` 파일 추가
     ```shell
     $ vi .gitignore
     ```
+
     - 내용은 [gitignore.io](https://www.gitignore.io/api/django) 참고
 
 
@@ -78,6 +77,10 @@ URL 설정 => Views (=> Templates)
 
 
 ## 앱(Application) 생성
+
+> Projects vs. apps
+>
+> 앱(app)은 웹 어플리케이션을 말한다. 예를 들면, 데이터베이스 웹로그 시스템이나 간단한 게시판이다. 프로젝트(project)는 특정 웹사이트를 위한 설정과 어플리케이션의 집합을 말한다. 한 프로젝트는 다수의 앱을 가질 수 있다. 한 앱은 다수의 프로젝트에 속할 수 있다.
 
 ### `pages`라는 앱 생성해보기
 
@@ -161,9 +164,9 @@ def index(request):
 ## 서버 실행
 
 - 반드시 서버 실행 시 실행되는 디렉토리를 확인할 것
-    
+  
 - `manage.py`가 있는 경로에서 서버를 실행한다!
-    
+  
     ```bash
     $ cd ~/django_intro
     $ python manage.py runserver 8080
