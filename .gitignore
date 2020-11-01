@@ -1,8 +1,11 @@
-venv/
-pycache/
+config
+venv
+pycache
+node_modules
 .vscode
 *.pdf
 *.exe
 *.sqlite3
 *.pptx
-node_modules/
+*.env
+*.env.local
