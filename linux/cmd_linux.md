@@ -1,4 +1,4 @@
-# linux 명령어
+# Terminal Commands(Linux)
 
 | 명령어 | 내용 |
 | ------ | ---- |
@@ -19,6 +19,8 @@
 | `apt-get install <패키지 이름>` | 패키지 설치 |
 | `apt-get update` | 패키지 업그레이드 가능 여부 체크 |
 | `apt-get upgragde` | 업그레이드 가능한 패키지 업그레이드 |
+|  |  |
+
 
 
 ## linux cmd 단축키 만들기
@@ -52,3 +54,15 @@ alias sample="mv ~/Downloads/sample_input.txt ./input.txt && mv ~/Downloads/samp
 ```shell
 $ source ~/.bashrc
 ```
+
+
+
+## 연속적으로 명령 실행시키기(`;`과 `&`와 `&&`의 차이)
+
+[Opentutorial.org: 리눅스 수업](https://opentutorials.org/module/2538/15818)
+
+### 결론
+
+- `;` 앞의 명령어가 실패해도 다음 명령어 실행
+- `&&` 앞의 명령어가 성공하면 다음 명령어 실행
+- `&` 앞의 명령어를 백그라운드로 돌리고 동시에 뒤의 명령어를 실행
