@@ -1,12 +1,12 @@
 # Django Dummy 데이터 생성하기
 
-> 테스트를 하기 위해 대량의 데이터를 만들 때 유용한 방법을 알아보자.
+> 테스트를 하기 위해 대량의 데이터를 만들 때 유용한 방법을 알아봅니다. Django에는 더미 데이터를 생성하기 위한 여러 가지 방법이 존재합니다.
 
 
 
 ## Factory Boy 사용하기
 
-> 공장처럼 데이터를 찍어낸다고 해서 Factory Boy라고 이름을 지은 듯하다.
+> 공장처럼 데이터를 찍어낸다고 해서 Factory Boy라고 이름을 지은 듯합니다.
 >
 > 참고 자료
 >
@@ -40,6 +40,8 @@
 
 ### `factories.py`
 
+더미 데이터를 생성하려는 모델이 있는 앱 폴더에 `factories.py` 파일을 생성하고 모델에 따라 필드값 형식을 정해줍니다.
+
 ```python
 import factory
 import factory.fuzzy
@@ -49,6 +51,7 @@ from users.models import CustomUser
 from games.models import Tag, Source, GameHistory
 
 
+# Source 모델의 category ENUM Field를 위한 값 설정
 CATEGORIES = [x[0] for x in Source.TYPE_CHOICES]
 
 
@@ -93,6 +96,10 @@ class GameHistoryFactory(DjangoModelFactory):
 
 
 ### `setup_test_data.py`
+
+`management/commands` 폴더 구조를 생성하고 각각의 폴더에 `__init__.py` 파일을 생성해 파이썬 패키지로 만듭니다. `commands` 폴더 안에 `setup_test_data.py` 파일을 생성해 사용자 지정 명령어를 만듭니다.
+
+> 사용자 지정 명령어와 관련된 내용은 [여기](writing_custom_commands.md)를 참고하세요.
 
 ```python
 import random
@@ -171,6 +178,18 @@ class Command(BaseCommand):
             game_history = GameHistoryFactory(player=user, source=src)
 
 ```
+
+
+
+### 명령어로 더미데이터 생성하기
+
+```shell
+$ python manage.py setup_test_data
+```
+
+
+
+<hr>
 
 
 
