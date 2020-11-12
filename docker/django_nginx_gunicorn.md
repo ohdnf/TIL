@@ -2,6 +2,10 @@
 
 
 
+```shell
+$ docker-compose down --rmi all -v --remove-orphans
+```
+
 
 
 ## Nginx에 리액트 빌드한 파일들 올리기
@@ -24,7 +28,9 @@ conf를 바꾸고 나서 그냥 `docker-compose restart` 를 하면 실패 시 �
 
 ```shell
 # build 프론트 파일을 도커 컨테이너 내부로 옮기는 명령어
-docker cp ./build/. nginx:/var/www/html/
+docker cp ./build/. ${NGINX_컨테이너이름}:/var/www/html/
+
+docker cp ./build/frontend/. 100moon1ta_nginx_1:/usr/share/nginx/html/
 ```
 
 

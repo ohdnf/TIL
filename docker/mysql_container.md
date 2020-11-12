@@ -5,11 +5,15 @@
 ## MySQL Container 생성
 
 ```shell
-$ docker run -d --name some-mysql -e MYSQL_ROOT_PASSWORD=some-password -p 3306:3306 mysql:5.7
+$ docker run -d --name mysql-oneta -v /oneta_db:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=some-password -p 3306:3306 mysql:5.7
 ```
 
-- `--name some-mysql`
+- `-d` 옵션
+  - 컨테이너를 백그라운드로 실행
+- `--name mysql-oneta`
   - MySQL 컨테이너에 붙일 이름 설정
+- `-v /oneta_db:/var/lib/mysql`
+  - `oneta_db`라는 호스트 폴더를 볼륨 디렉터리로 설정. 해당 폴더는 미리 생성
 - `-e MYSQL_ROOT_PASSWORD`
   - MySQL의 ROOT 계정 비밀번호 설정
 - `-p 3306:3306`
@@ -34,8 +38,7 @@ $ docker run -d --name some-mysql -e MYSQL_ROOT_PASSWORD=some-password -p 3306:3
 > mysql를 따로 설치하지 않아도 된다.
 
 ```shell
-$ docker exec -it mysql_oneta bash
-# mysql -u root -p
+$ docker exec -it mysql-oneta mysql -uroot -p
 Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 1472
@@ -62,7 +65,7 @@ Reading table information for completion of table and column names
 You can turn off this feature to get a quicker startup with -A
 
 Database changed
-mysql> select host, user, authentication_string from user;
+mysql> SELECT host, user, authentication_string FROM user;
 +-----------+---------------+-------------------------------------------+
 | host      | user          | authentication_string                     |
 +-----------+---------------+-------------------------------------------+
@@ -79,7 +82,7 @@ Query OK, 0 rows affected (0.00 sec)
 mysql> CREATE USER 'hellodev'@'localhost' IDENTIFIED BY 'typingdev';
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> select host, user, authentication_string from user;
+mysql> SELECT host, user, authentication_string FROM user;
 +-----------+---------------+-------------------------------------------+
 | host      | user          | authentication_string                     |
 +-----------+---------------+-------------------------------------------+
@@ -116,9 +119,9 @@ mysql>
 > 데이터베이스를 생성하고 생성한 유저에게 권한 부여
 
 ```mysql
-mysql> CREATE SCHEMA `ONETA` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin ;
-mysql> USE ONETA;
-mysql> GRANT ALL ON ONETA.* TO hellodev@'%';
+mysql> CREATE SCHEMA `oneta` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+mysql> USE oneta;
+mysql> GRANT ALL ON oneta.* TO hellodev@'%';
 Query OK, 0 rows affected (0.00 sec)
 
 mysql> SHOW GRANTS FOR hellodev;
@@ -133,8 +136,8 @@ mysql> SHOW GRANTS FOR hellodev;
 mysql>
 ```
 
-- `GRANT ALL ON ONETA.* TO hellodev@'%';`
-  - hellodev 유저에게 ONETA 데이터베이스의 모든 테이블(`*`)에 대한 모든 권한 부여
+- `GRANT ALL ON oneta.* TO hellodev@'%';`
+  - hellodev 유저에게 oneta데이터베이스의 모든 테이블(`*`)에 대한 모든 권한 부여
   - 데이터베이스 설정 시 대소문자 구분해야 함
 
 > **참고**
@@ -145,7 +148,7 @@ mysql>
 
 ## CLI 종료하기
 
-MySQL 접속을 끊고 Bash 창에서 `Ctrl + P`, `Ctrl + Q`를 눌러 컨테이너를 실행 유지하며 CLI를 종료한다.
+MySQL 접속을 끊고 Bash 창(`#`로 시작하는 커맨드 창)에서 `Ctrl + P`, `Ctrl + Q`를 눌러 컨테이너를 실행 유지하며 CLI를 종료한다.
 
 ```shell
 mysql> exit;
