@@ -10,7 +10,10 @@
   - [특수 문자](#특수-문자)
   - [서식 문자](#서식-문자)
 - [연산자](#연산자)
-- 
+- [배열](#배열)
+- [배열과 메모리](#배열과-메모리)
+- [조건문](#조건문)
+- [반복문](#반복문)
 
 
 
@@ -94,6 +97,8 @@ System.out.println("bVar = " + bVar);
 
 
 
+
+
 ## Formatting
 
 
@@ -172,7 +177,22 @@ System.out.printf("%.1f", 1.25);	// 1.3
 
 
 
+
+
 ## 연산자
+
+
+
+### 단항 연산자 & 이항 연산자
+
+```java
+// 단항 연산자
++x, -y, !z
+
+// 이항 연산자
+int x = 1;
+int y = 2;
+```
 
 
 
@@ -247,5 +267,246 @@ int y = 3;	// 0011
 x & y	// 0010	= 2
 x | y	// 0011	= 3
 x ^ y	// 0001	= 1
+```
+
+
+
+
+
+## 배열
+
+
+
+### 배열이란
+
+> **인덱스를 이용**해서 **자료형이 같은 데이터**를 관리하는 것
+
+
+
+### 배열 선언 및 초기화
+
+> 변수와 마찬가지로 선언과 초기화 과정을 거쳐 사용
+
+#### 배열 선언 후 초기화
+
+`데이터의 자료형[] 배열이름 = new 자료형[배열의 크기]`
+
+```java
+// 배열 선언 후 초기화
+int[] arr1 = new int[5];
+arr1[0] = 100;
+arr1[1] = 200;
+arr1[2] = 300;
+arr1[3] = 400;
+arr1[4] = 500;
+```
+
+#### 선언과 초기화를 동시에
+
+```java
+int[] arr2 = {10, 20, 30, 40, 50};
+```
+
+> Java에서 배열의 크기는 한 번 정해지면 바뀔 수 없다!
+
+#### 사용자의 입력값으로 배열 초기화
+
+```java
+String[] team = new String[5];
+Scanner scanner = new Scanner(System.in);
+
+System.out.printf("첫 번째 팀원 이름: ");
+team[0] = scanner.next();
+
+System.out.printf("두 번째 팀원 이름: ");
+team[1] = scanner.next();
+
+System.out.printf("세 번째 팀원 이름: ");
+team[2] = scanner.next();
+
+System.out.printf("네 번째 팀원 이름: ");
+team[3] = scanner.next();
+
+System.out.printf("다섯 번째 팀원 이름: ");
+team[4] = scanner.next();
+
+scanner.close();
+```
+
+
+
+## 배열과 메모리
+
+### 배열의 메모리 크기
+
+> 배열을 구성하는 데이터의 자료형에 따라 배열의 메모리 크기가 결정
+
+```java
+int [] arr = new int[3];
+
+// int형 = 4 byte
+// arr의 크기 = 3 * 4 = 12 byte
+```
+
+
+
+### 배열 변수: 배열을 가리키는 배열이름
+
+> 기본 자료형 변수와 달리 배열 변수는 배열의 주소를 담고 있다.
+
+```java
+// 배열 초기화
+int[] arr1 = {10, 20, 30, 40, 50};
+int[] arr2 = null;
+int[] arr3 = null;
+
+// 배열 길이
+System.out.println("arr1.length: " + arr1.length);
+
+// 배열 요소 출력
+System.out.println("arr1: " + Arrays.toString(arr1));
+
+// 배열 요소 복사
+System.out.println("arr3: " + Arrays.toString(arr3));
+arr3 = Arrays.copyOf(arr1, arr1.length);
+System.out.println("arr3: " + Arrays.toString(arr3));
+
+// 배열 참조(reference)
+arr2 = arr1;
+System.out.println("arr1: ": arr1);
+System.out.println("arr2: ": arr2);
+System.out.println("arr3: ": arr3);
+```
+
+
+
+### 다차원 배열
+
+> 3차원 이상은 보통 사용하지 않는다.
+
+```java
+// 다차원 배열(예. 2차원 배열)
+int[][] matrix = new int[3][2];	// 3행 2열
+matrix[0][0] = 10;
+matrix[0][1] = 20;
+matrix[1][0] = 30;
+matrix[1][1] = 40;
+matrix[2][0] = 50;
+matrix[2][1] = 60;
+
+System.out.println("matrix[0]: " + Arrays.toString(matrix[0]));
+System.out.println("matrix[1]: " + Arrays.toString(matrix[1]));
+System.out.println("matrix[2]: " + Arrays.toString(matrix[2]));
+```
+
+
+
+## 조건문
+
+### 조건문이란
+
+
+
+### if문
+
+> 양자택일
+
+```java
+// if (조건식)
+if (condition) {
+    // 조건이 참이라면 실행
+}
+
+// if (조건식) else
+if (condition) {
+    // 조건이 참이라면 실행
+} else {
+    // 조건이 거짓이라면 실행
+}
+
+// if (조건식) else if (조건식)
+if (condition1) {
+    // 조건1이 참이라면 실행
+} else if (condition2) {
+    // 조건1이 거짓이고 조건2가 참이라면 실행
+} else {
+    // 위 모든 조건이 거짓이라면 실행
+}
+```
+
+
+
+### switch문
+
+> 다자택일
+> 비교대상이 되는 결과값과 선택사항이 많을 경우 주로 사용
+
+```java
+System.out.print("점수를 입력하세요: ");
+Scanner inputNum = new Scanner(System.in);
+int score = inputNum.nextInt();
+
+switch (score) {
+    case 100:
+    case 90:
+        System.out.println("수");
+        break;
+
+    case 80:
+        System.out.println("우");
+        break;
+
+    case 70:
+        System.out.println("미");
+        break;
+
+    default:
+        System.out.printf("입력한 점수: %s", score);
+        break;
+}
+
+inputNum.close();	// inputNum 자원 회수
+```
+
+
+
+
+
+## 반복문
+
+> 프로그램 진행을 특정 조건에 따라 반복적으로 진행
+
+
+
+### for문
+
+```java
+for (int i = 0; i < 10; i++) {
+    System.out.println(i);
+}
+```
+
+
+
+### while문
+
+```java
+int i = 0;
+while (i < 10) {
+    System.out.printf("%d ", i);
+    i++;
+}
+```
+
+
+
+### do ~ while문
+
+> 조건과 상관없이 최초 한 번 무조건 `{ ... }` 안의 코드를 실행
+
+```java
+do {
+    System.out.println("무조건 한 번은 실행")
+} while (false);
 ```
 

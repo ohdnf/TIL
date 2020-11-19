@@ -2,18 +2,20 @@
 
 ## 환경변수 설정
 
-- javac.exe: 컴파일러
-- java.exe: JVM 구동 명령
-
-### `JAVA_HOME` 환경변수 추가
-
 `javac.exe`, `java.exe`를 다른 디렉토리에서도 실행할 수 있도록 하기 위해 환경변수(Path)에 JDK의 `bin` 경로를 등록한다.
+
+- `javac.exe`: 컴파일러
+- `java.exe`: JVM 구동 명령
+
+>  시스템 환경 변수 편집 > `JAVA_HOME` 환경변수 추가
 
 ### Path 환경변수 확인
 
 ```shell
 $ java -version
 ```
+
+
 
 ## Java 컴파일러와 JVM
 
@@ -43,6 +45,8 @@ $ java -version
     Hello World
     ```
 
+
+
 ## Garbage Collector
 
 프로그램 실행에 필요한 메모리를 Garbage Collector가 자동으로 관리한다.
@@ -51,6 +55,8 @@ $ java -version
 | ------------- | ------------ |
 | 개발자가 직접 메모리 관리 | 개발자가 메모리에 접근할 수 없음 |
 | 메모리 누수 발생 시 타 프로그램 동작 멈춤 | Garbage Collector가 불필요한 메모리 회수해서 최적화 |
+
+
 
 ## MainClass.java
 
@@ -70,6 +76,7 @@ public class MainClass {
 - `public static main(String[] args) {}` 메소드는 프로그램을 실행시켰을 때 가장 먼저 실행되는 곳이다.
 
 
+
 ## Encapsulation
 
 - Access Modifier
@@ -81,6 +88,7 @@ public class MainClass {
         - 상속 관계도 접근 허용
     4. `public`
         - 모두 접근 가능
+
 
 
 ## Method
@@ -106,6 +114,8 @@ public class MainClass {
 - `public class Child implements Interface Parent`
 - interface는 **다중** 구현이 가능함
 
+
+
 ## Collection
 
 Java 객체를 여러 개 담고 관리하는 다양한 Container
@@ -127,6 +137,8 @@ Java 객체를 여러 개 담고 관리하는 다양한 Container
 
 - 목적에 맞는 interface를 구현한 Collection Class를 app에서 사용
 - 넣기, 꺼내기, 들여다보기, 삭제하기, 순환하기 등의 method 제공
+
+
 
 ## 예외 처리
 
