@@ -4,6 +4,9 @@
 
 ```shell
 $ docker-compose down --rmi all -v --remove-orphans
+
+$ ln -s /etc/nginx/sites-available/ypc /etc/nginx/sites-enable/ypc
+
 ```
 
 

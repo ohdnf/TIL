@@ -1,6 +1,9 @@
 # Docker로 MySQL Container 만들기
 
-
+> 궁금한 점
+>
+> - DB를 컨테이너로 만드는 것이 바람직한가?
+>   - 볼륨 설정을 한다고 해도?
 
 ## MySQL Container 생성
 
@@ -114,9 +117,9 @@ mysql>
 
 
 
-## MySQL 스키마 생성 및 권한 부여
+## MySQL 스키마 설정
 
-> 데이터베이스를 생성하고 생성한 유저에게 권한 부여
+> MySQL CLI로 데이터베이스를 생성하고 생성한 유저에게 권한 부여
 
 ```mysql
 mysql> CREATE SCHEMA `oneta` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -146,9 +149,19 @@ mysql>
 
 
 
+> 스키마(SCHEMA) 삭제
+>
+> ```sql
+> DROP {DATABASE | SCHEMA} [IF EXISTS] db_name
+> ```
+
+
+
 ## CLI 종료하기
 
-MySQL 접속을 끊고 Bash 창(`#`로 시작하는 커맨드 창)에서 `Ctrl + P`, `Ctrl + Q`를 눌러 컨테이너를 실행 유지하며 CLI를 종료한다.
+MySQL 접속을 끊는다.
+
+> Bash 창(`#`로 시작하는 커맨드 창)에서는 `Ctrl + P`, `Ctrl + Q`를 눌러 컨테이너를 실행 유지하며 CLI를 종료한다.
 
 ```shell
 mysql> exit;
