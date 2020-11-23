@@ -10,9 +10,16 @@
 
 ## Redis란 무엇인가?
 
-[Redis](https://redis.io/)는 **key-value** 구조의 **in-memory** DB로, 캐시 서버로 쓰일 수 있습니다. 모든 데이터를 RAM에서 처리하기 때문에 아주 빠르게 데이터를 전달할 수 있습니다. [Memcached](https://realpython.com/python-memcache-efficient-caching/) 역시 많이 쓰이지만, [많은 사람들은 대부분 Redis가 Memcached보다 좋다](https://stackoverflow.com/questions/10558465/memcached-vs-redis?answertab=votes#tab-top)고 합니다.
+[Redis](https://redis.io/)는 
 
-
+- **Re**mote **Di**ctionary **S**erver라고도 알려져 있는
+- **key-value** 구조로,
+-  캐시 엔진, 메시지 브로커로 쓰일 수 있는
+-  **in-memory** DB이며
+-  모든 데이터를 RAM에서 처리하기 때문에
+-  데이터를 아주 빠르게 전달할 수 있습니다. 
+-  또한 NoSQL DB이고,
+-  `strings`, `hashes`, `lists`, `sets`, `sorted sets`와 같은 *range queries*(1차원 쿼리)나 `bitmaps`, `hyperloglogs`, `geospatial indexes`와 같은 *radius queries*(2차원 쿼리)를 지원하며
 
 ## 시작하기
 
