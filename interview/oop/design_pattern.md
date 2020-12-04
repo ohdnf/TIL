@@ -4,23 +4,23 @@
 
 ## OOP 원칙: SOLID
 
-- Single Responsibility Principal
+- Single Responsibility Principle
 
   > 하나의 클래스는 하나의 역할만 해야 한다.
 
-- Open / Closed Principal
+- Open / Closed Principle
 
   > 확장(상속)에는 열려있고, 수정에는 닫혀있어야 한다.
 
-- Liskov Substitution Pricipal
+- Liskov Substitution Principle
 
   > 자식이 부모의 자리에 항상 교체될 수 있어야 한다.
 
-- Interface Segregation Pricipal
+- Interface Segregation Principle
 
   > 인터페이스가 잘 분리되어서, 클래스가 꼭 필요한 인터페이스만 구현하도록 해야 한다.
 
-- Dependency Inversion Principal
+- Dependency Inversion Principle
 
   > 상위 모듈이 하위 모듈에 의존하면 안 된다.
   > 둘 다 추상화에 의존하며, 추상화는 세부 사항에 의존하면 안 된다.
