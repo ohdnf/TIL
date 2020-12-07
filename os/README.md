@@ -1,6 +1,6 @@
 # 운영체제
 
-[이화여자대학교의 반효경 교수님의 KOCW 강의](http://www.kocw.net/home/search/kemView.do?kemId=1046323)를 듣고 정리한 내용입니다.
+[이화여자대학교 반효경 교수님의 KOCW 강의](http://www.kocw.net/home/search/kemView.do?kemId=1046323)를 듣고 정리한 내용입니다.
 
 
 
