@@ -3,6 +3,7 @@
 
 
 ## 목차
+- [sizeof](#sizeof)
 - [정수와 실수](#정수와-실수)
 	- [정수 자료형](#정수-자료형)
 	- [Overflow of Integer](#overflow-of-integer)
@@ -12,6 +13,69 @@
 - [문자형](#문자형)
 - [불리언형](#불리언형)
 - [복소수형](#복소수형)
+
+
+
+## sizeof
+
+```c
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct MyStruct
+{
+	int i;
+	float f;
+};
+
+int main()
+{
+	/* 1. sizeof basic types */
+
+	int a = 0;
+	unsigned int int_size1 = sizeof a;
+	unsigned int int_size2 = sizeof(int);
+	unsigned int int_size3 = sizeof(a);
+
+	// 이식하기 좋은 데이터형(portable type)
+	size_t int_size4 = sizeof(a);
+	size_t float_size = sizeof(float);
+
+	printf("Size of int type is %u bytes.\n", int_size1);
+	printf("Size of int type is %zu bytes.\n", int_size4);
+	printf("Size of float type is %zu bytes.\n", float_size);
+
+	/* 2. sizeof arrays */
+
+	int int_arr[30];	// int_arr[0] = 1024;
+	int* int_ptr = NULL;
+	int_ptr = (int*)malloc(sizeof(int) * 30);	// int_ptr[0] = 1024;
+
+	printf("Size of array = %zu bytes\n", sizeof(int_arr));
+	printf("Size of pointer = %zu bytes\n", sizeof(int_ptr));
+
+	/* 3. sizeof character array */
+
+	char c = 'a';
+	char string[10];	// maximum 9 character + '\0' (null character)
+
+	size_t char_size = sizeof(char);
+	size_t str_size = sizeof(string);
+
+	printf("Size of char type is %zu bytes.\n", char_size);
+	printf("Size of string type is %zu bytes.\n", str_size);
+
+	/* 4. sizeof structure */
+
+	printf("%zu\n", sizeof(struct MyStruct));
+
+	return 0;
+}
+```
+
+
 
 
 
@@ -362,6 +426,88 @@ int main()
 	scanf("%f", &salary);
 }
 ```
+
+
+
+### 문자열이 메모리에 저장되는 구조
+
+```
+숫자 하나	1
+숫자의 배열	0 1 2 3 4 5 6 7 8 9
+문자 하나	'a'
+문자의 배열	'H' 'e' 'l' 'l' 'o' '\0' ? ? ? ?
+```
+
+> `printf()` 함수가 문자열 출력시 `\0`을 만나면 그 다음은 무시하고 출력을 종료하게 된다.
+
+```c
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int main()
+{
+	int a = 1;
+	int int_arr[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+	printf("%i %i %i\n", int_arr[0], int_arr[1], int_arr[9]);
+	// printf("%i\n", int_arr[10]);
+
+	char c = 'a';
+	char str1[10] = "Hello";
+	char str2[10] = { 'H', 'i' };
+
+	printf("%c\n", c);
+	printf("%s\n", str1);
+	printf("%s\n", str2);
+
+	printf("%hhi %hhi %hhi %hhi %hhi \n",
+		str2[0], str2[1], str2[2], str2[3], str2[4]);
+
+	//char str3[10] = "Hello, World";		// array size is not enough
+	char str3[20] = "Hello, \0World";
+	printf("%s\n", str3);		// Hello, 
+    printf("%c\n", str3[10]);	// r
+    printf("%c\n", str3[11]);	// l
+
+	return 0;
+}
+```
+
+
+
+### `strlen()`
+
+> 문자열의 길이를 반환하는  함수
+> `\0` 등을 제외하고 사람에게 의미 있는 문자열 길이만을 측정한다.
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char str1[100] = "Hello";
+    char str2[] = "Hello";		// 6 글자에 맞춰서 공간 할당
+    char str3[100] = "\0";
+    char str4[100] = "\n";
+
+    printf("%zu %zu\n", sizeof(str1), strlen(str1));    // 100 5
+    printf("%zu %zu\n", sizeof(str2), strlen(str2));    // 6 5
+    printf("%zu %zu\n", sizeof(str3), strlen(str3));    // 100 0
+    printf("%zu %zu\n", sizeof(str4), strlen(str4));    // 100 1
+
+    /* Extra */
+    char* str5 = (char*)malloc(sizeof(char) * 100);
+    str5[0] = 'H'; str5[1] = 'e'; str5[2] = 'l'; str5[3] = 'l'; str5[4] = 'o';
+    str5[5] = '\0';
+    printf("%zu %zu\n", sizeof(str5), strlen(str5));    // 4 5
+
+    return 0;
+}
+```
+
+
 
 
 

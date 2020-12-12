@@ -96,3 +96,28 @@ int main()
 }
 ```
 
+
+
+> 문자열 입출력하기
+
+```c
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int main()
+{
+	//char fruit_name;	// stores only one character
+	char fruit_name[40];	// stores only one character
+	printf("What is your favorite fruit?\n");
+
+	//scanf("%c", &fruit_name);
+	scanf("%s", fruit_name);	// 배열의 이름은 주소를 나타내기 때문에 &를 붙이지 않는다.
+
+	//printf("You like %c!\n", fruit_name);
+	printf("You like %s!\n", fruit_name);
+
+	return 0;
+}
+```
+
