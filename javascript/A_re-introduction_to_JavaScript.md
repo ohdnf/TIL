@@ -172,29 +172,367 @@ for (var myVarVariable = 0; myVarVariable < 5; myVarVariable++) {
 
 ## Operators
 
+- `+`, `-`, `*`, `/`, `%`는 산술 연산자
+- `=`는 할당 연산자
+- `++`, `--`는 증감 단항 연산자
 
+```javascript
+// 아래 두 식은 동치
+x += 5;
+x = x + 5;
+```
+
+`+` 연산자는 문자열을 이어붙이는 데도 사용됩니다. 문자열에 어떤 수 또는 다른 값을 더하면 문자열로 바뀌게 됩니다.
+
+```javascript
+'3' + 4 + 5;	// "345"
+3 + 4 + '5';	// "75"
+
+// 빈 문자열에 어떤 값을 더해 해당 값을 문자열로 바꿀 수 있습니다.
+'' + 1;		// "1"
+```
+
+### `==` vs. `===`
+
+> 이중 등호 연산자(`==`)는 서로 다른 타입을 줄 경우 타입 강제 변환을 수행합니다.
+>
+> 타입 강제 변환을 하지 않으려면 삼중 등호 연산자(`===`)를 사용해야 합니다.
+
+```javascript
+123 == '123';	// true
+1 == true;		// true
+
+123 === '123';	// false
+1 === true;		// false
+```
+
+`!=`와 `!==`도 유사한 결과를 내보냅니다.
+
+```javascript
+123 != '123';	// false
+1 != true;		// false
+
+123 !== '123';	// true
+1 !== true;		// true
+```
+
+즉, `===` 연산자나 `!==` 연산자가 보다 더 엄격한 비교를 수행한다고 할 수 있습니다.
+
+### 단축 평가(short-circuit)
+
+> `&&`와 `||` 연산자는 첫번째 식을 평가한 결과에 따라서 두번째 식을 평가하는 단축 평가 논리를 사용합니다. 객체에 접근하기 전에 객체가 null인지 아닌지를 검사하는데 유용하게 쓰입니다.
+
+```javascript
+// o가 null이 아니라면 o 객체의 getName 메소드를 실행합니다.
+let name = o && o.getName();
+
+// 캐시된 값이 유효하지 않은 값일 때 새로 캐싱할 수 있습니다.
+let name = cachedName || (cachedName = getName());
+
+// 삼중 연산자로 조건문을 한 줄에 표현 가능합니다.
+let allowed = (age > 18) ? "yes" : "no";
+```
 
 
 
 ## 제어 구조
 
+### `if` ~ `else`
 
+```javascript
+let name = 'kittens';
+if (name == 'puppies') {
+  name += ' woof';
+} else if (name == 'kittens') {
+  name += ' meow';
+} else {
+  name += '!';
+}
+name == 'kittens meow';		// true
+```
+
+### `while`, `do-while`
+
+```javascript
+while (true) {
+  // 무한루프!
+}
+
+let input;
+do {
+  input = get_input();
+} while (inputIsNotValid(input));
+```
+
+### `for`
+
+```javascript
+// C, Java의 for 반복문과 동일
+for (let i = 0; i < 5; i++) {
+  // 내부 동작을 5번 반복합니다
+}
+
+// for ... of
+for (let value of array) {
+  // value로 작업을 실행합니다
+}
+
+// for ... in
+for (let property in object) {
+  // object의 항목(property)으로 작업을 실행합니다
+}
+```
+
+### `switch`
+
+> 숫자나 문자열을 기반으로 다중 분기되는 문장을 작성하는데 사용됩니다.
+>
+> `switch` 부분과 `case` 부분의 표현식은 `===` 연산자로 비교됩니다.
+
+```javascript
+switch(action) {
+    case 'draw':
+        drawSomething();
+        break;
+    case 'eat':
+        eatSomething();
+        break;
+    default:
+        doNothing();
+}
+```
+
+- `break` 키워드가 없다면 다음 단계로 넘어가게 됩니다. 대부분 `case`문에 넣게 됩니다.
+- `default` 구문의 적용은 선택사항입니다.
 
 
 
 ## Objects
 
-> Python의 `dict()`
+> JavaScript의 객체는 name-value pairs의 모임입니다. 때문에 다음과 비슷합니다.
+>
+> - Python의 Dictionaries
+> - C와 C++의 Hash tables
+> - Java의 HashMaps
+>
+> JavaScript 내 코어 타입들을 제외한 모든 것은 객체로 취급되기 때문에 어떤 JavaScript 프로그램도 기본적으로 해쉬 테이블을 검색하는데 출중한 성능을 가지고 있습니다.
+>
+> 값(value)은 객체를 포함하여 아무 타입이 될 수 있는 반면, 이름(name)은 문자열입니다.
+
+빈 객체를 생성하는 두 가지 방법
+
+```javascript
+// 생성자 함수
+let obj = new Object();
+
+// 객체 리터럴 구문
+let obj = {};
+// 리터럴 구문을 사용해 속성을 초기화할 수 있습니다.
+let obj = {
+    name: "Carrot",
+    "for": "Max",
+    details: {
+        color: "orange",
+        size: 12
+    }
+}
+```
+
+객체의 속성에 접근하는 방법
+
+```javascript
+// dot 표기법
+obj.details.color;		// orange
+// bracket 표기법
+obj["details"]["size"];	// 12
+```
+
+객체 프로토타입(`Person`)과 프로토타입의 인스턴스(`you`)를 생성하는 예제입니다.
+
+```javascript
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+
+let you = new Person('You', 24);
+
+// key와 value를 입력받아 정의하는 방법
+let key = prompt('what is your key?');		// sex
+you[key] = prompt('what is its value?');	// male
+```
 
 
 
 ## Arrays
 
-> Python의 `list()`
+```javascript
+// 배열 생성 방법 1
+let arr = new Array();
+arr[0] = "dog";
+arr[1] = "cat";
+arr[2] = "hen";
+arr.length;		// 3
+
+// 배열 생성 방법 2
+let arr = ["dog", "cat", "hen"];
+arr.length;		// 3
+```
+
+> 배열 리터럴 `[]`의 마지막 원소 끝에 `,`를 남겨두는 것은 브라우저마다 다르게 처리하므로 권장하지 않습니다.
+
+`array.length`는 배열에 들어있는 항목의 수를 반드시 반영하지는 않습니다. 배열의 `length` 속성은 최대 인덱스에 하나를 더한 값일 뿐입니다.
+
+```javascript
+> let a = ["dog", "cat", "hen"];
+> a[100] = "fox";
+> a.length
+101
+```
+
+존재하지 않는 배열 인덱스를 참조하려고하면 다음과 같이 `undefined`을 얻게 됩니다.
+
+```javascript
+> typeof(a[90]);
+undefined
+```
+
+
+
+### 배열 메서드
+
+| 메서드 이름                                            | 설명                                                         |
+| ------------------------------------------------------ | ------------------------------------------------------------ |
+| `arr.toString()`                                       | 각 항목에 대한 `toString()`의 출력이 콤마로 구분된 한 개의 문자열을 반환합니다. |
+| `arr.toLocaleString()`                                 | 각 항목에 대한 `toLocaleString()`의 출력이 콤마로 구분된 한 개의 문자열을 반환합니다. |
+| `arr.concat(item1[, item2[, ...[, itemN]]])`           | item들이 덧붙여진 한 개의 배열을 반환합니다.                 |
+| `arr.join(sep)`                                        | 배열의 값들을 `sep` 인자로 구분하여 합친 한 개의 문자열로 변환합니다. |
+| `arr.pop()`                                            | 배열의 마지막 항목을 반환하면서 제거합니다.                  |
+| `arr.push(item1, ..., itemN)`                          | 배열의 끝에 item들을 덧붙입니다.                             |
+| `arr.shift()`                                          | 배열의 첫 번째 항목을 반환하면서 제거합니다.                 |
+| `arr.unshift(item1[, item2[, ...[, itemN]]])`          | 배열의 앞쪽에 item들을 덧붙입니다.                           |
+| `arr.sort([cmpfn])`                                    | 옵션으로 비교용도의 함수를 입력받습니다.                     |
+| `arr.splice(start, delcount[, item1[, ...[, itemN]]])` | 배열의 일부분을 제거하고 다른 항목으로 대체하여 배열을 변경합니다. |
+| `arr.reverse()`                                        | 배열의 순서를 거꾸로 배열합니다.                             |
+
+
+
+### 배열을 `for` 반복문으로 처리하는 방법
+
+#### `for`
+
+```javascript
+for (let i = 0; i < a.length; i++) {
+    // a[i] 로 뭔가를 수행
+}
+```
+
+#### `for ... of`
+
+```javascript
+for (const currentValue of a) {
+    // currentValue 로 뭔가를 수행
+}
+```
+
+> `for ... in` 루프는 배열 요소를 반복하는게 아니라 배열 인덱스를 반복하기 때문에 배열을 순회하기엔 적합하지 않습니다.
+
+#### `forEach()`
+
+```javascript
+['dog', 'cat', 'hen'].forEach(function(currentValue, index, array) {
+    // currentValue나 array[index]로 뭔가를 수행
+}
+```
 
 
 
 ## Functions
+
+```javascript
+function add(x, y) {
+    let total = x + y;
+    return total;	// return문이 없으면 undefined 반환
+}
+
+// 매개변수에 전달될 인자가 없다면 해당 변수는 undefined로 설정
+add();	// NaN
+
+// 매개변수보다 많은 인자가 넘겨질 경우 무시됩니다.
+add(2, 3, 4);	// 5
+```
+
+매개변수와 상관없이 함수에 넘겨지는 인자들은 `arguments` 객체로 접근할 수 있습니다.
+
+```javascript
+function add() {
+    let sum = 0;
+    for (let i = 0, j= arguments.length; i < j; i++) {
+        sum += arguments[i];
+    }
+    return sum;
+}
+
+add(2, 3, 4, 5);	// 14
+```
+
+Rest 파라미터 연산자는 `...args`와 같은 형식으로 함수 파라미터 목록에 사용되어, 갯수 제한없이 함수로 인자를 전달받습니다. 다음 예에서 `avg`에 전달된 첫번째 값은 `firstVal` 변수에 저장되고 남은 변수들은 `args`에 저장됩니다.
+
+```javascript
+function avg(firstVal, ...args) {
+    let sum = 0;
+    for (let value of args) {
+        sum += value;
+    }
+    return sum / arr.length;
+}
+
+avg(2, 3, 4, 5); // 3.5
+```
+
+### 익명 함수
+
+```javascript
+let avg = function() {
+    let sum = 0;
+    for (let i = 0, j = arguments.length; i < j; i++) {
+        sum += arguments[i];
+    }
+    return sum / arguments.length;
+}
+```
+
+### 재귀 호출
+
+JavaScript에서 재귀적으로 함수를 부를 수 있습니다. 브라우저 DOM과 같은 트리 구조를 다루는 데 유용합니다.
+
+```javascript
+function countChars(elm) {
+  if (elm.nodeType == 3) { // TEXT_NODE
+    return elm.nodeValue.length;
+  }
+  let count = 0;
+  for (let i = 0, child; child = elm.childNodes[i]; i++) {
+    count += countChars(child);
+  }
+  return count;
+}
+```
+
+익명 함수를 재귀적으로 호출할 때는 다음과 같이 이름을 부여할 수 있습니다. 함수 표현식에 제공된 이름은 함수 자체 범위에서만 유효합니다. 이는 엔진 최적화뿐만 아니라 코드 가독성을 높입니다.
+
+```javascript
+let charsInBody = (function counter(elm) {
+  if (elm.nodeType == 3) { // TEXT_NODE
+    return elm.nodeValue.length;
+  }
+  let count = 0;
+  for (let i = 0, child; child = elm.childNodes[i]; i++) {
+    count += counter(child);
+  }
+  return count;
+})(document.body);
+```
 
 ### Arrow function
 
@@ -205,6 +543,103 @@ for (var myVarVariable = 0; myVarVariable < 5; myVarVariable++) {
 
 
 ## 사용자 정의 객체
+
+> 고전 객체지향 프로그래밍에서 객체는 데이터와 해당 데이터를 다루는 메소드의 집합이었습니다. JavaScript는 프로토타입 기반 언어로, class 구문이 따로 없습니다. 대신 JavaScript는 function을 class로 사용합니다.
+
+```javascript
+function makePerson(first, last) {
+  return {
+    first: first,
+    last: last,
+    fullName: function() {
+      return this.first + ' ' + this.last;
+    },
+    fullNameReversed: function() {
+      return this.last + ', ' + this.first;
+    }
+  };
+}
+
+let jp = makePerson("Jupyo", "Hong");
+jp.fullName(); // "Jupyo Hong"
+jp.fullNameReversed(s); // "Hong, Jupyo"
+```
+
+`this` 키워드를 사용해서 개선할 수 있습니다.
+
+> We have introduced another keyword: `new`. `new` is strongly related to `this`. It creates a brand new empty object, and then calls the function specified, with `this` set to that new object. Notice though that the function specified with `this` does not return a value but merely modifies the `this` object. It's `new` that returns the `this` object to the calling site. Functions that are designed to be called by `new` are called constructor functions. Common practice is to capitalize these functions as a reminder to call them with `new`.
+
+```javascript
+function personFullName() {
+  return this.first + ' ' + this.last;
+}
+function personFullNameReversed() {
+  return this.last + ', ' + this.first;
+}
+
+function Person(first, last) {
+  this.first = first;
+  this.last = last;
+  this.fullName = personFullName;
+  this.fullNameReversed = personFullNameReversed;
+}
+
+let jp = new Person('Jupyo', 'Hong');
+```
+
+프로토타입 체인을 사용해 객체에 메소드를 추가할 수도 있습니다. 객체에 설정되지 않은 속성에 접근을 시도하면, JavaScript는 객체의 `prototype`에 그 속성이 존재하는지 살펴봅니다.
+
+```javascript
+function Person(first, last) {
+  this.first = first;
+  this.last = last;
+}
+Person.prototype.fullName = function() {
+  return this.first + ' ' + this.last;
+};
+Person.prototype.fullNameReversed = function() {
+  return this.last + ', ' + this.first;
+};
+```
+
+이미 존재하는 객체에 추가적인 메소드를 실시간으로 추가할 수도 있습니다.
+
+```javascript
+let jp = new Person("Jupyo", "Hong");
+jp.firstNameCaps();	//TypeError on line 1: jp.firstNameCaps is not a function
+
+Person.prototype.firstNameCaps = function() {
+    return this.first.toUpperCase()
+};
+s.firstNameCaps();	// "JUPYO"
+```
+
+JavaScript의 빌트인 객체(`Number`, `String` 등)의 `prototype`에도 추가할 수 있습니다. `String` 객체에 문자열 순서를 거꾸로 배열하여 돌려주는 메소드를 추가해봅니다.
+
+```javascript
+var jp = "Jupyo";
+jp.reversed();	// TypeError on line 1: jp.reversed is not a function
+
+String.prototype.reversed = function() {
+    var r = "";
+    for (var i = this.length - 1; i >= 0; i--) {
+        r += this[i];
+    }
+    return r;
+};
+
+jp.reversed();	// oypuJ
+```
+
+문자열 상수에서도 동작합니다.
+
+```javascript
+"This can now be reversed".reversed(); // desrever eb won nac sihT
+```
+
+프로토타입 체인에서 루트는 `Object.prototype`입니다.
+
+
 
 ### Inner functions
 
