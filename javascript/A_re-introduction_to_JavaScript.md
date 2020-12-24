@@ -587,7 +587,7 @@ function Person(first, last) {
 let jp = new Person('Jupyo', 'Hong');
 ```
 
-프로토타입 체인을 사용해 객체에 메소드를 추가할 수도 있습니다. 객체에 설정되지 않은 속성에 접근을 시도하면, JavaScript는 객체의 `prototype`에 그 속성이 존재하는지 살펴봅니다.
+[프로토타입 체인](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain)을 사용해 객체에 메소드를 추가할 수도 있습니다. 객체에 설정되지 않은 속성에 접근을 시도하면, JavaScript는 객체의 `prototype`에 그 속성이 존재하는지 살펴봅니다(lookup).
 
 ```javascript
 function Person(first, last) {
@@ -643,11 +643,54 @@ jp.reversed();	// oypuJ
 
 ### Inner functions
 
+> 중첩 함수는 함수 내부에서 선언된 함수입니다. 자식 함수는 부모 함수 스코프(scope)의 변수에 접근할 수 있습니다. 한두개 정도의 함수에서만 호출되며 다른 부분에서 사용되지 않는다면 함수 내에 중첩시키는 것이 좋습니다. 전역 범위 함수의 갯수를 늘리지 않도록 하는 것은 좋은 습관입니다.
 
+```javascript
+function parentFunc() {
+    var a = 1;
+
+    function nestedFunc() {
+        var b = 4; // parentFunc은 사용할 수 없는 변수
+        return a + b;
+    }
+    return nestedFunc();  // 5
+}
+```
 
 
 
 ## Closures
 
+```javascript
+function makeAdder(a) {
+  return function(b) {
+    return a + b;
+  };
+}
+var add5 = makeAdder(5);
+var add20 = makeAdder(20);
+add5(6);	// ?
+add20(7);	// ?
+```
 
+`makeAdder` 함수는 `a`라는 매개변수를 받아 `b`라는 매개변수와 합한 값을 반환하는 새로운 함수를 만들고, *이 함수*를 반환합니다.
 
+상식적으로 우리는 `makeAdder` 함수가 호출되었을 때 함수를 반환하고 사라질 것이라고 생각하지만 사실 사라지지 않았습니다. 오히려 매개변수 `a`에 넘겨진 값을 지역변수로 기억하고 있으며 위 코드의 마지막 두 줄의 결과는 다음과 같습니다.
+
+```javascript
+add5(6);	// returns 11
+add20(7);	// returns 27
+```
+
+JavaScript에서 함수를 실행하면 *Scope* 객체가 생성되어 함수 내에서 생성된 지역 변수를 저장해둡니다. 함수의 매개변수로 넘겨진 값 또한 마찬가지입니다. 이는 전역 변수와 함수가 존재하는 전역 객체(global object)와 비슷하지만 두 가지 중요한 차이가 있습니다.
+
+1. 함수가 실행될 때마다 새로운 Scope 객체가 생성됩니다.
+2. (`this` 또는 브라우저에서 `window`로 접근가능한) 전역 객체와 달리, Scope 객체들은 JavaScript 코드로 직접 접근할 수 없습니다. 예를 들어, 현재 Scope 객체의 속성들을 순환할 방법은 존재하지 않습니다.
+
+따라서 `makeAdder()`가 호출될 때, Scope 객체가 `a`라는 속성과 함께 생성됩니다. `makeAdder()`가 새로 생성된 함수를 반환하면, 보통 JavaScript의 Garbage collector가 `makeAdder()`에서 생성된 Scope 객체를 정리합니다. 하지만 반환된 함수가 Scope 객체를 참조하고 있기 때문에 참조가 없어질 때까지 정리되지 않습니다.
+
+Scope 객체들은 Scope chain이라는 Prototype chain과 유사한 구조를 가집니다.
+
+**Closure**는 함수와 Scope 객체의 조합으로, 상태를 저장할 수 있게 해줍니다. 
+
+[How do JavaScript closures work?](https://stackoverflow.com/questions/111102/how-do-javascript-closures-work)
