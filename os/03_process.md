@@ -2,6 +2,17 @@
 
 > Process is **a program in execution**
 
+## 목차
+
+- [프로세스의 개념](#프로세스의-개념)
+- [프로세스의 상태(Process State)](#프로세스의-상태process-state)
+- [프로세스 상태도](#프로세스-상태도)
+- [Process Control Block (PCB)](#process-control-block-pcb)
+- [문맥 교환(Context switch)](#문맥-교환context-switch)
+- [프로세스를 스케줄링하기 위한 큐](#프로세스를-스케줄링하기-위한-큐)
+- [스케줄러(Scheduler)](#스케줄러scheduler)
+- [Thread](#thread)
+
 
 
 ## 프로세스의 개념
@@ -152,4 +163,63 @@ I/O device의 처리를 기다리는 프로세스의 집합
 - **여유 공간 마련을 위해 프로세스를 통째로 메모리에서 디스크로 쫓아냄**
 - 프로세스에게서 **memory**를 뺏는 문제
 - *degree of Multiprogramming*을 제어
+
+
+
+## Thread
+
+> "A **thread** (or **lightweight process**) is a basic unit of CPU utilization"
+>
+> 전통적인 개념의 heavyweight process는 하나의 thread를 가지고 있는 task로 볼 수 있다.
+
+### Thread의 구성
+
+- program counter
+- register set
+- stack space
+
+### Task
+
+> Process 안에서 Thread끼리 공유하는 부분
+
+- code section
+- data section
+- OS resources
+
+### 장점
+
+#### Responsiveness
+
+- 다중 스레드로 구성된 태스크 구조에서는 **하나의 서버 스레드가 blocked(waiting) 상태인 동안에도 동일한 태스크 내의 다른 스레드가 실행(running)**되어 빠른 처리를 할 수 있다.
+- Multi-threaded Web
+  - 이미지 파일 요청을 한 쓰레드만 블록되더라도 텍스트 파일 요청한 쓰레드는 실행될 수 있어 응답성이 향상된다.
+- 동일한 일을 수행하는 다중 스레드가 협력하여 높은 처리율(throughput)과 성능 향상을 얻을 수 있다.
+- 스레드를 사용하면 병렬성을 높일 수 있다.
+
+#### Resource Sharing
+
+- `n`개의 쓰레드가 프로세스의 자원 등을 공유한다.
+
+#### Economy
+
+- creating & CPU switching in **thread** have much less overheads rather than in a **process**
+- 프로세스 생성이나 문맥교환과 같은 오버헤드가 큰 작업을 쓰레드 생성과 쓰레드 교환으로 바꾸어 자원을 절약할 수 있다.
+
+#### Utilization of Multi-Processor Architectures
+
+- **each thread** may be running in parallel on a different *processor*
+
+
+
+## Implementation of Threads
+
+### Kernel Threads
+
+- supported by kernel
+
+### User Threads
+
+- supported by library
+
+### Real-time Threads
 
