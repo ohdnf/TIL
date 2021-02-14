@@ -12,7 +12,7 @@
 
 ### OSI 모델(Open Systems Interconnection Reference Model)
 
-ISO라는 국제표준화기구에서 제정한 네트워크 통신 표준 규격
+ISO라는 국제표준화기구에서 제정한 네트워크 통신 표준 규격으로, 컴퓨터 네트워크 프로토콜 디자인과 통신을 계층으로 나누어 설명한 것이다.
 
 <img src="https://www.cloudflare.com/img/learning/ddos/what-is-a-ddos-attack/osi-model-7-layers.svg" style="zoom:50%;" />
 
