@@ -2,7 +2,7 @@
 
 ## [Python Documentation](https://docs.python.org/3/library/itertools.html#itertools.combinations)
 
-`itertools` 모듈 활용
+`itertools` 라이브러리 활용
 
 ```python
 from itertools import combinations
@@ -22,7 +22,7 @@ for c in combinations('ABCD', 2):
 
 
 
-직접 구현
+라이브러리 모듈과 유사한 코드
 
 ```python
 def combinations(iterable, r):

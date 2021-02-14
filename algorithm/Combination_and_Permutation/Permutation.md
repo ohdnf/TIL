@@ -28,7 +28,7 @@ for p in permutations('ABCD', 2):
 
 
 
-직접 구현
+모듈과 유사한 코드
 
 ```python
 def permutations(iterable, r=None):
