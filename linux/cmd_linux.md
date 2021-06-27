@@ -1,32 +1,38 @@
 # Terminal Commands(Linux)
 
-| 명령어 | 내용 |
+| 명령어 (옵션) | 내용 |
 | ------ | ---- |
-| `pwd` | 현재 작업 디렉토리 표시 |
-| `ls -al` | 현재 작업 디렉토리에 있는 디렉토리 및 파일 표시 |
-| `cd dir_path` | 디렉토리 이동(`.` : 현재 디렉토리 / `..` 상위 디렉토리) |
-| `mkdir dir_name` | 디렉토리 생성 |
-| `rm -r` | 디렉토리 삭제 (폴더 내 파일 Recursive하게 삭제) |
-| `touch a.txt` | 파일 `a.txt` 생성 |
-| `mv file_path destination` | 파일/폴더를 해당 위치로 이동(이름 변경 가능) |
-| `cp file_path destination` | 복사 대상 경로 파일을 복사 위치로 복사(이름 변경 가능) |
-| `cat (-n) file_path` | (옵션: `n`행만큼) 파일 내용 출력 |
-| `cat file_path > destination` | 기존 파일 내용을 다른 파일로 복사 |
-| `echo 'contents' > file_path` | 해당 파일 내용을 `contents`로 덮어쓰기 |
-| `echo 'contents' >> file_path` | 해당 파일 맨 뒤에 `contents` 이어쓰기 |
-| `start` | `start .`: 현재 디렉토리에서 파일 탐색기 실행 |
+| `man 명령어` | 명령어 사용법 표시 |
+| `sudo 명령어` | 지정한 명령어를 관리자 권한으로 실행 |
+| `pwd` | 현재 작업 디렉터리 표시 |
+| `ls -al` | 현재 작업 디렉터리에 있는 디렉터리 및 파일 목록 표시 |
+| `cd 디렉터리명` | 디렉터리 이동(`.` : 현재 디렉터리 / `..` 상위 디렉터리) |
+| `touch 파일명` | 파일 생성 |
+| `mkdir 디렉터리명` | 디렉터리 생성 |
+| `rm (-r) 파일명` | 파일 또는 디렉터리 삭제, 디렉터리 시 `-r` 옵션 필요 (폴더 내 파일까지 Recursive하게 삭제) |
+| `mv 파일명1 파일명2` | `파일명1`에서 `파일명2`로 파일을 이동 또는 파일명 변경 |
+| `cp 파일명1 파일명2` | `파일명1`에서 `파일명2`로 파일을 복사 |
+| `cat (-n) 파일명` | (옵션: `n`행만큼) 파일 내용 출력 |
+| `cat 파일명1 > 파일명2` | `파일명1` 내용을 `파일명2`라는 새로운 파일로 생성 |
+| `echo 'contents' > 파일명` | 파일 내용을 `contents`로 덮어쓰기 |
+| `echo 'contents' >> 파일명` | 파일 마지막 줄에 이어쓰기 |
+| `start` | `start .`: 현재 디렉터리에서 파일 탐색기 실행(Windows용) |
 | `grep` | 출력된 데이터 중 일치하는 텍스트가 있는 줄들을 보여줌(ex. `pip list | grep django`) |
-| `apt-get install 패키지 이름` | 패키지 설치 |
-| `apt-get update` | 패키지 업그레이드 가능 여부 체크 |
-| `apt-get upgragde` | 업그레이드 가능한 패키지 업그레이드 |
+| `apt-get update` | 패키지의 갱신 정보 취득 |
+| `apt-get upgrade` | 갱신 정보 바탕으로 패키지 업그레이드 |
+| `apt-get install 패키지명` | 지정한 패키지 설치 |
+| `apt-get remove 패키지명` | 지정한 패키지 제거 |
+| `apt-get autoclean` | 이미 제거한 패키지의 캐시를 삭제 |
 | `chown [OPTIONS] [USER][:GROUP] 파일_또는_폴더` | 파일 또는 폴더의 소유자를 변경 |
+| `chgrp [OPTIONS] [USER][:GROUP] 파일_또는_폴더` | 파일 또는 폴더의 그룹을 변경 |
 | `chmod [OPTIONS] [PERMISSIONS] 파일_또는_폴더` | 파일 또는 폴더의 권한을 변경 |
+| `ifconfig` | 네트워크 인터페이스의 참조 및 설정 |
 
 
 
 ## linux cmd 단축키 만들기
 
-1. root 디렉토리에 `.bashrc` 파일을 만들어준다.
+1. root 디렉터리에 `.bashrc` 파일을 만들어준다.
 
 ```shell
 $ vi ~/.bashrc
@@ -81,7 +87,7 @@ $ source ~/.bashrc
 #### `useradd`
 
 ```shell
-# -m 옵션을 사용하면 홈 디렉토리도 함께 생성
+# -m 옵션을 사용하면 홈 디렉터리도 함께 생성
 $ sudo useradd -m user01
 [sudo] password for jarvis:
 $ sudo passwd user01
@@ -99,7 +105,7 @@ jarvis  user01
 
 > ##### `/etc/passwd`에 있는 사용자 파일의 내용
 >
-> 사용자이름:암호:사용자ID:그룹ID:추가정보:홈디렉토리:쉘
+> 사용자이름:암호:사용자ID:그룹ID:추가정보:홈디렉터리:쉘
 
 #### `adduser`
 
@@ -191,7 +197,7 @@ $ ls -l test/
 total 0
 -rw-r--r-- 1 user01 user01 0 Nov  5 10:45 test1.txt
 -rw-r--r-- 1 user01 user01 0 Nov  5 10:45 test2.txt
-# 디렉토리 권한 변경
+# 디렉터리 권한 변경
 $ sudo chown -R user01:user01 test
 $ ls -l
 drwxr-xr-x 2 user01 user01 4096 Nov  5 10:45 test
