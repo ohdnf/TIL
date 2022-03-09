@@ -31,8 +31,8 @@ src
 `main.ts`는 애플리케이션을 시동시키는 async 함수를 포함
 
 ```js
-import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app.module";
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
