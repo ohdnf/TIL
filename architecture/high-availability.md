@@ -1,10 +1,8 @@
-# HA(High Availability)
-
-## 고가용성
+# 고가용성(HA, High Availability)
 
 서버와 네트워크, 프로그램 등의 정보 시스템이 오랜 기간동안 지속적으로 정상 운영이 가능한 성질
 
-### 용어 정리
+## 용어 정리
 
 - Active
 - Standby
@@ -15,19 +13,15 @@
   - Read
 - Backup(Standby와 동일한 개념)
 
-
-
 ## HA 방식
 
 ### 클러스터링(Clustering)
 
 각기 다른 서버들을 하나로 묶어서 하나의 시스템과 같이 작동하도록 하는 것
 
-
-
 ### 로드밸런싱(Load Balancing)
 
-*부하 분산을 위해서 Virtual IP를 통해 여러 서버에 접속하도록 분배하는 기능*
+_부하 분산을 위해서 Virtual IP를 통해 여러 서버에 접속하도록 분배하는 기능_
 
 - 로드밸런싱(기능)을 하려면 클러스터링(구조)이 필요하다
 - 하나의 서비스를 하나 이상의 노드가 처리하는 방식
@@ -40,11 +34,9 @@
 - Fail Over: 이중화 구조에서 Health Check를 통해 Standby를 Active하는 것
 - [참고](https://www.digitalocean.com/community/tutorials/what-is-load-balancing#how-does-the-load-balancer-choose-the-backend-server)
 
-
-
 ### RAID(Redundant Array of Independent Disks)
 
-*여러 개의 하드 디스크에 일부 중복된 데이터를 나눠서 저장하는 기술*
+_여러 개의 하드 디스크에 일부 중복된 데이터를 나눠서 저장하는 기술_
 
 #### RAID 0
 
@@ -69,4 +61,3 @@
 #### RAID 0 + 1
 
 Striping 방식과 Mirroring 방식을 혼합한 형태
-
