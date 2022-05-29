@@ -1,7 +1,5 @@
 # 컴파일러와 링커
 
-
-
 ```c
 #include <stdio.h>
 
@@ -14,9 +12,7 @@ int main()
 }
 ```
 
-`Ctrl + F5` 디버깅 없이 실행
-
-
+> Visual Studio에서 `Ctrl + F5`를 누르면 디버깅 없이 실행
 
 ### 폴더 구조
 
@@ -30,8 +26,6 @@ Solution/
 		.c
 ```
 
-
-
 CMD에서 컴파일하고 실행하기
 
 ```shell
@@ -41,4 +35,3 @@ $ gcc compile_this.c -o to_this_name.o
 $ gcc only_compile.c -c
 $ gcc link_this_object.o -o exe_from_obj.exe
 ```
-

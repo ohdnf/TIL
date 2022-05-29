@@ -1,20 +1,17 @@
 # 자료형
 
-
-
 ## 목차
+
 - [sizeof](#sizeof)
 - [정수와 실수](#정수와-실수)
-	- [정수 자료형](#정수-자료형)
-	- [Overflow of Integer](#overflow-of-integer)
-	- [고정 너비 정수](#고정-너비-정수)
-	- [부동소수점 수](#부동소수점-수)
-	- [부동소수점 형](#부동소수점-형)
+  - [정수 자료형](#정수-자료형)
+  - [Overflow of Integer](#overflow-of-integer)
+  - [고정 너비 정수](#고정-너비-정수)
+  - [부동소수점 수](#부동소수점-수)
+  - [부동소수점 형](#부동소수점-형)
 - [문자형](#문자형)
 - [불리언형](#불리언형)
 - [복소수형](#복소수형)
-
-
 
 ## sizeof
 
@@ -75,11 +72,6 @@ int main()
 }
 ```
 
-
-
-
-
-
 ## 정수와 실수
 
 ### 정수 자료형
@@ -138,8 +130,6 @@ long = 65537, 1
 long long = 12345678901234, 1942892530
 ```
 
-
-
 ### Overflow of Integer
 
 #### `sizeof()`로 데이터 크기 확인
@@ -155,8 +145,6 @@ int main()
     return 0;
 }
 ```
-
-
 
 #### signed vs. unsigned
 
@@ -189,8 +177,6 @@ min of unsigned = 0
 max of signed = 2147483647
 min of signed = 2147483648
 ```
-
-
 
 #### Overflow 확인
 
@@ -240,8 +226,6 @@ int main()
    binary: 11111111111111111111111111111111
    ```
 
-
-
 ### 고정 너비 정수
 
 > C 언어는 각 자료형의 최소 메모리 크기를 규정하고, 시스템에 따라 크기가 더 커질 수 있다.
@@ -263,7 +247,7 @@ int main()
     int_fast8_t f8;		// fastest minimum
     intmax_t imax;		// biggest signed integers
     uintmax_t uimax;	// biggest unsigned integers
-    
+
     i32 = 1004;
     printf("me32 = %d\n", i32);
     printf("me32 = %" "d" "\n", i32);		// formatting 문자열 띄어쓰기
@@ -271,11 +255,9 @@ int main()
 }
 ```
 
-
-
 ### 부동소수점 수
 
->  실수 표현에는 unsigned가 없다.
+> 실수 표현에는 unsigned가 없다.
 
 ```
 부호		지수		   분수
@@ -284,8 +266,6 @@ sign	exponent	fraction
 +		   1		0.3141592	=> 0.3141592 * 10^1
 +		   2		0.3141592	=> 0.3141592 * 10^2
 ```
-
-
 
 #### 32bit single precision
 
@@ -297,8 +277,6 @@ float a = 1.234f;
 | ----- | -------- | -------- |
 | 1 bit | 8 bits   | 23 bits  |
 
-
-
 #### 64bit double precision
 
 ```c
@@ -308,8 +286,6 @@ double pi = 3.141592;
 | sign  | exponent | fraction |
 | ----- | -------- | -------- |
 | 1 bit | 11 bits  | 52 bits  |
-
-
 
 ### 부동소수점 형
 
@@ -351,8 +327,6 @@ int main()
 }
 ```
 
-
-
 #### 한계
 
 ```c
@@ -378,7 +352,7 @@ int main()
 	/*
 	* 부동소수점은 0.01을 정확히 표현하기 어렵기 때문에 이런 문제가 발생
 	*/
-    
+
     // overflow
 	float max = 3.402823466e+38F
 	printf("%f\n", max);	// 340282346638528859811704183484516925440.000000
@@ -394,8 +368,6 @@ int main()
 	return 0;
 }
 ```
-
-
 
 ## 문자형
 
@@ -426,8 +398,6 @@ int main()
 	scanf("%f", &salary);
 }
 ```
-
-
 
 ### 문자열이 메모리에 저장되는 구조
 
@@ -466,7 +436,7 @@ int main()
 
 	//char str3[10] = "Hello, World";		// array size is not enough
 	char str3[20] = "Hello, \0World";
-	printf("%s\n", str3);		// Hello, 
+	printf("%s\n", str3);		// Hello,
     printf("%c\n", str3[10]);	// r
     printf("%c\n", str3[11]);	// l
 
@@ -474,11 +444,9 @@ int main()
 }
 ```
 
-
-
 ### `strlen()`
 
-> 문자열의 길이를 반환하는  함수
+> 문자열의 길이를 반환하는 함수
 > `\0` 등을 제외하고 사람에게 의미 있는 문자열 길이만을 측정한다.
 
 ```c
@@ -506,10 +474,6 @@ int main()
     return 0;
 }
 ```
-
-
-
-
 
 ## 불리언형
 
@@ -543,8 +507,6 @@ int main()
 }
 ```
 
-
-
 ## 복소수형
 
 > Visual Studio와 GCC 컴파일러가 각각 복소수를 지원하는 방식이 다르다.
@@ -560,12 +522,10 @@ int main()
     _Dcomplex z;
     z._Val[0] = 1.0;
     z._Val[1] = 1.0;
-    
+
     return 0;
 }
 ```
-
-
 
 ### GCC
 
@@ -577,14 +537,11 @@ int main()
 {
     //double _Imaginary i = 3;
     double _Complex z = 1 + 2*I;
-    
+
     z = 1 / z;
-    
+
     printf("1 / (1.0 + 2.0i) = %.1f%+.1fi\n", creal(z), cimag(z));
-    
+
     return 0;
 }
 ```
-
-
-

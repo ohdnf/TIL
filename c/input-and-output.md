@@ -1,7 +1,5 @@
 # 입출력
 
-
-
 ## 입력
 
 ### `scanf()` 함수
@@ -16,9 +14,9 @@ int main()
 {
     int i = 0;
     scanf("%d", &i);	// ampersand
-    
+
     printf("Value is %d", i);
-    
+
     return 0;
 }
 ```
@@ -116,10 +114,6 @@ int main()
 }
 ```
 
-
-
-
-
 ## 출력
 
 ### `printf()` 함수
@@ -145,9 +139,9 @@ int main()
 int main()
 {
     int x = 1, y = 4, z;
-    
+
     z = x + y;
-    
+
     printf("%i + %i = %d", x, y, z);
 
     return 0;
@@ -186,7 +180,7 @@ printf("%d + %d = %d", 1, a, 1 + a);
 
 ```c
 // %[flags][width][.precision][length]specifier
-    
+
 printf("%+10.5hi", 256);
 printf("%010.3f", 123.45678);
 ```
@@ -202,20 +196,18 @@ int main()
     float n1 = 3.14;	// 4 bytes
     double n2 = 1.234;	// 8 bytes
     int n3 = 1024;		// 4 bytes
-    
+
     printf("%f %f %d\n\n", n1, n2, n3);
-    
+
     // 데이터 사이즈가 맞지 않거나, 데이터 사이즈는 맞지만 타입이 맞지 않는 예
     printf("%d %d %d\n\n", n1, n2, n3);
     printf("%lld %lld %d\n\n", n1, n2, n3);
     printf("%f %d %d\n\n", n1, n2, n3);
     printf("%f %lld %d\n\n", n1, n2, n3);
-    
+
     return 0;
 }
 ```
-
-
 
 ## 입출력 함수 만들어보기
 
@@ -229,18 +221,16 @@ int main()
 {
     float won = 0.0f;
     float dollar = 0.0f;
-    
+
     printf("Input KRW: ");
     scanf("%f", &won);
-    
+
     dollar = won * 0.00092f;	// 0.00092는 원래 double이므로 float형으로 변환
     printf("KRW %f = USD %f", won, dollar);
-    
+
     return 0;
 }
 ```
-
-
 
 > 문자열 입출력하기
 
@@ -264,4 +254,3 @@ int main()
 	return 0;
 }
 ```
-

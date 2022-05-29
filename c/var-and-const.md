@@ -12,8 +12,6 @@ int angel = 1004;
 - `angel` 변수(variable)
 - `1004` 리터럴 상수(literal constant)
 
-
-
 ## 상수
 
 > 변수와 마찬가지로 데이터를 저장할 수 있는 메모리 공간
@@ -52,13 +50,13 @@ const int angel = 1004;
 int main()
 {
     flaot radius, area, circum;
-    
+
     printf("I'm %s.\nPlease, input radius...\n", AI_NAME);
     scanf("%f", &radius);
-    
+
     area = PI * radius * radius;
     circum = 2.0 * PI * radius;
-    
+
     printf("Area = %f\n", area);
     printf("Circumference = %f\n", circum);
 }
@@ -75,15 +73,14 @@ int main()
 {
     const float pi = 3.141592f;
     flaot radius, area, circum;
-    
+
     printf("I'm %s.\nPlease, input radius...\n", AI_NAME);
     scanf("%f", &radius);
-    
+
     area = PI * radius * radius;
     circum = 2.0 * PI * radius;
-    
+
     printf("Area = %f\n", area);
     printf("Circumference = %f\n", circum);
 }
 ```
-
