@@ -1,12 +1,8 @@
 # Docker 입문
 
-
-
 ## 설치
 
 > Linux Ubuntu
-
-
 
 ## 초기 설정
 
@@ -19,6 +15,3 @@ $ sudo usermod -aG docker ${USER}
 $ sudo service docker restart
 $ logout
 ```
-
-
-

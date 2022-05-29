@@ -24,8 +24,6 @@ $ docker run -d --name mysql-oneta -v /oneta_db:/var/lib/mysql -e MYSQL_ROOT_PAS
 - `mysql:5.7`
   - 5.7 버전의 MySQL docker image 사용
 
-
-
 > **참고**
 >
 > [mysql docker official images](https://hub.docker.com/_/mysql)
@@ -33,8 +31,6 @@ $ docker run -d --name mysql-oneta -v /oneta_db:/var/lib/mysql -e MYSQL_ROOT_PAS
 > [docker run](https://docs.docker.com/engine/reference/commandline/run/)
 >
 > [run 명령으로 컨테이너 생성하기](http://pyrasis.com/book/DockerForTheReallyImpatient/Chapter03)
-
-
 
 ## MySQL Container에 CLI로 접속하기
 
@@ -57,8 +53,6 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 mysql>
 ```
-
-
 
 ## MySQL에서 새로운 유저 생성하기
 
@@ -115,8 +109,6 @@ mysql>
 >
 > [CREATE USER Statement](https://dev.mysql.com/doc/refman/8.0/en/create-user.html)
 
-
-
 ## MySQL 스키마 설정
 
 > MySQL CLI로 데이터베이스를 생성하고 생성한 유저에게 권한 부여
@@ -147,15 +139,11 @@ mysql>
 >
 > [GRANT Statement](https://dev.mysql.com/doc/refman/8.0/en/grant.html)
 
-
-
 > 스키마(SCHEMA) 삭제
 >
 > ```sql
 > DROP {DATABASE | SCHEMA} [IF EXISTS] db_name
 > ```
-
-
 
 ## CLI 종료하기
 
@@ -169,4 +157,3 @@ Bye
 # read escape sequence
 $
 ```
-
