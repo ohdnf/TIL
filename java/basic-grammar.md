@@ -1,7 +1,5 @@
 # 기초 문법
 
-
-
 ## 목차
 
 - [기본 자료형](#기본-자료형)
@@ -14,8 +12,6 @@
 - [배열과 메모리](#배열과-메모리)
 - [조건문](#조건문)
 - [반복문](#반복문)
-
-
 
 ## 기본 자료형
 
@@ -44,8 +40,6 @@ int i = 10;
 
 - `boolean` 1 byte
 
-
-
 ### 객체 자료형
 
 객체 메모리 주소가 변수에 저장
@@ -57,8 +51,6 @@ int i = 10;
 String str = "ABC";
 
 ```
-
-
 
 ## 형 변환
 
@@ -72,8 +64,6 @@ int in = by;
 System.out.println("in = " + in);
 // in = 10
 ```
-
-
 
 ### 명시적 형 변환
 
@@ -95,13 +85,7 @@ System.out.println("bVar = " + bVar);
 >
 > 따라서 기본적으로 여유롭게 큰 공간의 메모리를 가진 자료형을 선택한다.
 
-
-
-
-
 ## Formatting
-
-
 
 ### 특수 문자
 
@@ -115,15 +99,11 @@ System.out.println("bVar = " + bVar);
 | `//`    | 한 줄 주석   |
 | `/* */` | 여러 줄 주석 |
 
-
-
 ### 서식 문자
 
 > `System.out.prinf("서식문자", 자료);`
 >
 > println과 달리 printf를 사용한다.
-
-
 
 #### 서식
 
@@ -149,8 +129,6 @@ System.out.printf("8진수로 표현: %o", num);		// 36
 System.out.printf("16진수로 표현: %x", num);	// 1E
 ```
 
-
-
 #### `printf` 출력 형식
 
 ```java
@@ -175,13 +153,7 @@ System.out.printf("%.1f", 1.23);	// 1.2
 System.out.printf("%.1f", 1.25);	// 1.3
 ```
 
-
-
-
-
 ## 연산자
-
-
 
 ### 단항 연산자 & 이항 연산자
 
@@ -194,8 +166,6 @@ int x = 1;
 int y = 2;
 ```
 
-
-
 ### 삼항 연산자
 
 ```java
@@ -205,8 +175,6 @@ int a = 10;
 int b = 20;
 (a > b) ? 100 : 200		// 200
 ```
-
-
 
 ### 증감 연산자
 
@@ -223,8 +191,6 @@ System.out.println("Reset int x as " + (x));		// 10
 System.out.println("print(x++) = " + (x++));		// 10
 System.out.println("after x++ = " + (x));			// 11
 ```
-
-
 
 ### 논리 연산자
 
@@ -254,8 +220,6 @@ boolean cond = false;
 !cond	// true
 ```
 
-
-
 ### 비트 연산자
 
 데이터를 비트 단위로 환산하여 연산을 수행, 다른 연산자보다 연산 속도가 향상
@@ -269,19 +233,11 @@ x | y	// 0011	= 3
 x ^ y	// 0001	= 1
 ```
 
-
-
-
-
 ## 배열
-
-
 
 ### 배열이란
 
 > **인덱스를 이용**해서 **자료형이 같은 데이터**를 관리하는 것
-
-
 
 ### 배열 선언 및 초기화
 
@@ -333,8 +289,6 @@ team[4] = scanner.next();
 scanner.close();
 ```
 
-
-
 ## 배열과 메모리
 
 ### 배열의 메모리 크기
@@ -347,8 +301,6 @@ int [] arr = new int[3];
 // int형 = 4 byte
 // arr의 크기 = 3 * 4 = 12 byte
 ```
-
-
 
 ### 배열 변수: 배열을 가리키는 배열이름
 
@@ -378,8 +330,6 @@ System.out.println("arr2: ": arr2);
 System.out.println("arr3: ": arr3);
 ```
 
-
-
 ### 다차원 배열
 
 > 3차원 이상은 보통 사용하지 않는다.
@@ -399,13 +349,9 @@ System.out.println("matrix[1]: " + Arrays.toString(matrix[1]));
 System.out.println("matrix[2]: " + Arrays.toString(matrix[2]));
 ```
 
-
-
 ## 조건문
 
 ### 조건문이란
-
-
 
 ### if문
 
@@ -433,8 +379,6 @@ if (condition1) {
     // 위 모든 조건이 거짓이라면 실행
 }
 ```
-
-
 
 ### switch문
 
@@ -468,15 +412,9 @@ switch (score) {
 inputNum.close();	// inputNum 자원 회수
 ```
 
-
-
-
-
 ## 반복문
 
 > 프로그램 진행을 특정 조건에 따라 반복적으로 진행
-
-
 
 ### for문
 
@@ -485,8 +423,6 @@ for (int i = 0; i < 10; i++) {
     System.out.println(i);
 }
 ```
-
-
 
 ### while문
 
@@ -498,8 +434,6 @@ while (i < 10) {
 }
 ```
 
-
-
 ### do ~ while문
 
 > 조건과 상관없이 최초 한 번 무조건 `{ ... }` 안의 코드를 실행
@@ -509,4 +443,3 @@ do {
     System.out.println("무조건 한 번은 실행")
 } while (false);
 ```
-

@@ -1,14 +1,10 @@
 # Java 객체
 
-
-
 ## 객체 지향 프로그래밍이란
 
 ### 객체
 
 세상에 존재하는 모든 것을 뜻하며, 프로그래밍에서 **속성**과 **기능**을 가지는 프로그램 단위
-
-
 
 ### 클래스
 
@@ -18,8 +14,6 @@
 
 - 속성(멤버 변수)
 - 기능(메서드)
-
-
 
 ## 클래스 제작과 객체 생성
 
@@ -32,7 +26,7 @@ public class TeslaCar {
     public String color;
     public String model;
     public int price;
-    
+
     // 생성자
     public TeslaCar() {
         /*
@@ -43,20 +37,18 @@ public class TeslaCar {
         */
         System.out.println("Tesla model constructor");
     }
-    
+
     // 메서드(기능)
     public void run() {
         // 호출했을 때 수행해야 할 기능 구현
         System.out.println("--run--");
     }
-    
+
     public void stop() {
         System.out.println("--stop--");
     }
 }
 ```
-
-
 
 ### 클래스로부터 `new`를 이용해서 객체를 생성
 
@@ -69,8 +61,6 @@ myRoadster.price = 106000;
 myRoadster.run();
 myRoadster.stop();
 ```
-
-
 
 ## 메서드
 
@@ -89,8 +79,6 @@ public void getInfo() {
 
 - 메서드 이름은 동사형, camelCase로 작성
 
-
-
 ### 매개변수
 
 ```java
@@ -102,8 +90,6 @@ public void setInfo(int i, boolean b, double d, char c, String s) {
     System.out.println('s = ', s);
 }
 ```
-
-
 
 ### 중복 메서드
 
@@ -123,8 +109,6 @@ public void getInfo(String s1, String s2) {
 }
 ```
 
-
-
 ### 접근자
 
 > 메서드를 호출할 때 접근자에 따라서 호출이 불가할 수 있다
@@ -142,15 +126,11 @@ private void getInfo() {
 }
 ```
 
-
-
 ## 객체와 메모리
 
 ### 메모리에서 객체 생성(동적 생성)
 
 > 객체는 메모리에서 동적으로 생성되며, 객체가 더 이상 필요없게 되면 GC(Garbage Collector)에 의해서 제거
-
-
 
 ### 레퍼런스
 
@@ -172,8 +152,6 @@ obj2 ----> lec14Pjt001.ObjectClass@5aaa6d82
 obj3 ----> lec14Pjt001.ObjectClass@73a28541
 */
 ```
-
-
 
 ### 자료형이 같아도 다른 객체
 
@@ -203,8 +181,6 @@ obj1 != obj3
 */
 ```
 
-
-
 ### `null`과 `NullPointException`
 
 > 레퍼런스에 `null`이 저장되면 객체와 연결이 끊기며, 더 이상 객체를 이용할 수 없다.
@@ -215,28 +191,24 @@ System.out.println("obj1 ----> " + obj1);
 obj1.getInfo();
 
 // obj1 ----> lec14Pjt001.ObjectClass@7d6f77cc
-// -- getInfo method -- 
+// -- getInfo method --
 
 
 obj1 = null;
 System.out.println("obj1 ----> " + obj1);
 obj1.getInfo();
 
-// Exception in thread "main" ObjectClass 
+// Exception in thread "main" ObjectClass
 // constructorjava.lang.NullPointerException
 //	at lec14Pjt001.MainClass.main(MainClass.java:44)
 // obj1 ----> null
 ```
-
-
 
 ## 생성자와 소멸자 그리고 `this`
 
 ### 디폴트 생성자
 
 > 객체가 생성될 때 가장 먼저 호출되는 생성자로, 개발자가 명시하지 않아도 컴파일 시점에 자동 생성된다.
-
-
 
 ### 사용자 정의 생성자
 
@@ -264,8 +236,6 @@ public ObjectEx(String s, int i[]) {
 
 }
 ```
-
-
 
 ### 소멸자
 
@@ -297,16 +267,14 @@ System.gc();	// 첫 번째 생성된 객체를 소멸
 - `System.gc();`를 사용한다고 해서 GC가 바로 작동하는 것이 아니라, 가급적 빨리 작동하도록 요청하는 것이다.
 - Java는 기본적으로 메모리를 개발자가 직접 관리하지 않으므로 일반적으로 `System.gc();`를 사용하는 경우는 드물다.
 
-
-
 ### `this` 키워드
 
 ```java
 public class ObjectEx {
-	
+
 	int x;	// 전역 x
 	int y;	// 전역 y
-    
+
     public ObjectEx(int x, int y) {
         // this를 사용해서 전역변수에 매개변수 들어온 값을 대입
         this.x = x;
@@ -314,8 +282,6 @@ public class ObjectEx {
     }
 }
 ```
-
-
 
 ## 패키지와 `static`
 
@@ -347,8 +313,6 @@ public class ObjectEx {
     └─Util.java
 ```
 
-
-
 ### `import`
 
 > 다른 패키지에 있는 클래스를 사용하기 위해서는 `import` 키워드를 이용한다.
@@ -365,8 +329,6 @@ public class Payment {
     Parttime parttime = new Parttime();
 }
 ```
-
-
 
 ### `static`
 
@@ -406,8 +368,6 @@ Created 500 instances
 */
 ```
 
-
-
 ## 데이터 은닉
 
 > 객체가 가지고 있는 데이터를 외부로부터 변질되지 않게 보호하는 방법
@@ -421,14 +381,12 @@ public class InstanceCounter {
 
 	private int sturdyAttr = 0;
     public int vulnerableAttr = 0;
-    
+
     public static void main(String[] arguments) {
-        
+
     }
 }
 ```
-
-
 
 ### `setter`, `getter`
 
@@ -439,14 +397,13 @@ public class InstanceCounter {
 
 	private int sturdyAttr = 0;
     public int vulnerableAttr = 0;
-    
+
     protected int getSturdyAttr() {
         return sturdyAttr;
    }
-    
+
     protected void setSturdyAttr(int arg) {
         this.sturdyAttr = arg;
     }
 }
 ```
-
