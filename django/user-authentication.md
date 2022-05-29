@@ -2,19 +2,13 @@
 
 [Django Documentation](https://docs.djangoproject.com/en/3.0/topics/auth/default/)
 
-
-
 ## `auth.User` vs. `setting.AUTH_USER_MODEL`
-
-
 
 ## `accounts` 앱 생성
 
 ```bash
 $ python manage.py startapp accounts
 ```
-
-
 
 ## 회원가입: `signup`
 
@@ -59,19 +53,14 @@ def signup(request):
 
 ```html
 <!-- accounts/templates/accounts/signup.html -->
-{% extends 'base.html' %}
-
-{% block body %}
+{% extends 'base.html' %} {% block body %}
 <form action="" method="POST">
-  {% csrf_token %}
-  {% form %}
+  {% csrf_token %} {% form %}
   <button class="btn btn-primary">Join!</button>
   <a href="{% url 'accounts:login' %}">Log in</a>
 </form>
 {% endblock %}
 ```
-
-
 
 ## 로그인: `login`
 
@@ -107,19 +96,14 @@ def login(request):
 
 ```html
 <!-- accounts/templates/accounts/login.html -->
-{% extends 'base.html' %}
-
-{% block body %}
+{% extends 'base.html' %} {% block body %}
 <form action="" method="POST">
-  {% csrf_token %}
-  {% form %}
+  {% csrf_token %} {% form %}
   <button class="btn btn-primary">Log in</button>
   <a href="{% url 'accounts:signup' %}">Sign up</a>
 </form>
 {% endblock %}
 ```
-
-
 
 ## 마이페이지: `detail`
 
@@ -141,12 +125,8 @@ def detail(request, pk):
 
 ```html
 <!-- accounts/templates/accounts/detail.html -->
-{% extends 'base.html' %}
-
-{% block body %}
-{{ user.username }}'s Info
-
-{% if request.user == user %}
+{% extends 'base.html' %} {% block body %} {{ user.username }}'s Info {% if
+request.user == user %}
 <!-- GET -->
 <a href="{% url 'accounts:delete' %}">Delete Account</a>
 <!-- POST -->
@@ -154,11 +134,8 @@ def detail(request, pk):
   {% csrf_token %}
   <button class="btn btn-danger">Delete my Account</button>
 </form>
-{% endif %}
-{% endblock %}
+{% endif %} {% endblock %}
 ```
-
-
 
 ## 회원정보 수정: `update`
 
@@ -200,12 +177,8 @@ def update(request):
 
 ```html
 <!-- accounts/templates/accounts/detail.html -->
-{% extends 'base.html' %}
-
-{% block body %}
-{{ user.username }}'s Info
-
-{% if request.user == user %}
+{% extends 'base.html' %} {% block body %} {{ user.username }}'s Info {% if
+request.user == user %}
 <!-- GET -->
 <a href="{% url 'accounts:update' %}">Update info</a>
 <!-- POST -->
@@ -213,11 +186,8 @@ def update(request):
   {% csrf_token %}
   <button class="btn btn-danger">Delete account</button>
 </form>
-{% endif %}
-{% endblock %}
+{% endif %} {% endblock %}
 ```
-
-
 
 ## 로그아웃: `logout`
 
@@ -245,33 +215,34 @@ def logout(request):
 <!-- templates/base.html -->
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Workshop</title>
-</head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{% url 'posts:index' %}">Navbar</a>
-    <div class="navbar-nav">
-    {% if request.user.is_authenticated %}
-    <!-- {% if user.is_authenticated %} -->
-    <!-- user는 context에서 넘겨준 값, request.user는 현재 장고 서버에서 보내준 응답 -->
-      <a class="nav-item nav-link" href="#">{{ request.user.username }}</a>
-      <a class="nav-item nav-link" href="{% url 'accounts:logout' %}">Logout</a>
-    {% else %}
-      <a class="nav-item nav-link" href="{% url 'accounts:login' %}">Login</a>
-      <a class="nav-item nav-link" href="{% url 'accounts:signup' %}">Sign up</a>
-    {% endif %}
-    </div>
-  </nav>
-  {% block body %}
-  {% endblock %}
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workshop</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'posts:index' %}">Navbar</a>
+      <div class="navbar-nav">
+        {% if request.user.is_authenticated %}
+        <!-- {% if user.is_authenticated %} -->
+        <!-- user는 context에서 넘겨준 값, request.user는 현재 장고 서버에서 보내준 응답 -->
+        <a class="nav-item nav-link" href="#">{{ request.user.username }}</a>
+        <a class="nav-item nav-link" href="{% url 'accounts:logout' %}"
+          >Logout</a
+        >
+        {% else %}
+        <a class="nav-item nav-link" href="{% url 'accounts:login' %}">Login</a>
+        <a class="nav-item nav-link" href="{% url 'accounts:signup' %}"
+          >Sign up</a
+        >
+        {% endif %}
+      </div>
+    </nav>
+    {% block body %} {% endblock %}
+  </body>
 </html>
 ```
-
-
 
 ## 회원탈퇴: `delete`
 
@@ -297,16 +268,12 @@ def delete(request):
     return redirect('posts:index')
 ```
 
-
-
 ## Sign UP vs Sign IN
 
-| 구분 | Sign Up | Sign In |
-| ---- | ------- | ------- |
-| forms | UserCreationForm | AuthenticationForm |
-| 로직 | User Object 생성 | Django Session 저장 및 변경 + 사용자에게 쿠키 전달 |
-
-
+| 구분  | Sign Up          | Sign In                                            |
+| ----- | ---------------- | -------------------------------------------------- |
+| forms | UserCreationForm | AuthenticationForm                                 |
+| 로직  | User Object 생성 | Django Session 저장 및 변경 + 사용자에게 쿠키 전달 |
 
 ## login_required
 
@@ -320,55 +287,53 @@ def func(request):
 ```
 
 - 로그인되어있지 않을 경우 로그인 페이지로 이동
-    - 로그인 URL Default는 `LOGIN_URL='/accounts/login/'`이며 `settings.py`에서 변경이 가능하다.
+  - 로그인 URL Default는 `LOGIN_URL='/accounts/login/'`이며 `settings.py`에서 변경이 가능하다.
 - `next` 파라미터를 활용 가능
-
-
 
 ## 상속관계
 
 > [Django GitHub](https://github.com/django/django/blob/master/django/contrib/auth/models.py) 참고
 
 - `models.Model`
-    - `AbstractBaseUser`: password
-        - `AbstractUser`: username
-            - `User`
+
+  - `AbstractBaseUser`: password
+    - `AbstractUser`: username
+      - `User`
 
 - `django/contrib/auth/base_user.py`
-    ```python
-    class AbstractBaseUser(models.Model):
-        password = models.CharField(_('password'), max_length=128)
-        last_login = models.DateTimeField(_('last login'), blank=True, null=True)
 
-        is_active = True
+  ```python
+  class AbstractBaseUser(models.Model):
+      password = models.CharField(_('password'), max_length=128)
+      last_login = models.DateTimeField(_('last login'), blank=True, null=True)
 
-        ...
-    ```
+      is_active = True
+
+      ...
+  ```
 
 - `django/contrib/auth/models.py`
 
-    ```python
-    class AbstractUser(AbstractBaseUser, PermissionsMixin):
-        username_validator = UnicodeUsernameValidator()
+  ```python
+  class AbstractUser(AbstractBaseUser, PermissionsMixin):
+      username_validator = UnicodeUsernameValidator()
 
-        username = models.CharField(
-            _('username'),
-            max_length=150,
-            unique=True,
-            help_text=_('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
-            validators=[username_validator],
-            error_messages={
-                'unique': _("A user with that username already exists."),
-            },
-        )
-        ...
+      username = models.CharField(
+          _('username'),
+          max_length=150,
+          unique=True,
+          help_text=_('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
+          validators=[username_validator],
+          error_messages={
+              'unique': _("A user with that username already exists."),
+          },
+      )
+      ...
 
-    class User(AbstractUser):
-        class Meta(AbstractUser.Meta):
-            swappable = 'AUTH_USER_MODEL'
-    ```
-
-
+  class User(AbstractUser):
+      class Meta(AbstractUser.Meta):
+          swappable = 'AUTH_USER_MODEL'
+  ```
 
 ## signup: Create
 
@@ -395,28 +360,24 @@ def signup(request):
 ### 회원가입
 
 - 비밀번호 제공 및 확인
-    - `UserCreationForm` 추가 column 정의
-    - 저장 로직에서 일치하는지 확인
+  - `UserCreationForm` 추가 column 정의
+  - 저장 로직에서 일치하는지 확인
 - 비밀번호 암호화 저장
-    - `User.objects.create_user(username, email=None, password=None)`
-    - `user.set_password(password)`
-
-
+  - `User.objects.create_user(username, email=None, password=None)`
+  - `user.set_password(password)`
 
 ## 비밀번호
 
 ### 암호화
 
 - 해시함수(SHA, Secure Hash Algorithm) 활용
-    - PBKDF2(Password-Based Key Derivation Function)
-        - 해시 함수의 컨테이너
-        - 솔트를 적용한 후 해시 함수의 반복 횟수를 임의로 선택
-    - SHA256
+  - PBKDF2(Password-Based Key Derivation Function)
+    - 해시 함수의 컨테이너
+    - 솔트를 적용한 후 해시 함수의 반복 횟수를 임의로 선택
+  - SHA256
 - 역산이 불가능(단방향)
 
 > [Naver D2의 '안전한 패스워드 저장'](https://d2.naver.com/helloworld/318732) 참조
-
-
 
 ## Custom User
 

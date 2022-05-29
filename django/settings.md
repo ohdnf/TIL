@@ -1,7 +1,5 @@
 # Django 환경 설정
 
-
-
 ## 개발 환경과 배포 환경 분리하기
 
 > Django 프로젝트를 개발할 때 필요한 모듈(예. `django-debug-toolbar`)이 배포할 때는 필요없는 경우가 있다. 이런 모듈을 분리하여 관리할 수 있는 방법을 알아보자.
@@ -70,4 +68,3 @@ $ python manage.py runserver
 ```shell
 python manage.py runserver --settings=django_project.local_settings
 ```
-

@@ -1,8 +1,6 @@
-# Django admin site
+# Django Admin Site
 
 > Django admin application은 생성한 모델을 바탕으로 레코드들을 직접 CRUD할 수 있는 사이트다. admin 앱을 사용하기 위해선 모델을 *등록*하고 *superuser를 생성*해야 한다.
-
-
 
 ## 모델 등록
 
@@ -27,20 +25,16 @@ class PostAdmin(admin.ModelAdmin):
 admin.site.register(Post, PostAdmin)
 ```
 
-
-
 ## 슈퍼계정 생성
 
 ```bash
 $ python manage.py createsuperuser
 사용자 이름 (leave blank to use 'jp'): admin
 이메일 주소: jupyohong7@gmail.com
-Password: 
-Password (again): 
+Password:
+Password (again):
 Superuser created successfully.
 ```
-
-
 
 ## 로그인 후 사용
 
@@ -49,8 +43,6 @@ Superuser created successfully.
 ```bash
 $ python manage.py runserver
 ```
-
-
 
 > Django Docs
 >

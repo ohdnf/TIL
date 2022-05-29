@@ -6,8 +6,6 @@
 - View 함수는 DB에서 필요한 자료를 찾아 HTML 페이지를 만들어 요청자에게 반환
 - Templates는 views에서 데이터를 HTML 페이지에 렌더링할 때 사용
 
-
-
 ## Defining the resource URLs
 
 일반적으로 사용하는 URL 예시는 다음과 같다.
@@ -33,8 +31,6 @@ urlpatterns = [
 ]
 ```
 
-
-
 ## View functions
 
 View는 HTTP 요청을 처리하는 함수로, DB에서 필요한 데이터를 가져와 HTML 템플릿 파일에 렌더링하거나 요청된 자료구조로 변환해 반환해준다.
@@ -55,15 +51,11 @@ def index(request):
     return render(request, 'index.html', context)
 ```
 
-
-
 ## Templates
 
 > HTML 페이지의 레이아웃, 구조를 정의하는 파일
 
 Django는 기본적으로 앱 안의 `templates`라는 이름의 폴더에서 렌더링할 템플릿을 찾는다. 찾지 못한다면 `TemplateDoesNotExist at /posts/`와 같은 에러를 발생시킨다.
-
-
 
 ### Extending templates
 
@@ -75,28 +67,30 @@ Django는 기본적으로 앱 안의 `templates`라는 이름의 폴더에서 �
 <!-- base.html -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  {% block title %}<title>Local Library</title>{% endblock %}
-</head>
-<body>
-  {% block sidebar %}<!-- insert default navigation text for every page -->{% endblock %}
-  {% block content %}<!-- default content text (typically empty) -->{% endblock %}
-</body>
+  <head>
+    {% block title %}
+    <title>Local Library</title>
+    {% endblock %}
+  </head>
+  <body>
+    {% block sidebar %}<!-- insert default navigation text for every page -->{%
+    endblock %} {% block content %}<!-- default content text (typically empty) -->{%
+    endblock %}
+  </body>
 </html>
 ```
 
 #### `index.html`
 
 ```html
-{% extends "base.html" %}
-
-{% block content %}
-  <h1>Local Library Home</h1>
-  <p>Welcome to LocalLibrary, a website developed by <em>Mozilla Developer Network</em>!</p>
+{% extends "base.html" %} {% block content %}
+<h1>Local Library Home</h1>
+<p>
+  Welcome to LocalLibrary, a website developed by
+  <em>Mozilla Developer Network</em>!
+</p>
 {% endblock %}
 ```
-
-
 
 ### next 파라미터 받은 값 POST 요청으로 보내기
 

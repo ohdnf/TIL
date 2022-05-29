@@ -6,20 +6,18 @@
 >
 > [Django's cache framework 공식 문서](https://docs.djangoproject.com/en/3.1/topics/cache/)
 
-
-
 ## Redis란 무엇인가?
 
-[Redis](https://redis.io/)는 
+[Redis](https://redis.io/)는
 
 - **Re**mote **Di**ctionary **S**erver라고도 알려져 있는
 - **key-value** 구조로,
--  캐시 엔진, 메시지 브로커로 쓰일 수 있는
--  **in-memory** DB이며
--  모든 데이터를 RAM에서 처리하기 때문에
--  데이터를 아주 빠르게 전달할 수 있습니다. 
--  또한 NoSQL DB이고,
--  `strings`, `hashes`, `lists`, `sets`, `sorted sets`와 같은 *range queries*(1차원 쿼리)나 `bitmaps`, `hyperloglogs`, `geospatial indexes`와 같은 *radius queries*(2차원 쿼리)를 지원하며
+- 캐시 엔진, 메시지 브로커로 쓰일 수 있는
+- **in-memory** DB이며
+- 모든 데이터를 RAM에서 처리하기 때문에
+- 데이터를 아주 빠르게 전달할 수 있습니다.
+- 또한 NoSQL DB이고,
+- `strings`, `hashes`, `lists`, `sets`, `sorted sets`와 같은 _range queries_(1차원 쿼리)나 `bitmaps`, `hyperloglogs`, `geospatial indexes`와 같은 _radius queries_(2차원 쿼리)를 지원하며
 
 ## 시작하기
 
@@ -62,8 +60,6 @@
 >    $ sudo apt-get upgrade
 >    ```
 
-
-
 ## Redis 설치 및 테스트
 
 ```shell
@@ -74,13 +70,11 @@ $ redis-cli ping
 PONG
 ```
 
-Redis 서버 
+Redis 서버
 
 ```shell
 $ sudo service redis-server restart
 ```
-
-
 
 ## Django 설정
 
@@ -94,9 +88,7 @@ $ sudo service redis-server restart
 $ python -m pip install django-redis
 ```
 
-
-
-### `settings.py` 
+### `settings.py`
 
 다음 내용을 추가합니다.
 
@@ -126,8 +118,6 @@ CACHE_TTL = 60 * 15
   - `KEY_PREFIX`
 - `INTERNAL_IPS`
 - `CACHE_TTL` => Cache time to live. 캐시 데이터가 15분 동안 유지되도록 기본값 설정
-
-
 
 ### `views.py`
 
@@ -160,13 +150,6 @@ def rank_retrieve(request):
 
 ```
 
-
-
 ## 캐시 데이터 확인하기
 
-
-
-
-
 ## 캐시 데이터 갱신하기
-

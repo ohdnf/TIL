@@ -4,8 +4,6 @@ Serializer는 queryset이나 모델 인스턴스와 같은 복잡한 데이터�
 
 Django REST Framework의 serializer는 Django의 `Form`이나 `ModelForm`과 매우 유사합니다. `Serializer`, `ModelSerializer` 클래스를 통해 모델 인스턴스나 쿼리셋 등을 변환해 클라이언트 요청에 대한 응답으로 내보낼 결과들을 손쉽게 제어할 수 있습니다.
 
-
-
 ## Reference
 
 https://www.django-rest-framework.org/api-guide/serializers/

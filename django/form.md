@@ -1,26 +1,22 @@
 # Django Form
 
-
-
 ## 기본 로직
 
 1. Form 제공: `GET {URL}`
 
-    1. `context`에 `form` 넘겨준다.
+   1. `context`에 `form` 넘겨준다.
 
 2. 양식에 맞춰 데이터 회수 => 처리: `POST {URL}`
 
-    1. 양식_데이터(`request.POST`)를 ModelForm에 넘긴다
-        ```python
-        form = ArticleForm(request.POST)
-        ```
-    2. 검증
-        ```python
-        if form.is_valid():
-            form.save()
-        ```
-
-
+   1. 양식\_데이터(`request.POST`)를 ModelForm에 넘긴다
+      ```python
+      form = ArticleForm(request.POST)
+      ```
+   2. 검증
+      ```python
+      if form.is_valid():
+          form.save()
+      ```
 
 ## User의 input 값을 받아 처리하기
 
@@ -31,44 +27,41 @@
 > `pong.html` 입력을 받아 출력하는 페이지
 
 1. 사용자 정보(`form`)
-    - `boards/views.py`
-      
-        ```python
-        def ping(request):
-        	return render(request, 'boards/ping.html')
-        ```
-    - `templates/boards/ping.html`
-        
-        ```html
-        <form action="/boards/ping/">
-            <input type="text" name="msg">
-            <input type="submit" value="입력">
-        </form>
-    ```
-    
+   - `boards/views.py`
+
+     ```python
+     def ping(request):
+     	return render(request, 'boards/ping.html')
+     ```
+
+   - `templates/boards/ping.html`
+     ```html
+     <form action="/boards/ping/">
+       <input type="text" name="msg" />
+       <input type="submit" value="입력" />
+     </form>
+     ```
+   ```
+
+   ```
 2. 정보 처리
-    - `boards/views.py`
-        ```python
-        def pong(request):
-            msg = request.GET.get('msg')
-            return render(request, 'boards/pong.html', {'msg': msg})
-        ```
-        
-    - `templates/boards/pong.html`
-        ```html
-        <p>출력: {{ msg }}</p>
-        ```
-
-
+   - `boards/views.py`
+     ```python
+     def pong(request):
+         msg = request.GET.get('msg')
+         return render(request, 'boards/pong.html', {'msg': msg})
+     ```
+   - `templates/boards/pong.html`
+     ```html
+     <p>출력: {{ msg }}</p>
+     ```
 
 ## `/`
 
 `action` 속성 시작 부분에...
 
--  `/` 기호를 넣지 않으면 현재 페이지를 기준으로 요청을 보내고,
--  `/` 기호를 넣게 되면 서버주소를 기준으로 요청을 보내게 됩니다.
-
-
+- `/` 기호를 넣지 않으면 현재 페이지를 기준으로 요청을 보내고,
+- `/` 기호를 넣게 되면 서버주소를 기준으로 요청을 보내게 됩니다.
 
 ## ModelForm
 
@@ -86,8 +79,6 @@ class PostForm(forms.ModelForm):
         # 어떠한 필드를 담을 지
         fields = '__all__'
 ```
-
-
 
 ## User: 회원 가입 및 로그인 처리
 
@@ -170,7 +161,7 @@ class UserCreationForm(forms.ModelForm):
 - 따라서 문법도 달라지게 된다.
 
 - `request`가 중요하다.
-    `AuthenticationForm(request, request.POST)`
+  `AuthenticationForm(request, request.POST)`
 
 ```python
 # django/contrib/auth/forms.py

@@ -11,11 +11,11 @@ path('add/<int:a>/<int:b>/', views.add),
 ```
 
 - Path converters
-    - `str`: 띄어쓰기 없는 string
-    - `int`: 0 또는 양의 정수
-    - `slug`: `-`(hyphen) 또는 `_`(underscore)로 연결된 string
-    - `uuid`: `-`(dash)와 소문자로 구성된 UUID
-    - `path`: `/`을 포함한 기본 경로
+  - `str`: 띄어쓰기 없는 string
+  - `int`: 0 또는 양의 정수
+  - `slug`: `-`(hyphen) 또는 `_`(underscore)로 연결된 string
+  - `uuid`: `-`(dash)와 소문자로 구성된 UUID
+  - `path`: `/`을 포함한 기본 경로
 
 ## 2. `views.py`
 
@@ -41,14 +41,10 @@ def add(request, a, b):
 
 ```html
 <!-- pages/templates/hi.html -->
-<p>
-Hello, {{ name }}
-</p>
+<p>Hello, {{ name }}</p>
 ```
 
 ```html
 <!-- pages/templates/add.html -->
-<p>
-{{a}} + {{b}} = {{result}}
-</p>
+<p>{{a}} + {{b}} = {{result}}</p>
 ```

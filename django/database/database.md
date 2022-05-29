@@ -2,14 +2,13 @@
 
 ## Schema
 
-
 ## Model
 
-| 구분 | 의미 |
-| --- | ---- |
-| Model | MTV 패턴에서 데이터를 관리 |
-| Migration | Model로 정의된 클래스를 데이터베이스 스키마에 반영 |
-| ORM(Query methods, QuerySet API) | 데이터베이스를 조작 |
+| 구분                             | 의미                                               |
+| -------------------------------- | -------------------------------------------------- |
+| Model                            | MTV 패턴에서 데이터를 관리                         |
+| Migration                        | Model로 정의된 클래스를 데이터베이스 스키마에 반영 |
+| ORM(Query methods, QuerySet API) | 데이터베이스를 조작                                |
 
 ### Model 생성
 
@@ -62,7 +61,9 @@ sqlite> .headers on
 ```
 
 ### DB 초기화하기
+
 > 주의: 모든 데이터가 사라짐!
+
 1. `migrations/` 내 `__init__.py` 파일 제외(삭제하면 패키지로 인식하지 못 함)하고 이력(`0001_initial.py` 등) 삭제
 2. `db.sqlite3` 삭제
 3. `$ python manage.py makemigrations`
@@ -91,19 +92,19 @@ migrate할 때 실제 대응되는 SQL문을 보여준다.
 - `QuerySet` 반환
 
 - AND
-    ```python
-    Posts.object.filter(condition_1, condition_2)
-    ```
+
+  ```python
+  Posts.object.filter(condition_1, condition_2)
+  ```
 
 - OR
-    ```python
-    Posts.object.filter(Q(condition_1) | Q(condition_2))
-    ```
+  ```python
+  Posts.object.filter(Q(condition_1) | Q(condition_2))
+  ```
 
 ### 대소관계
 
 ### 표현식 사용: Aggregation
-
 
 ### python shell_plus 에서 sql문 바로 보기
 

@@ -14,21 +14,19 @@ class ArticleListView(ListView):
 
 class ArticleDetailView(ListView):
     model = Article
-    
+
     def get(request):
         pass
 
     def post():
         pass
-    
+
     def put():
         pass
 
     def delete():
         pass
 ```
-
-
 
 ## Reference
 

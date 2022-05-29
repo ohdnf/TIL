@@ -33,13 +33,13 @@ article.reporter # related_name 옵션으로 직접 설정
 class Reporter(models.Model):
     ...
     article = models.ForeignKey(
-        Article, on_delete=models.CASCADE, 
+        Article, on_delete=models.CASCADE,
         related_name='reporter')
 
 ```
 
 - 정의: 모델 단수형(ex. `.user`)
-- 역참조: 모델_set(ex. `.article_set`)
+- 역참조: 모델\_set(ex. `.article_set`)
 
 ## `models.ForeignKey({모델명}, _on_delete_)`
 
@@ -47,7 +47,7 @@ class Reporter(models.Model):
 # models.py
 class User(models.Model):
     username = models.CharField(max_length=10)
-    
+
 class Article(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
@@ -82,4 +82,3 @@ c5 = Comment.objects.create(content='3글1댓', article=a3, user=u2)
 c6 = Comment.objects.create(content='3글2댓', article=a3, user=u1)
 
 ```
-

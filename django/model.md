@@ -1,7 +1,5 @@
 # Using models
 
-
-
 ## 모델 정의
 
 > 모델 정의는 `models.py`에, `django.db.models.Model`을 상속하여 정의한다.
@@ -19,20 +17,18 @@ class MyModelName(models.Model):
     ...
 
     # Metadata
-    class Meta: 
+    class Meta:
         ordering = ['-my_field_name']
 
     # Methods
     def get_absolute_url(self):
         """Returns the url to access a particular instance of MyModelName."""
         return reverse('model-detail-view', args=[str(self.id)])
-    
+
     def __str__(self):
         """String for representing the MyModelName object (in Admin site etc.)."""
         return self.my_field_name
 ```
-
-
 
 ### Fields
 
@@ -60,15 +56,11 @@ DB의 Column 영역
 - `ForeignKey`
 - `ManyToManyField`
 
-
-
 ### Metadata
 
 - `ordering`
 - `verbose_name`
 - `verbose_name_plural`
-
-
 
 ### Methods
 
@@ -89,11 +81,7 @@ DB의 Column 영역
       return reverse('model-detail-view', args=[str(self.id)])
   ```
 
-
-
 ## 모델 관리
-
-
 
 ### 모델 생성과 변경
 
@@ -111,15 +99,13 @@ record.save()
 
 ```python
 # Access model field values using Python attributes.
-print(record.id) # should return 1 for the first record. 
+print(record.id) # should return 1 for the first record.
 print(record.my_field_name) # should print 'Instance #1'
 
 # Change record by modifying the fields, then calling save().
 record.my_field_name = "New Instance Name"
 record.save()
 ```
-
-
 
 ### 레코드 검색
 

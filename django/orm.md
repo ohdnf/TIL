@@ -1,20 +1,12 @@
 # Django ORM
 
-
-
 ## Making queries
 
 https://docs.djangoproject.com/en/3.1/topics/db/queries/
 
-
-
 ### Creating objects
 
-
-
 ### Saving changes to objects
-
-
 
 ### Retrieving objects
 
@@ -45,4 +37,3 @@ https://docs.djangoproject.com/en/3.1/topics/db/queries/
 - `get()`은 객체 하나만 반환해줌
 
 쿼리를 만족하는 객체가 존재하지 않는다면 `get()`은 `DoesNotExist` exception을 발생시킵니다. 쿼리를 만족하는 객체가 여러 개라면, `MultipleObjectsReturned` Exception을 발생시킵니다.
-

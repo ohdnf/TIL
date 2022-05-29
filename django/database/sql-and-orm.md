@@ -13,38 +13,41 @@
 > Gitlab에서 프로젝트를 다운받으면 아래의 내용이 이미 반영되어 있습니다.
 
 - django app
-    - `django_extensions` 설치
-    - `users` app 생성
-    - csv 파일에 맞춰 `models.py` 작성 및 migrate
 
-            $ python manage.py sqlmigrate users 0001
+  - `django_extensions` 설치
+  - `users` app 생성
+  - csv 파일에 맞춰 `models.py` 작성 및 migrate
+
+          $ python manage.py sqlmigrate users 0001
 
 - `db.sqlite3` 활용 및 데이터 반영
-    - `sqlite3` 실행
 
-            $ ls
-            db.sqlite3 manage.py ...
-            $ sqlite3 db.sqlite3
+  - `sqlite3` 실행
 
-    - csv 파일 data 로드
+          $ ls
+          db.sqlite3 manage.py ...
+          $ sqlite3 db.sqlite3
 
-            sqlite > .tables
-            auth_group                  django_admin_log
-            auth_group_permissions      django_content_type
-            auth_permission             django_migrations
-            auth_user                   django_session
-            auth_user_groups            auth_user_user_permissions
-            users_user
-            sqlite > .mode csv
-            sqlite > .import users.csv users_user
-            sqlite > SELECT COUNT(*) FROM users_user;
-            1000
+  - csv 파일 data 로드
+
+          sqlite > .tables
+          auth_group                  django_admin_log
+          auth_group_permissions      django_content_type
+          auth_permission             django_migrations
+          auth_user                   django_session
+          auth_user_groups            auth_user_user_permissions
+          users_user
+          sqlite > .mode csv
+          sqlite > .import users.csv users_user
+          sqlite > SELECT COUNT(*) FROM users_user;
+          1000
 
 - 확인
-    - sqlite3에서 스키마 확인
 
-            sqlite > .schema users_user
-            CREATE TABLE IF NOT EXISTS "users_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "first_name" varchar(10) NOT NULL, "last_name" varchar(10) NOT NULL, "age" integer NOT NULL, "country" varchar(10) NOT NULL, "phone" varchar(15) NOT NULL, "balance" integer NOT NULL);
+  - sqlite3에서 스키마 확인
+
+          sqlite > .schema users_user
+          CREATE TABLE IF NOT EXISTS "users_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "first_name" varchar(10) NOT NULL, "last_name" varchar(10) NOT NULL, "age" integer NOT NULL, "country" varchar(10) NOT NULL, "phone" varchar(15) NOT NULL, "balance" integer NOT NULL);
 
 ## **문제**
 
@@ -54,27 +57,28 @@
 
 - django
 
-    ```python
-    # django
-    class User(models.Model):
-        first_name = models.CharField(max_length=10)
-        last_name = models.CharField(max_length=10)
-        age = models.IntegerField()
-        country = models.CharField(max_length=10)
-        phone = models.CharField(max_length=15)
-        balance = models.IntegerField()
-    ```
+  ```python
+  # django
+  class User(models.Model):
+      first_name = models.CharField(max_length=10)
+      last_name = models.CharField(max_length=10)
+      age = models.IntegerField()
+      country = models.CharField(max_length=10)
+      phone = models.CharField(max_length=15)
+      balance = models.IntegerField()
+  ```
 
 - SQL
-    - sql.sqlite3에 동일하게 테이블 생성
 
-        ```sql
-        --sql
-        CREATE TABLE users (
-           id INTEGER PRIMARY KEY AUTOINCREMENT,
-           
-        )
-        ```
+  - sql.sqlite3에 동일하게 테이블 생성
+
+    ```sql
+    --sql
+    CREATE TABLE users (
+       id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    )
+    ```
 
 ### 기본 CRUD 로직
 
@@ -103,7 +107,7 @@
    INSERT INTO "users_user" ("first_name", "last_name", "age", "country", "phone", "balance") VALUES ('', '김', 18, '서울특별시', '010-9876-5432', 10000000);
    ```
 
-   * 하나의 레코드를 빼고 작성 후 `NOT NULL constraint` 오류를 orm과 sql에서 모두 확인 해보세요.
+   - 하나의 레코드를 빼고 작성 후 `NOT NULL constraint` 오류를 orm과 sql에서 모두 확인 해보세요.
 
    ```python
    new = User.objects.create(first_name='Bruce', last_name='Springsteen')
@@ -245,8 +249,6 @@
    SELECT "users_user"."id", "users_user"."first_name", "users_user"."last_name", "users_user"."age", "users_user"."country", "users_user"."phone", "users_user"."balance" FROM "users_user" WHERE ("users_user"."country" = '강원도' AND "users_user"."last_name" = '황');
    ```
 
-
-
 ### 정렬 및 LIMIT, OFFSET
 
 1. 나이가 많은 사람 10명
@@ -285,8 +287,6 @@
    SELECT "users_user"."id", "users_user"."first_name", "users_user"."last_name", "users_user"."age", "users_user"."country", "users_user"."phone", "users_user"."balance" FROM "users_user" ORDER BY "users_user"."last_name" DESC, "users_user"."first_name" DESC  LIMIT 1 OFFSET 4;
    ```
 
-
-
 ### 표현식
 
 > 표현식을 위해서는 [`aggregate`](https://docs.djangoproject.com/en/2.2/topics/db/aggregation/)를 알아야한다.
@@ -320,7 +320,7 @@
    ```python
    # orm
    User.objects.all().aggregate(Max('balance'))
-   
+
    # User.objects.order_by('-balance')[0].balance
    ```
 
@@ -345,8 +345,6 @@
    SELECT SUM("users_user"."balance") AS "balance__sum" FROM "users_user";
    ```
 
-
-
 ### Group by
 
 > [`annotate`](https://docs.djangoproject.com/en/3.0/ref/models/querysets/#annotate)는 개별 item에 추가 필드를 구성한다.
@@ -363,4 +361,3 @@
    -- sql
    SELECT "users_user"."country", COUNT("users_user"."country") AS "country__count" FROM "users_user" GROUP BY "users_user"."country";
    ```
-

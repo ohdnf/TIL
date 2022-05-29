@@ -21,8 +21,6 @@
 >   - runs on many platforms(Linux, Windows, Mac OS X)
 >   - well-supported by many web hosting providers
 
-
-
 ## What does Django code look like: MVT architecture
 
 > MVT architecture는 Model View Controller architecture와 흡사하다.
@@ -40,12 +38,10 @@
 - `View`
   - request handler functions
 - `Models`
-  - structures of  an application's data
+  - structures of an application's data
   - provides mechanisms to manage and query records in DB
 - `Templates`
   - text file defining the structure or layout of a file with placeholders used to represent actual content
-
-
 
 ### `urls.py`
 
@@ -59,8 +55,6 @@ urlpatterns = [
     re_path(r'^([0-9]+)/$', views.best),
 ]
 ```
-
-
 
 ### `views.py`
 
@@ -78,8 +72,6 @@ def index(request):
     return HttpResponse('Hello from Django!')
 ```
 
-
-
 ### `models.py`
 
 > defining data models
@@ -87,10 +79,10 @@ def index(request):
 ```python
 # filename: models.py
 
-from django.db import models 
+from django.db import models
 
-class Team(models.Model): 
-    team_name = models.CharField(max_length=40) 
+class Team(models.Model):
+    team_name = models.CharField(max_length=40)
 
     TEAM_LEVELS = (
         ('U09', 'Under 09s'),
@@ -101,8 +93,6 @@ class Team(models.Model):
     team_level = models.CharField(max_length=3, choices=TEAM_LEVELS, default='U11')
 ```
 
-
-
 ### `views.py` again
 
 > querying data
@@ -111,15 +101,13 @@ class Team(models.Model):
 ## filename: views.py
 
 from django.shortcuts import render
-from .models import Team 
+from .models import Team
 
 def index(request):
     list_teams = Team.objects.filter(team_level__exact="U09")
     context = {'youngest_teams': list_teams}
     return render(request, '/best/index.html', context)
 ```
-
-
 
 ### HTML `templates`
 
@@ -130,25 +118,23 @@ def index(request):
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Home page</title>
-</head>
-<body>
-  {% if youngest_teams %}
+  <head>
+    <meta charset="utf-8" />
+    <title>Home page</title>
+  </head>
+  <body>
+    {% if youngest_teams %}
     <ul>
       {% for team in youngest_teams %}
-        <li>{{ team.team_name }}</li>
+      <li>{{ team.team_name }}</li>
       {% endfor %}
     </ul>
-  {% else %}
+    {% else %}
     <p>No teams are available.</p>
-  {% endif %}
-</body>
+    {% endif %}
+  </body>
 </html>
 ```
-
-
 
 ### Other things you can do
 
@@ -157,8 +143,6 @@ def index(request):
 - Caching
 - Administration site
 - Serializing data
-
-
 
 ## 패키지 설치
 
@@ -179,37 +163,35 @@ $ source venv/bin/activate
 $ pip install django
 ```
 
-
-
 ## 프로젝트 생성
 
 - `django`는 여러 개의 Application을 가진 하나의 Project로 구성
 
 - Project는 git의 Repository 개념
-    ```bash
-    $ django-admin startproject django_tutorial
-    ```
+
+  ```bash
+  $ django-admin startproject django_tutorial
+  ```
 
 - `django_tutorial` 폴더 안에 동일한 이름의 `django_tutorial` 폴더가 있는 이유
 
-    - 다양한 application을 넣기 위해
-    - 상위 폴더는 단순한 container 역할, 하위 폴더는 Python 모듈이다.
-    
+  - 다양한 application을 넣기 위해
+  - 상위 폴더는 단순한 container 역할, 하위 폴더는 Python 모듈이다.
+
 - 폴더/파일 구조는 다음과 같다
 
-    ```
-    django_tutorial/
-    	manage.py
-    	django_tutorial/
-    		__init__.py
-    		settings.py
-    		urls.py
-    		wsgi.py
-    ```
-
-
+  ```
+  django_tutorial/
+  	manage.py
+  	django_tutorial/
+  		__init__.py
+  		settings.py
+  		urls.py
+  		wsgi.py
+  ```
 
 ## 초기 설정
+
 ### `django_tutorial/settings.py` 설정
 
 ```python
@@ -225,25 +207,19 @@ LANGUAGE_CODE = 'ko-kr'
 TIME_ZONE = 'Asia/Seoul'
 ```
 
-
-
 ### `.gitignore` 파일 추가
 
 ```shell
 $ vi .gitignore
 ```
 
->  내용은 [gitignore.io](https://www.gitignore.io/api/django) 참고
-
-
+> 내용은 [gitignore.io](https://www.gitignore.io/api/django) 참고
 
 ## 앱(Application) 생성
 
 > Projects vs. apps
 >
 > 앱(app)은 웹 어플리케이션을 말한다. 예를 들면, 데이터베이스 웹로그 시스템이나 간단한 게시판이다. 프로젝트(project)는 특정 웹사이트를 위한 설정과 어플리케이션의 집합을 말한다. 한 프로젝트는 다수의 앱을 가질 수 있다. 한 앱은 다수의 프로젝트에 속할 수 있다.
-
-
 
 ### `posts` 앱 생성해보기
 
@@ -266,8 +242,6 @@ django_tutorial/
         __init__.py
         migrations/
 ```
-
-
 
 ### 앱 등록
 
@@ -294,8 +268,6 @@ DATABASES = {
 
 ...
 ```
-
-
 
 ### URL 설정
 
@@ -344,8 +316,6 @@ urlpatterns = [
 ]
 ```
 
-
-
 ### Views(Controller) 설정
 
 `posts/views.py`에서 함수 정의
@@ -358,10 +328,9 @@ from django.shortcuts import render
 def index(request):
     return render(request, 'index.html')
 ```
+
 - `render()` 함수를 정의할 때, 항상 첫 번째 인자는 `request`로 작성
-    - 내부적으로 요청을 처리할 때, 함수 호출 시 요청 정보가 담긴 객체를 넣어준다.
-
-
+  - 내부적으로 요청을 처리할 때, 함수 호출 시 요청 정보가 담긴 객체를 넣어준다.
 
 ### Settings for serving Static Files
 
@@ -375,30 +344,26 @@ from django.conf.urls.static import static
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 ```
 
-
-
 ### Templates(View) 설정
 
 `posts/` 앱 안에 `templates/` 폴더 만들고 렌더링할 html 파일 생성
 
->  반환할 `html` 파일은 항상 `templates/` 폴더 안에 생성한다.
+> 반환할 `html` 파일은 항상 `templates/` 폴더 안에 생성한다.
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>My First Django Project</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Hello, world!</h1>
-</body>
+  </body>
 </html>
 ```
-
-
 
 ## DB migration
 
@@ -412,16 +377,12 @@ $ python manage.py makemigrations
 $ python manage.py migrate
 ```
 
-
-
 ## 서버 실행
 
 - 반드시 서버 실행 시 실행되는 디렉토리를 확인할 것
-  
 - `manage.py`가 있는 경로에서 서버를 실행한다!
-  
-    ```bash
-    $ cd ~/django_tutorial
-    $ python manage.py runserver
-    ```
 
+  ```bash
+  $ cd ~/django_tutorial
+  $ python manage.py runserver
+  ```
