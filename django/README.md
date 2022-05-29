@@ -21,6 +21,7 @@ Python의 Backend Web Framework인 Django를 공부하며 정리한 내용입니
 - [API 문서 자동화](auto-documentation-with-yasg.md)
 - [더미 데이터 생성하기](how-to-create-dummies-in-django.md)
 - [Follow 기능 구현하기](sample-code-for-user-follow-feature.md)
+- [배포하기](deployment.md)
 
 ### 데이터베이스
 
