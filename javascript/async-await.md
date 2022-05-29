@@ -1,7 +1,5 @@
 # async와 await
 
-
-
 ## Promise
 
 > JavaScript 비동기 처리에 사용되는, Object 안에 Object를 포함하는 JavaScript의 특별한 객체다.
@@ -12,17 +10,17 @@
 
 ```javascript
 function getFirstUser() {
-    return getUsers().then(function(users) {
-        return users[0].name;
-    }).catch(function(err) {
-        return {
-            name: 'default user'
-        };
+  return getUsers()
+    .then(function (users) {
+      return users[0].name;
+    })
+    .catch(function (err) {
+      return {
+        name: "default user",
+      };
     });
 }
 ```
-
-
 
 ### Promise의 3가지 상태(states)
 
@@ -46,14 +44,14 @@ new Promise(function(resolve, reject)) {
 
 ```javascript
 function getData() {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     let data = 100;
     resolve(data);
   });
 }
 
 // resolve()의 결과 값 data를 resolvedData로 받음
-getData().then(function(resolvedData) {
+getData().then(function (resolvedData) {
   console.log(resolvedData); // 100
 });
 ```
@@ -66,22 +64,22 @@ getData().then(function(resolvedData) {
 
 ```javascript
 function getData() {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     reject(new Error("Request is failed"));
   });
 }
 
 // reject()의 결과 값 Error를 err에 받음
-getData().then().catch(function(err) {
-  console.log(err); // Error: Request is failed
-});
+getData()
+  .then()
+  .catch(function (err) {
+    console.log(err); // Error: Request is failed
+  });
 ```
 
 #### 처리 흐름
 
 <img src="https://mdn.mozillademos.org/files/8633/promises.png" alt="Promise process" />
-
-
 
 ## async/await
 
@@ -91,13 +89,11 @@ getData().then().catch(function(err) {
 
 ```javascript
 async function 함수명() {
-	await 비동기_처리_메서드_명();
+  await 비동기_처리_메서드_명();
 }
 ```
 
 비동기 처리 메서드가 프로미스 객체를 반환해야 `await`가 의도한 대로 동작한다.
-
-
 
 ## Reference
 
