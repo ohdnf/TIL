@@ -38,7 +38,7 @@ public class MemberController {
 
 @Service
 public class MemberService {
-    
+
     private final MemberRepository memberRepository;
 
     @Autowired
@@ -76,4 +76,3 @@ public class MemoryMemberRepository implements MemberRepository{
 ---
 
 ### 2. 자바 코드로 직접 스프링 빈 등록하기
-

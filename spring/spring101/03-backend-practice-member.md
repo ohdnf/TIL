@@ -9,6 +9,7 @@
 ### 일반적인 웹 어플리케이션 계층 구조
 
 ![웹 앱 계층 구조](assets/web_application_structure.png)
+
 - 컨트롤러: 웹 MVC의 컨트롤러 역할
 - 서비스: 핵심 비즈니스 로직 구현
 - 리포지토리: 데이터베이스에 접근, 도메인 객체를 DB에 저장하고 관리
@@ -17,6 +18,7 @@
 ### 클래스 의존 관계
 
 ![클래스 의존 관계](assets/class_dependency.png)
+
 - 아직 데이터 저장소가 선정되지 않아서, 우선 인터페이스로 구현 클래스를 변경할 수 있도록 설계
 - 데이터 저장소는 RDB, NoSQL 등등 다양한 저장소를 고민 중인 상황으로 가정
 - 개발을 진행하기 위해서 초기 개발 단계에서는 구현체로 가벼운 메모리 기반의 데이터 저장소 사용
@@ -129,6 +131,7 @@ public class MemoryMemberRepository implements MemberRepository{
 개발한 기능을 테스트하기 위해 `main` 메서드나 웹 어플리케이션의 컨트롤러를 통해 해당 기능을 실행하는 것은 오래 걸리고, 반복 실행하기 어렵고, 여러 테스트를 한 번에 실행하기 어렵다는 단점이 있다. Java는 `JUnit`, 최근에는 `assertj`라는 프레임워크로 테스트를 실행해서 이러한 문제를 해결한다.
 
 ### 파일 구조
+
 ```
 src/
 ├─main/
@@ -281,7 +284,7 @@ public class MemberService {
         return memberRepository.findById(memberId);
     }
 }
-``` 
+```
 
 ---
 
