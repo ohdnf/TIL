@@ -35,8 +35,6 @@ print(m)
 - 단방향 해시 값을 계산한 후 그 해시 값을 또 해시하는 것을 여러 번 반복하는 방법
 - 컴퓨터 성능이 더 향상되더라도 키 스트레칭 횟수를 추가하여 보완 가능
 
-
-
 ### `bcrypt` 모듈
 
 salting과 key stretching을 구현한 해시 함수 라이브러리
@@ -49,22 +47,16 @@ b = bcrypt.hashpw(b'secret password', bcrypt.gensalt()).hex()
 print(b)
 ```
 
-
-
 ## access token
 
 - 사용자가 로그인에 성공한 후에
 - 사용자의 로그인 여부를 확인하기 위해
 - 백엔드 API 서버에서 프론트엔드에 전송하는 데이터
 
-
-
 ### JWT
 
 - JSON Web Token
 - access token을 생성하는 방법 중 하나
-
-
 
 #### 구조
 
@@ -78,8 +70,8 @@ header.payload.signature
 
 ```json
 {
-    "typ": "JWT",
-    "alg": "HS256"
+  "typ": "JWT",
+  "alg": "HS256"
 }
 ```
 
@@ -89,8 +81,8 @@ header.payload.signature
 
 ```json
 {
-    "user_id": 2,
-    "exp": 1539517391
+  "user_id": 2,
+  "exp": 1539517391
 }
 ```
 
@@ -101,10 +93,6 @@ JWT의 원본 확인 용도
 ```
 Base64URL
 ```
-
-
-
-
 
 ### `PyJWT` 모듈
 
