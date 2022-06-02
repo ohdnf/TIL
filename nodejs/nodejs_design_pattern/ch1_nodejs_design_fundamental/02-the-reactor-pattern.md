@@ -1,15 +1,36 @@
 # The reactor pattern
 
+> Node.js 비동기 속성의 핵심!
+
 ## I/O is slow
+
+- 속도
+  - RAM 접근 = 몇 나노초(0.000000001초)
+  - 디스크(Disk) 또는 네트워크 데이터 접근 = 몇 밀리초(0.001초)
+- 대역폭
+  - RAM -> GB/s
+  - 디스크/네트워크 -> MB/s(이상적으로 GB/s)
+- I/O는 인간 요소(human factor)를 더불어 고려해야 한다.
 
 ## Blocking I/O
 
-## Non-blocking I/O
-
-- polling algorithm은 보통 CPU 시간을 많이 잡아먹는다.
-- non-blocking I/O의 busy-waiting의 pseudocode
+- 전통적인 I/O 블로킹 프로그래밍에서는 I/O 요청이 스레드의 실행을 블로킹한다.
 
 ```js
+data = socket.read(); // data를 가용할 때까지 스레드가 블로킹됨
+print(data);
+```
+
+- Web 서버에서 동시성을 제어하는 전통적인 접근으로는 각 커넥션마다 스레드 또는 프로세스를 새로 생성(또는 기존 재사용)하는 것이다.
+- 하지만 스레드는 시스템 리소스 차원에서 메모리를 많이 소모하고, 문맥 교환이 발생하여 각 커넥션마다 긴 스레드를 유지하는 것은 효율성 측면에서 바람직하지 못하다.
+
+## Non-blocking I/O
+
+- busy-waiting은 non-blocking I/O에 접근하기 위한 패턴 중 하나로, 실제 데이터가 반환될 때까지 루프를 돌며 자원의 상태를 확인(poll)하는 것이다.
+- polling algorithm은 보통 CPU 시간을 많이 잡아먹는다.
+
+```js
+// non-blocking I/O의 busy-waiting의 pseudocode
 resources = [socketA, socketB, pipeA];
 while (!resources.isEmpty()) {
   for (i = 0; i < resources.length; i++) {
