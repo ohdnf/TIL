@@ -34,7 +34,7 @@
   - 브라우저와 공유하기 좋다.
 - 작고 한 가지 기능에 집중한 모듈은 모두에게 아무리 작은 코드여도 공유하고 재사용하도록 합니다. DRY 원칙이 새로운 차원에서 적용된 것입니다.
 
-## Small surface area
+### Small surface area
 
 - Node.js 모듈은 기능 노출을 최소한으로 한다는 특징도 지니고 있습니다.
 - 이는 API로 하여금 이상한 곳에 사용되는 것을 막음으로써 API 사용성을 증가시킵니다.
@@ -43,13 +43,13 @@
 - 이러한 방식은 사용자로 하여금 무엇이 중요 기능이고 부가 기능인지 구분할 수 있게 해줍니다.
 - 이로써 모듈은 단 하나의 분명한 엔트리 포인트(entry point)를 갖게 됩니다.
 
-## Simplicity and pragmatism
+### Simplicity and pragmatism
 
 - Keep It Simple, Stupid (KISS)
 
-> _"Simplicity is the ultimate sophistication."_ > _- Leonardo da Vinci_
+> _"Simplicity is the ultimate sophistication."_ _Leonardo da Vinci_
 
-> _"The design must be simple, both in implementation and interface. It is more important for the implementation to be simple than the interface. Simplicity is the most important consideration in a design."_ > _- Richard P. Gabriel(The rise of worse is better)_
+> _"The design must be simple, both in implementation and interface. It is more important for the implementation to be simple than the interface. Simplicity is the most important consideration in a design."_ _Richard P. Gabriel(The rise of worse is better)_
 
 - 모든 기능을 갖춘 완벽한 소프트웨어보다 단순한 소프트웨어를 디자인하는 것은 여러 가지 이유에서 좋습니다.
   - 구현하기 쉽습니다.
