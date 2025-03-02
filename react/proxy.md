@@ -5,14 +5,12 @@
 ```json
 {
     ...
-    
+
  "proxy": "http://localhost:4000",
-    
+
     ...
 }
 ```
-
-
 
 ### `http-proxy-middleware` 사용
 
@@ -36,13 +34,13 @@
 
   ```js
   // React 서버는 3000번 포트 사용
-  
-  const { createProxyMiddleware } = require('http-proxy-middleware');
-  module.exports = function(app) {
+
+  const { createProxyMiddleware } = require("http-proxy-middleware");
+  module.exports = function (app) {
     app.use(
       // createProxyMiddleware('/api', {
-      createProxyMiddleware('/', {
-        target: 'http://localhost:5000',
+      createProxyMiddleware("/", {
+        target: "http://localhost:5000",
         changeOrigin: true,
       })
     );
@@ -52,46 +50,39 @@
   > `/api`로 시작하는 API(`LandingPage.js`에서 `axios.get('/api/hello'))` 등)는 `target`으로 설정된 `http://localhost:5000`로 호출
   >
   > `/api`를 `/`로 바꿀 수 있고, 바꾸면 서버를 재시작해야 한다.
-  >
-  > 
 
 - `src/components/views/LandingPage/LandingPage.js`
 
   ```js
-  import React, {useEffect} from 'react'
-  import axios from 'axios'
-  
+  import React, { useEffect } from "react";
+  import axios from "axios";
+
   function LandingPage() {
     useEffect(() => {
       // axios.get('/api/hello')
-      axios.get('/hello')
-        .then(res => {
-          console.log(res)
-        })
-    })
-    return (
-      <div>
-        LandingPage
-      </div>
-    )
+      axios.get("/hello").then((res) => {
+        console.log(res);
+      });
+    });
+    return <div>LandingPage</div>;
   }
-  
-  export default LandingPage
+
+  export default LandingPage;
   ```
 
 - 서버 쪽 `index.js`
 
   ```js
   ...
-  
+
   app.get('/', (req, res) => {
     res.send('Hello, World!')
   })
-  
+
   app.get('/api/hello', (req, res) => {
     res.send('hello, world!')
   })
-  
+
   ...
   ```
 
