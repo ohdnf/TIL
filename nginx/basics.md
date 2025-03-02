@@ -1,7 +1,5 @@
 # NGINX Basics
 
-
-
 ## 핵심 파일, 명령어, 디렉토리 알아보기
 
 ### NGINX 파일과 디렉토리
@@ -16,16 +14,16 @@
 
 - Sets up global settings for worker process, tuning, logging, loading dynamic modules, and references to other NGINX configuration files
 
-- Includes the top-level `http` block, which includes all configuration files in `/etc/nginx/conf.d` 
+- Includes the top-level `http` block, which includes all configuration files in `/etc/nginx/conf.d`
 
   ```nginx
   # /etc/nginx/nginx.conf
-  
+
   ...
-  
+
   http {
       ...
-          
+
       include /etc/nginx/conf.d/*.conf;
   }
   ```
@@ -40,8 +38,6 @@
 
 - 기본 로그 폴더
 - `access.log` 파일, `error.log` 파일 포함
-
-
 
 ### NGINX 명령어
 
@@ -69,9 +65,6 @@
   - `reopen`
     - log 파일 다시 열기
 
-
-
 ## Serving Static Content
 
 > NGINX에서 정적 컨텐츠 제공하기
-
